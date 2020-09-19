@@ -340,7 +340,7 @@ class _HomeListPageState extends State<HomeListPage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Container(
-                                    width: 140,
+                                    width: MediaQuery.of(context).size.width*0.7,
                                     child: Text(
                                       '${snapshot.data[index].data["title"]}',
                                       style: TextStyle(
@@ -348,9 +348,8 @@ class _HomeListPageState extends State<HomeListPage> {
                                           fontWeight: FontWeight.w600),
                                     ),
                                   ),
-                                  Row(children: <Widget>[
-                                    SizedBox(
-                                      width: 280,
+                                    Container(
+                                      width: MediaQuery.of(context).size.width*0.7,
                                       child: Text(
                                         '${snapshot.data[index].data["subtitle"]}',
                                         style: TextStyle(fontSize: 12),
@@ -358,31 +357,33 @@ class _HomeListPageState extends State<HomeListPage> {
                                         textAlign: TextAlign.left,
                                       ),
                                     ),
-                                  ])
                                 ]),
-                            IconButton(
-                              onPressed: () async {
-                                final status =
-                                    await Permission.storage.request();
+                            Container(
+                              width: MediaQuery.of(context).size.width*0.1,
+                              child:IconButton(
+                                onPressed: () async {
+                                  final status =
+                                  await Permission.storage.request();
 
-                                if (status.isGranted) {
-                                  final externalDir =
-                                      await getExternalStorageDirectory();
+                                  if (status.isGranted) {
+                                    final externalDir =
+                                    await getExternalStorageDirectory();
 
-                                  final taskId =
-                                      await FlutterDownloader.enqueue(
-                                    url:
-                                        '${snapshot.data[index].data["downloadLink"]}',
-                                    savedDir: externalDir.path,
-                                    fileName:
-                                        '${snapshot.data[index].data["title"]}',
-                                    showNotification: true,
-                                    openFileFromNotification: true,
-                                  );
-                                }
-                              },
-                              icon: Icon(Icons.insert_drive_file),
-                            )
+                                    final taskId =
+                                    await FlutterDownloader.enqueue(
+                                      url:
+                                      '${snapshot.data[index].data["downloadLink"]}',
+                                      savedDir: externalDir.path,
+                                      fileName:
+                                      '${snapshot.data[index].data["title"]}',
+                                      showNotification: true,
+                                      openFileFromNotification: true,
+                                    );
+                                  }
+                                },
+                                icon: Icon(Icons.insert_drive_file),
+                              )
+                            ),
                           ]),
                     );
                   });

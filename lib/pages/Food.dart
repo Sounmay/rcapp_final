@@ -77,7 +77,10 @@ class _FoodState extends State<Food> {
           automaticallyImplyLeading: false,
           elevation: 10.0,
           backgroundColor: Colors.deepOrange,
-          title: Text("Menu"),
+          title: Container(
+            margin: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.13),
+            child:Text('Menu', style: GoogleFonts.inter()),
+          ),  //repeat for menu and booking
           actions: <Widget>[
             IconButton(
               icon: Icon(
@@ -128,7 +131,7 @@ class _FoodState extends State<Food> {
                         ),
                       ),
                     ),
-                    FlatButton(
+                    /*FlatButton(
                       onPressed: () {
                         Navigator.pushNamed(context, '/allmenu');
                       },
@@ -140,7 +143,7 @@ class _FoodState extends State<Food> {
                               fontSize: 20,
                               fontWeight: FontWeight.bold)),
                       color: Colors.white,
-                    ),
+                    ),*/
                   ],
                 ),
                 ListPage(),
@@ -257,7 +260,7 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Main Course',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -280,7 +283,7 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Breads',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -303,7 +306,7 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Biryani',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -326,7 +329,7 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Tandoori',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -359,7 +362,7 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Chinese',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -382,7 +385,7 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Noodles',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -405,7 +408,7 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Rolls',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -428,7 +431,7 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Pizza',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -461,7 +464,7 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Snacks',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -484,7 +487,7 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Sandwiches',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -507,7 +510,7 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Burgers',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -530,7 +533,7 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Pasta',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -563,7 +566,7 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Soup',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -609,7 +612,7 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Starters',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -632,7 +635,7 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Breakfast',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(

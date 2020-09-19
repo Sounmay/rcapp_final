@@ -17,7 +17,10 @@ class _BookingState extends State<Booking> {
         automaticallyImplyLeading: false,
         elevation: 10.0,
         backgroundColor: Colors.deepOrange,
-        title: Text('Booking'),
+        title: Container(
+          margin: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.13),
+          child:Text('Booking', style: GoogleFonts.inter()),
+        ),  //repeat for menu and booking
       ),
       body: new ListView(
         children: <Widget>[

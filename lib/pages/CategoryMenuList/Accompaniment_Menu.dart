@@ -127,6 +127,9 @@ class _AccompanimentMenuListPageState extends State<AccompanimentMenuListPage> {
   @override
   Widget build(BuildContext context) {
     final _menuList = Provider.of<List<AccompanimentMenu>>(context) ?? [];
+    if (_menuList.length != 0) {
+      _menuList.sort((a, b) => a.searchIndex.compareTo(b.searchIndex));
+    }
     if (_menuList.length == 0) {
       return Container(
         height: 200,

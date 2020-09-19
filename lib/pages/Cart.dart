@@ -93,7 +93,7 @@ class _CartState extends State<Cart> {
         appBar: AppBar(
           elevation: 10.0,
           backgroundColor: Colors.deepOrange,
-          title: Text('Cart'),
+          title: Text('Cart', style: GoogleFonts.inter()),  //repeat for menu and booking
         ),
         body: Column(children: <Widget>[
           SizedBox(height: 10),

@@ -102,18 +102,26 @@ class FoodCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Container(
-                            width: 70,
+                            width: MediaQuery.of(context).size.width*0.25,
+                            height: MediaQuery.of(context).size.height*0.03,
                             child: Text(
                               categoryName,
                               style: GoogleFonts.inter(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 13.0,
                                   color: Colors.white),
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.left,
                             ),
                           ),
-                          Text(
-                            '₹' + '$itemprice',
-                            style: GoogleFonts.inter(color: Colors.white),
+                          Container(
+                              width: MediaQuery.of(context).size.width*0.2,
+                              height: MediaQuery.of(context).size.height*0.03,
+
+                              child:Text(
+                                '₹' + '$itemprice',
+                                style: GoogleFonts.inter(color: Colors.white),
+                              )
                           )
                         ],
                       ),
@@ -124,7 +132,7 @@ class FoodCard extends StatelessWidget {
                         },
                         child: Container(
                           height: 25,
-                          width: 45,
+                          width: MediaQuery.of(context).size.width*0.1,
                           decoration: BoxDecoration(
                               color: Colors.deepOrange,
                               border:

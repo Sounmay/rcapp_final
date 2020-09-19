@@ -54,7 +54,8 @@ class _Biryani_MenuListState extends State<Biryani_MenuList> {
 
 class BiryaniMenuListListPage extends StatefulWidget {
   @override
-  _BiryaniMenuListListPageState createState() => _BiryaniMenuListListPageState();
+  _BiryaniMenuListListPageState createState() =>
+      _BiryaniMenuListListPageState();
 }
 
 class _BiryaniMenuListListPageState extends State<BiryaniMenuListListPage> {
@@ -126,6 +127,11 @@ class _BiryaniMenuListListPageState extends State<BiryaniMenuListListPage> {
   @override
   Widget build(BuildContext context) {
     final _menuList = Provider.of<List<BiryaniMenu>>(context) ?? [];
+
+    //ye if statement hai wo code jo sort karega, (sab pages me dal dena lol.....)
+    if (_menuList.length != 0) {
+      _menuList.sort((a, b) => a.searchIndex.compareTo(b.searchIndex));
+    }
     if (_menuList.length == 0) {
       return Container(
         height: 200,
@@ -176,8 +182,10 @@ class _BiryaniMenuListListPageState extends State<BiryaniMenuListListPage> {
                                     width: 43,
                                     margin: EdgeInsets.only(top: 6),
                                     alignment: Alignment.center,
-                                    decoration:
-                                        BoxDecoration(color: Colors.deepOrange, borderRadius: BorderRadius.circular(10)),
+                                    decoration: BoxDecoration(
+                                        color: Colors.deepOrange,
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
                                     child: IconButton(
                                       onPressed: () {
                                         showFlushbar(context);

@@ -126,6 +126,9 @@ class _StarterMenuListListPageState extends State<StarterMenuListListPage> {
   @override
   Widget build(BuildContext context) {
     final _menuList = Provider.of<List<StarterMenu>>(context) ?? [];
+    if (_menuList.length != 0) {
+      _menuList.sort((a, b) => a.searchIndex.compareTo(b.searchIndex));
+    }
     if (_menuList.length == 0) {
       return Container(
         height: 200,
