@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "946016773649",
+    "firebase_url": "https://rcapp-a57cd.firebaseio.com",
+    "project_id": "rcapp-a57cd",
+    "storage_bucket": "rcapp-a57cd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:946016773649:android:cd582a95e23ec301a933b0",
+        "android_client_info": {
+          "package_name": "com.rourkela.rcapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "946016773649-6mequs1kpd3h8o5phpd8ee1juj3c7vg0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCK8rzg8SncLmjZFItCFLAAg5aFzmazaJc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "946016773649-6mequs1kpd3h8o5phpd8ee1juj3c7vg0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
