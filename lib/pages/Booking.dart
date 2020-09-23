@@ -104,7 +104,7 @@ class _BookingState extends State<Booking> {
     fit: BoxFit.fill)),
     ),
     ),
-    SizedBox(width: 12),
+    SizedBox(width: 20),
     InkWell(
     onTap: () {
     Navigator.pushNamed(context, "/milaplounge");
@@ -127,7 +127,7 @@ class _BookingState extends State<Booking> {
     fit: BoxFit.fill)),
     ),
     ),
-    SizedBox(width: 12),
+    SizedBox(width: 20),
       InkWell(
         onTap: () {
           Navigator.pushNamed(context, "/milanlounge");
@@ -151,7 +151,7 @@ class _BookingState extends State<Booking> {
                   fit: BoxFit.fill)),
         ),
       ),
-    SizedBox(width: 12),
+    SizedBox(width: 20),
     ],
     ),
     ),
@@ -202,7 +202,7 @@ class _BookingState extends State<Booking> {
                                     fit: BoxFit.fill)),
                           ),
                         ),
-                        SizedBox(width: 12),
+                        SizedBox(width: 20),
                         InkWell(
                           onTap: () {
                             Navigator.pushNamed(context, "/weddinghall");
@@ -225,7 +225,7 @@ class _BookingState extends State<Booking> {
                                     fit: BoxFit.fill)),
                           ),
                         ),
-                        SizedBox(width: 12),
+                        SizedBox(width: 20),
                         InkWell(
                           onTap: () {
                             Navigator.pushNamed(context, "/tenniscourt");

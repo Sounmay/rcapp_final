@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rcapp/pages/Food.dart';
+import 'package:rcapp/pages/customAlert.dart';
 import 'package:rcapp/pages/order_cart.dart';
 import 'package:rcapp/pages/storeData.dart';
 import 'package:rcapp/services/database.dart';
@@ -93,7 +94,8 @@ class _CartState extends State<Cart> {
         appBar: AppBar(
           elevation: 10.0,
           backgroundColor: Colors.deepOrange,
-          title: Text('Cart', style: GoogleFonts.inter()),  //repeat for menu and booking
+          title: Text('Cart',
+              style: GoogleFonts.inter()), //repeat for menu and booking
         ),
         body: Column(children: <Widget>[
           SizedBox(height: 10),
@@ -175,13 +177,13 @@ class _CartState extends State<Cart> {
                                 ),
                                 SizedBox(
                                   width: 200,
-                                                                  child: Text(
+                                  child: Text(
                                     keyname,
                                     style: GoogleFonts.inter(
                                         fontSize: 17,
                                         fontWeight: FontWeight.bold),
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.left,
+                                    overflow: TextOverflow.ellipsis,
+                                    textAlign: TextAlign.left,
                                   ),
                                 ),
                               ],
@@ -275,7 +277,8 @@ class _QuantityInCartState extends State<QuantityInCart> {
           height: 25,
           width: 62,
           child: Center(
-              child: Text('Add', style: GoogleFonts.inter(color: Colors.deepOrange))),
+              child: Text('Add',
+                  style: GoogleFonts.inter(color: Colors.deepOrange))),
         ),
       );
     } else {
@@ -331,7 +334,8 @@ class _QuantityInCartState extends State<QuantityInCart> {
             width: 33,
             child: Text(
               '${widget.qty}',
-              style: GoogleFonts.inter(fontSize: 17, fontWeight: FontWeight.bold),
+              style:
+                  GoogleFonts.inter(fontSize: 17, fontWeight: FontWeight.bold),
             ),
           ),
           // Text(
@@ -408,9 +412,17 @@ class _ProceedAccessState extends State<ProceedAccess> {
                 updateTotal();
                 confirmOrder();
                 Navigator.pushReplacementNamed(context, '/navigationbar');
+                showDialog(
+                    context: context,
+                    builder: (context) => CustomAlert(
+                          title: 'Order Placed!',
+                          description:
+                              'Your Order has been placed and will be on its way to you shortly',
+                          url: 'assets/nigga.gif',
+                        ));
               },
               child: Text(
-                'Proceed to Pay',
+                'Confirm Order(Pay through COD',
                 style: GoogleFonts.inter(color: Colors.white),
               )));
     } else if (widget.address == null) {
@@ -443,15 +455,15 @@ class BottomItemView extends StatelessWidget {
           children: <Widget>[
             Text(
               '${qty} ' + '  item ' + '|' + ' ' + '₹ ' + '${total}',
-              style:
-                  GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.bold),
+              style: GoogleFonts.inter(
+                  color: Colors.white, fontWeight: FontWeight.bold),
             ),
             InkWell(
               onTap: (() => Navigator.pushNamed(context, '/cart')),
               child: Text(
                 'VIEW CART',
-                style:
-                    GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.bold),
+                style: GoogleFonts.inter(
+                    color: Colors.white, fontWeight: FontWeight.bold),
               ),
             )
           ],

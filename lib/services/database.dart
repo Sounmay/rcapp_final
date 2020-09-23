@@ -56,15 +56,21 @@ class DatabaseService {
   final CollectionReference bookingDetails =
       Firestore.instance.collection('BookingDetails');
 
-  Future updateUserInfo(String name, bool isAdmin, String number) async {
+  Future updateUserInfo(
+      String name, bool isAdmin, String number, var token) async {
     return await userInfo.document(uid).setData({
       'name': name,
       'isAdmin': isAdmin,
       'number': number,
       'address': '',
       'avatar': '',
+      'token': token
     });
   }
+
+  // Future updateToken(var token) async {
+  //   return await userInfo.document(uid).updateData({'token': token});
+  // }
 
   Future updateUserData(String food, int price, int quantity) async {
     return await foodCollection.document(uid).setData({
@@ -97,6 +103,8 @@ class DatabaseService {
   Future bookDetails(String id, String name, String number, int numberOfPeople,
       String lounge, int slot, DateTime date) async {
     var _date = DateTime.now().toUtc().millisecondsSinceEpoch;
+    var forToken = await Firestore.instance.collection('userInfo').document(id).get();
+    var _token = forToken.data["token"];
     return await bookingDetails.document('$_date').setData({
       '_date': _date,
       'id': id,
@@ -107,7 +115,8 @@ class DatabaseService {
       'lounge': lounge,
       'slot': slot,
       'date': '${date.day}' + '/' + '${date.month}' + '/' + '${date.year}',
-      'bookingDate': date
+      'bookingDate': date,
+      'token': _token
     });
   }
 
@@ -115,6 +124,8 @@ class DatabaseService {
       String address, List item, List qty, int total, bool isConfirmed) async {
     // var docId = '$id' + '$total';
     var _date = DateTime.now().toUtc().millisecondsSinceEpoch;
+    var forToken = await Firestore.instance.collection('userInfo').document(id).get();
+    var _token = forToken.data["token"];
     return await confirmedOrders.document('$_date').setData({
       'id': id,
       'name': name,
@@ -129,7 +140,8 @@ class DatabaseService {
           '/' +
           '${DateTime.now().month}' +
           '/' +
-          '${DateTime.now().year}'
+          '${DateTime.now().year}',
+      'token': _token
     });
   }
 

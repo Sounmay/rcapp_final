@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:rcapp/models/user.dart';
 import 'package:rcapp/services/database.dart';
 
@@ -55,17 +56,21 @@ class AuthService {
   }
 
   //register with email and pass
-  Future registerWithEmailAndPassword(String name, bool isAuth, String number, String password) async {
+  Future registerWithEmailAndPassword(
+      String name, bool isAuth, String number, String password) async {
     try {
       String numemail = number + "@gmail.com";
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: (numemail), password: (password));
       FirebaseUser user = result.user;
 
+      final FirebaseMessaging _messaging = FirebaseMessaging();
+      var token = await _messaging.getToken();
+
       //create a new document for the user with the uid
       await DatabaseService(uid: user.uid).updateUserData('chowmin', 100, 10);
       await DatabaseService(uid: user.uid)
-          .updateUserInfo('$name', isAuth, '$number');
+          .updateUserInfo('$name', isAuth, '$number', token);
 
       var userkaabba = user.uid;
       var dat = await Firestore.instance

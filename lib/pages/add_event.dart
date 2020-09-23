@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:rcapp/models/event.dart';
 import 'package:flutter/material.dart';
 import 'package:rcapp/pages/CategoryMenuList/flushbar.dart';
+import 'package:rcapp/pages/customAlert.dart';
 import 'package:rcapp/res/event_firestore_service.dart';
 import 'package:rcapp/services/database.dart';
 
@@ -78,7 +79,16 @@ class _AddEventPageState extends State<AddEventPage> {
     if (!exits) {
       _booking.bookDetails(id, _name, _personalno, numberOfPeople,
           loungeColor[_value1 - 1], slot, _eventDate);
-      Navigator.pop(context);
+      showDialog(
+          context: context,
+          builder: (context) => CustomAlert(
+                title: 'Booking Requested',
+                description:
+                    'Your booking request has been forwarded to the administrator. You will get a confirmation notification within 24 hours and can view your booking in the calendar',
+                url: 'assets/nigga.gif',
+              ));
+
+      // Navigator.pop(context);
     } else {
       showFlushbarBooking(context);
       setState(() {

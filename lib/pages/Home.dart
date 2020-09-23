@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rcapp/CustomWidget/foot_category.dart';
 import 'package:rcapp/models/user.dart';
+import 'package:rcapp/pages/customAlert.dart';
 import 'package:rcapp/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:rcapp/services/database.dart';
@@ -73,6 +75,17 @@ class _HomeState extends State<Home> {
     getAdmin();
   }
 
+  void abc() {
+    Fluttertoast.showToast(
+        msg: "This is Center Short Toast",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.SNACKBAR,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
+  }
+
   @override
   Widget build(BuildContext context) {
     // final userData = Provider.of<UserData>(context);
@@ -119,7 +132,8 @@ class _HomeState extends State<Home> {
           title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Home', style: GoogleFonts.inter()),  //repeat for menu and booking
+                Text('Home',
+                    style: GoogleFonts.inter()), //repeat for menu and booking
               ]),
         ),
         drawer: Drawer(
@@ -149,6 +163,15 @@ class _HomeState extends State<Home> {
                     showNotification: true,
                     openFileFromNotification: true,
                   );
+
+                  Fluttertoast.showToast(
+                      msg: "Downloading...",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.black12,
+                      textColor: Colors.black,
+                      fontSize: 16.0);
                 }
               },
               child: Row(
@@ -177,12 +200,24 @@ class _HomeState extends State<Home> {
             Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text(
-                    "  Notice Board",
-                    style: GoogleFonts.inter(
-                      color: Colors.grey,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
+                  InkWell(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => CustomAlert(
+                                title: 'hello world nigga',
+                                description:
+                                    'teri maa ki choot madarchod order karta hai bhosdiwale',
+                                url: 'assets/nigga.gif',
+                              ));
+                    },
+                    child: Text(
+                      "  Notice Board",
+                      style: GoogleFonts.inter(
+                        color: Colors.grey,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                   if (areYouadmin) ...[
@@ -340,7 +375,8 @@ class _HomeListPageState extends State<HomeListPage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Container(
-                                    width: MediaQuery.of(context).size.width*0.7,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.7,
                                     child: Text(
                                       '${snapshot.data[index].data["title"]}',
                                       style: TextStyle(
@@ -348,42 +384,51 @@ class _HomeListPageState extends State<HomeListPage> {
                                           fontWeight: FontWeight.w600),
                                     ),
                                   ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width*0.7,
-                                      child: Text(
-                                        '${snapshot.data[index].data["subtitle"]}',
-                                        style: TextStyle(fontSize: 12),
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.left,
-                                      ),
+                                  Container(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.7,
+                                    child: Text(
+                                      '${snapshot.data[index].data["subtitle"]}',
+                                      style: TextStyle(fontSize: 12),
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.left,
                                     ),
+                                  ),
                                 ]),
                             Container(
-                              width: MediaQuery.of(context).size.width*0.1,
-                              child:IconButton(
-                                onPressed: () async {
-                                  final status =
-                                  await Permission.storage.request();
+                                width: MediaQuery.of(context).size.width * 0.1,
+                                child: IconButton(
+                                  onPressed: () async {
+                                    final status =
+                                        await Permission.storage.request();
 
-                                  if (status.isGranted) {
-                                    final externalDir =
-                                    await getExternalStorageDirectory();
+                                    if (status.isGranted) {
+                                      final externalDir =
+                                          await getExternalStorageDirectory();
 
-                                    final taskId =
-                                    await FlutterDownloader.enqueue(
-                                      url:
-                                      '${snapshot.data[index].data["downloadLink"]}',
-                                      savedDir: externalDir.path,
-                                      fileName:
-                                      '${snapshot.data[index].data["title"]}',
-                                      showNotification: true,
-                                      openFileFromNotification: true,
-                                    );
-                                  }
-                                },
-                                icon: Icon(Icons.insert_drive_file),
-                              )
-                            ),
+                                      final taskId =
+                                          await FlutterDownloader.enqueue(
+                                        url:
+                                            '${snapshot.data[index].data["downloadLink"]}',
+                                        savedDir: externalDir.path,
+                                        fileName:
+                                            '${snapshot.data[index].data["title"]}',
+                                        showNotification: true,
+                                        openFileFromNotification: true,
+                                      );
+                                    }
+
+                                    Fluttertoast.showToast(
+                                        msg: "Downloading...",
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        gravity: ToastGravity.BOTTOM,
+                                        timeInSecForIosWeb: 1,
+                                        backgroundColor: Colors.black12,
+                                        textColor: Colors.black,
+                                        fontSize: 16.0);
+                                  },
+                                  icon: Icon(Icons.insert_drive_file),
+                                )),
                           ]),
                     );
                   });
@@ -512,7 +557,8 @@ class _LoadingDataState extends State<LoadingData> {
                         ),
                         SizedBox(height: 20),
                         Text('LOADING',
-                            style: GoogleFonts.inter(fontWeight: FontWeight.w500))
+                            style:
+                                GoogleFonts.inter(fontWeight: FontWeight.w500))
                       ]),
                 );
               } else {

@@ -152,8 +152,6 @@ class _AddressFormState extends State<AddressForm> {
                                   ", " +
                                   _streetname +
                                   ", " +
-                                  _area +
-                                  ", " +
                                   _city +
                                   "-" +
                                   _pincode;
