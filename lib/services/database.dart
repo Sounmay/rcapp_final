@@ -80,8 +80,8 @@ class DatabaseService {
     });
   }
 
-  Future updateAddressData(String id, String address) async {
-    return await userInfo.document(id).updateData({'address': address});
+  Future updateAddressData(String id, String address, String number) async {
+    return await userInfo.document(id).updateData({'address': address, 'mobileNumber': number});
   }
 
   Future updateTodayMenu(String food, int price, String url) async {
@@ -121,7 +121,7 @@ class DatabaseService {
   }
 
   Future confirmOrderofUser(String id, String name, String number,
-      String address, List item, List qty, int total, bool isConfirmed) async {
+      String address, List item, List price, List qty, int total, bool isConfirmed, String mobileNumber) async {
     // var docId = '$id' + '$total';
     var _date = DateTime.now().toUtc().millisecondsSinceEpoch;
     var forToken = await Firestore.instance.collection('userInfo').document(id).get();
@@ -132,6 +132,7 @@ class DatabaseService {
       'number': number,
       'address': address,
       'item': item,
+      'price': price,
       'quantity': qty,
       'total': total,
       'isConfirmed': isConfirmed,
@@ -141,7 +142,8 @@ class DatabaseService {
           '${DateTime.now().month}' +
           '/' +
           '${DateTime.now().year}',
-      'token': _token
+      'token': _token, 
+      'mobileNumber': mobileNumber
     });
   }
 
