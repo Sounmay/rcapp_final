@@ -201,16 +201,7 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   InkWell(
-                    onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) => CustomAlert(
-                                title: 'hello world nigga',
-                                description:
-                                    'teri maa ki choot madarchod order karta hai bhosdiwale',
-                                url: 'assets/nigga.gif',
-                              ));
-                    },
+                    onTap: () {},
                     child: Text(
                       "  Notice Board",
                       style: GoogleFonts.inter(

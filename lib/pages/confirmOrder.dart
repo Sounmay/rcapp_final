@@ -6,41 +6,42 @@ import 'package:rcapp/services/database.dart';
 import 'package:flutter/material.dart';
 
 StoreData storeData = StoreData();
-  int total = 0;
-  int totalquantity = 1;
-  List<String> itemList = List<String>();
-  List<int> quantityList = List<int>();
+int total = 0;
+int totalquantity = 1;
+List<String> itemList = List<String>();
+List<int> priceList = List<int>();
+List<int> quantityList = List<int>();
 
-  void updateTotal() {
-    Map<String, int> foodDetail = storeData.retrieveFoodDetails();
-    Map<String, int> foodqtyDetail = storeData.retrieveQtyDetails();
+void updateTotal() {
+  Map<String, int> foodDetail = storeData.retrieveFoodDetails();
+  Map<String, int> foodqtyDetail = storeData.retrieveQtyDetails();
 
+  foodDetail.forEach((k, v) => total = total + v * foodqtyDetail[k]);
+  foodDetail.forEach((k, v) => totalquantity = totalquantity + v);
+  foodDetail.forEach((key, value) {
+    itemList.add(key);
+    priceList.add(value);
+  });
+  foodqtyDetail.forEach((key, value) => quantityList.add(value));
+}
 
-      foodDetail.forEach((k, v) => total = total + v * foodqtyDetail[k]);
-      foodDetail.forEach((k, v) => totalquantity = totalquantity + v);
-      foodDetail.forEach((key, value) => itemList.add(key));
-      foodqtyDetail.forEach((key, value) => quantityList.add(value));
-  }
+void confirmOrder() async {
+  var user = await FirebaseAuth.instance.currentUser();
+  var _dat =
+      await Firestore.instance.collection('userInfo').document(user.uid).get();
 
-  void confirmOrder() async {
-    var user = await FirebaseAuth.instance.currentUser();
-    var _dat = await Firestore.instance
-        .collection('userInfo')
-        .document(user.uid)
-        .get();
+  var userName = _dat.data["name"];
+  var number = _dat.data["number"];
+  var address = _dat.data["address"];
+  var mobileNumber = _dat.data["mobileNumber"];
 
-    var userName = _dat.data["name"];
-    var number = _dat.data["number"];
-    var address = _dat.data["address"];
+  DatabaseService().confirmOrderofUser(user.uid, userName, number, address,
+      itemList, priceList, quantityList, total, false, mobileNumber);
 
-    DatabaseService().confirmOrderofUser(user.uid, userName, number, address,
-        itemList, quantityList, total, false);
-
-    storeData.resetStore();
-    updateTotal();
-    // Navigator.pushReplacementNamed(context, '/navigationbar');
-  }
-
+  storeData.resetStore();
+  updateTotal();
+  // Navigator.pushReplacementNamed(context, '/navigationbar');
+}
 
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_auth/firebase_auth.dart';

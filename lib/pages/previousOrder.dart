@@ -161,8 +161,11 @@ class _PreviousOrderState extends State<PreviousOrder> {
                                                     address: orders[index]
                                                         ["address"],
                                                     item: item[index],
-                                                    quantity:
-                                                        quantity[index])));
+                                                    quantity: quantity[index],
+                                                    mobileNumber: orders[index]
+                                                        ["mobileNumber"],
+                                                    price: orders[index]
+                                                        ["price"])));
                                   },
                                   child: Container(
                                     child: Text('Know More',
@@ -190,7 +193,8 @@ class _PreviousOrderState extends State<PreviousOrder> {
 class OrderData extends StatefulWidget {
   List item;
   List quantity;
-  OrderData({this.item, this.quantity});
+  List price;
+  OrderData({this.item, this.quantity, this.price});
   @override
   _OrderDataState createState() => _OrderDataState();
 }
@@ -213,6 +217,7 @@ class _OrderDataState extends State<OrderData> {
                   Text('${widget.item[index]} '),
                 ])),
                 Text('${widget.quantity[index]}'),
+                Text('${widget.price[index]}')
               ],
             );
           }),
@@ -229,6 +234,8 @@ class PreviousOrderDetails extends StatefulWidget {
   final String date;
   final List item;
   final List quantity;
+  final String mobileNumber;
+  final List price;
   PreviousOrderDetails(
       {this.orderNo,
       this.total,
@@ -237,7 +244,9 @@ class PreviousOrderDetails extends StatefulWidget {
       this.number,
       this.date,
       this.item,
-      this.quantity});
+      this.quantity,
+      this.mobileNumber,
+      this.price});
   @override
   _PreviousOrderDetailsState createState() => _PreviousOrderDetailsState();
 }
@@ -356,6 +365,29 @@ class _PreviousOrderDetailsState extends State<PreviousOrderDetails> {
                                     ]),
                               ],
                             ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text(
+                                  "Mobile No. :",
+                                  style: GoogleFonts.inter(
+                                      color: Colors.grey,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                SizedBox(height: 5),
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                  child: Text(
+                                    "${widget.mobileNumber}",
+                                    style: GoogleFonts.inter(
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                         SizedBox(height: 20),
@@ -373,12 +405,17 @@ class _PreviousOrderDetailsState extends State<PreviousOrderDetails> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Text('Item Name',
+                              Text('Item ',
                                   style: GoogleFonts.inter(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w400,
                                       decoration: TextDecoration.underline)),
-                              Text('Quantity',
+                              Text('Qty',
+                                  style: GoogleFonts.inter(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w400,
+                                      decoration: TextDecoration.underline)),
+                              Text('Price(per qty)',
                                   style: GoogleFonts.inter(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w400,
@@ -388,7 +425,9 @@ class _PreviousOrderDetailsState extends State<PreviousOrderDetails> {
                         ),
                         Flexible(
                           child: OrderData(
-                              item: widget.item, quantity: widget.quantity),
+                              item: widget.item,
+                              quantity: widget.quantity,
+                              price: widget.price),
                         ),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

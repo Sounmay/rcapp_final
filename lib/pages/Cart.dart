@@ -418,7 +418,7 @@ class _ProceedAccessState extends State<ProceedAccess> {
                           title: 'Order Placed!',
                           description:
                               'Your Order has been placed and will be on its way to you shortly',
-                          url: 'assets/nigga.gif',
+                          // url: 'assets/nigga.gif',
                         ));
               },
               child: Text(

@@ -206,8 +206,12 @@ class _AdminOrderState extends State<AdminOrder> {
                                                       address: orders[index]
                                                           ["address"],
                                                       item: item[index],
-                                                      quantity:
-                                                          quantity[index])));
+                                                      quantity: quantity[index],
+                                                      mobileNumber:
+                                                          orders[index]
+                                                              ["mobileNumber"],
+                                                      price: orders[index]
+                                                          ["price"])));
                                     },
                                     child: Container(
                                       padding: EdgeInsets.symmetric(
@@ -287,7 +291,8 @@ class _AdminOrderState extends State<AdminOrder> {
 class AdminOrderData extends StatefulWidget {
   List item;
   List quantity;
-  AdminOrderData({this.item, this.quantity});
+  List price;
+  AdminOrderData({this.item, this.quantity, this.price});
   @override
   _AdminOrderDataState createState() => _AdminOrderDataState();
 }
@@ -310,6 +315,7 @@ class _AdminOrderDataState extends State<AdminOrderData> {
                   Text('${widget.item[index]} '),
                 ])),
                 Text('${widget.quantity[index]}'),
+                Text('${widget.price[index]}'),
               ],
             );
           }),
@@ -324,18 +330,21 @@ class AdminOrderDetails extends StatefulWidget {
   final String name;
   final String number;
   final String date;
+  final String mobileNumber;
   final List item;
   final List quantity;
-  AdminOrderDetails({
-    this.orderNo,
-    this.total,
-    this.address,
-    this.name,
-    this.number,
-    this.date,
-    this.item,
-    this.quantity,
-  });
+  final List price;
+  AdminOrderDetails(
+      {this.orderNo,
+      this.total,
+      this.address,
+      this.name,
+      this.number,
+      this.date,
+      this.item,
+      this.quantity,
+      this.mobileNumber,
+      this.price});
   @override
   _AdminOrderDetailsState createState() => _AdminOrderDetailsState();
 }
@@ -454,6 +463,30 @@ class _AdminOrderDetailsState extends State<AdminOrderDetails> {
                                     ]),
                               ],
                             ),
+                            SizedBox(height: 10),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text(
+                                  "Mobile No. :",
+                                  style: GoogleFonts.inter(
+                                      color: Colors.grey,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                SizedBox(height: 5),
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                  child: Text(
+                                    "${widget.mobileNumber}",
+                                    style: GoogleFonts.inter(
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                         SizedBox(height: 20),
@@ -471,12 +504,17 @@ class _AdminOrderDetailsState extends State<AdminOrderDetails> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Text('Item Name',
+                              Text('Item',
                                   style: GoogleFonts.inter(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w400,
                                       decoration: TextDecoration.underline)),
-                              Text('Quantity',
+                              Text('Qty',
+                                  style: GoogleFonts.inter(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w400,
+                                      decoration: TextDecoration.underline)),
+                              Text('Price(per qty)',
                                   style: GoogleFonts.inter(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w400,
@@ -486,7 +524,9 @@ class _AdminOrderDetailsState extends State<AdminOrderDetails> {
                         ),
                         Flexible(
                           child: AdminOrderData(
-                              item: widget.item, quantity: widget.quantity),
+                              item: widget.item,
+                              quantity: widget.quantity,
+                              price: widget.price),
                         ),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
