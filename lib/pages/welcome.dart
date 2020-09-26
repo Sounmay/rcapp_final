@@ -10,26 +10,11 @@ class welcome extends StatefulWidget {
 }
 
 class _welcomeState extends State<welcome> {
-  Future configure() async {
-    final fbm = FirebaseMessaging();
-    fbm.configure(onMessage: (msg) {
-      print(msg);
-      return;
-    }, onLaunch: (msg) {
-      print(msg);
-      return;
-    }, onResume: (msg) {
-      print(msg);
-      return;
-    });
-   
-  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    configure();
   }
 
   @override

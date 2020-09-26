@@ -43,7 +43,7 @@ class _BlueLoungeState extends State<BlueLounge> {
         Text(
           "\nThe Blue Lounge is a comfortable lounge present in the ground floor of the club. Perfect for small group gatherings like office parties, get togethers amongst friends etc  \n\nCapacity : 15 people \n \n ",
           style: GoogleFonts.inter(
-            fontSize: 20
+            fontSize: 16
           ),
         ),
         SizedBox(

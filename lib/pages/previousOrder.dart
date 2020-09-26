@@ -161,8 +161,11 @@ class _PreviousOrderState extends State<PreviousOrder> {
                                                     address: orders[index]
                                                         ["address"],
                                                     item: item[index],
-                                                    quantity:
-                                                        quantity[index])));
+                                                    quantity: quantity[index],
+                                                    mobileNumber: orders[index]
+                                                        ["mobileNumber"],
+                                                    price: orders[index]
+                                                        ["price"])));
                                   },
                                   child: Container(
                                     child: Text('Know More',
@@ -190,7 +193,8 @@ class _PreviousOrderState extends State<PreviousOrder> {
 class OrderData extends StatefulWidget {
   List item;
   List quantity;
-  OrderData({this.item, this.quantity});
+  List price;
+  OrderData({this.item, this.quantity, this.price});
   @override
   _OrderDataState createState() => _OrderDataState();
 }
@@ -209,10 +213,10 @@ class _OrderDataState extends State<OrderData> {
               children: <Widget>[
                 Container(
                     child: Row(children: <Widget>[
-                  Text('${index + 1}) '),
                   Text('${widget.item[index]} '),
                 ])),
                 Text('${widget.quantity[index]}'),
+                Text('${widget.price[index]}')
               ],
             );
           }),
@@ -229,6 +233,8 @@ class PreviousOrderDetails extends StatefulWidget {
   final String date;
   final List item;
   final List quantity;
+  final String mobileNumber;
+  final List price;
   PreviousOrderDetails(
       {this.orderNo,
       this.total,
@@ -237,7 +243,9 @@ class PreviousOrderDetails extends StatefulWidget {
       this.number,
       this.date,
       this.item,
-      this.quantity});
+      this.quantity,
+      this.mobileNumber,
+      this.price});
   @override
   _PreviousOrderDetailsState createState() => _PreviousOrderDetailsState();
 }
@@ -265,8 +273,8 @@ class _PreviousOrderDetailsState extends State<PreviousOrderDetails> {
                   SizedBox(height: 20.0),
                   Container(
                     padding: EdgeInsets.all(10),
-                    height: 500.0,
-                    width: 370.0,
+                    height: MediaQuery.of(context).size.height * 0.7,
+                    width: MediaQuery.of(context).size.width * 0.9,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(15.0)),
@@ -305,14 +313,14 @@ class _PreviousOrderDetailsState extends State<PreviousOrderDetails> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 Text(
-                                  "Personal No. :",
+                                  "Personal No. : ${widget.number}",
                                   style: GoogleFonts.inter(
                                       color: Colors.grey,
                                       fontSize: 18,
                                       fontWeight: FontWeight.w500),
                                 ),
                                 SizedBox(height: 5),
-                                Padding(
+                                /*Padding(
                                   padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                                   child: Text(
                                     "${widget.number}",
@@ -321,7 +329,7 @@ class _PreviousOrderDetailsState extends State<PreviousOrderDetails> {
                                         fontSize: 18,
                                         fontWeight: FontWeight.w400),
                                   ),
-                                ),
+                                ),*/
                               ],
                             ),
                             SizedBox(height: 8),
@@ -340,7 +348,7 @@ class _PreviousOrderDetailsState extends State<PreviousOrderDetails> {
                                             fontWeight: FontWeight.w500),
                                       ),
                                       Container(
-                                        width: 300,
+                                        width: MediaQuery.of(context).size.width * 0.4,
                                         child: Padding(
                                           padding:
                                               EdgeInsets.fromLTRB(10, 0, 0, 0),
@@ -356,10 +364,34 @@ class _PreviousOrderDetailsState extends State<PreviousOrderDetails> {
                                     ]),
                               ],
                             ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                SizedBox(height: 10.0,),
+                                Text(
+                                  "Mobile No. : ${widget.mobileNumber}",
+                                  style: GoogleFonts.inter(
+                                      color: Colors.grey,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                SizedBox(height: 5),
+                                /*Padding(
+                                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                  child: Text(
+                                    "${widget.mobileNumber}",
+                                    style: GoogleFonts.inter(
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),*/
+                              ],
+                            ),
                           ],
                         ),
                         SizedBox(height: 20),
-                        Container(
+                        /*Container(
                             alignment: Alignment.centerLeft,
                             child: Text(
                               'Menu :',
@@ -367,28 +399,44 @@ class _PreviousOrderDetailsState extends State<PreviousOrderDetails> {
                                   color: Colors.grey,
                                   fontSize: 18,
                                   fontWeight: FontWeight.w500),
-                            )),
+                            )),*/
                         Container(
                           padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Text('Item Name',
-                                  style: GoogleFonts.inter(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w400,
-                                      decoration: TextDecoration.underline)),
-                              Text('Quantity',
-                                  style: GoogleFonts.inter(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w400,
-                                      decoration: TextDecoration.underline))
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.4,
+                                child: Text('Item',
+                                    style: GoogleFonts.inter(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w400,
+                                        decoration: TextDecoration.underline)),
+                              ),
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.2,
+                                child: Text('Qty',
+                                    style: GoogleFonts.inter(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w400,
+                                        decoration: TextDecoration.underline)),
+                              ),
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.2,
+                                child: Text('Rate',
+                                    style: GoogleFonts.inter(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w400,
+                                        decoration: TextDecoration.underline)),
+                              ),
                             ],
                           ),
                         ),
                         Flexible(
                           child: OrderData(
-                              item: widget.item, quantity: widget.quantity),
+                              item: widget.item,
+                              quantity: widget.quantity,
+                              price: widget.price),
                         ),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -407,11 +455,11 @@ class _PreviousOrderDetailsState extends State<PreviousOrderDetails> {
                                               PreviousOrderDetails()));
                                 },
                                 child: Container(
-                                  child: Text('Know More',
+                                  /*child: Text('Know More',
                                       style: GoogleFonts.inter(
                                           color: Colors.deepOrange,
                                           decoration:
-                                              TextDecoration.underline)),
+                                              TextDecoration.underline)),*/
                                 ),
                               )
                             ]),

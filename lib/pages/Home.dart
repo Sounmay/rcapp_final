@@ -47,26 +47,7 @@ class _HomeState extends State<Home> {
     }
   }
 
-  // void exp() async {
-  //   // var date = 1600288449003;
-  //   // var result = await Firestore.instance
-  //   //     .collection('events')
-  //   //     .where('slot', isEqualTo: 1)
-  //   //     .getDocuments();
-  //   // result.documents.forEach((element) {
-  //   //   print(DateTime.fromMillisecondsSinceEpoch(date));
-  //   // });
-  //   DateTime currentPhoneDate = DateTime.now();
-  //   Timestamp myTimeStamp = Timestamp.fromDate(currentPhoneDate);
-  //   DateTime myDateTime = myTimeStamp.toDate();
-  //   print("$currentPhoneDate");
-  //   print("$myDateTime");
-  //   var result = await Firestore.instance
-  //       .collection('events')
-  //       .where("slot", isEqualTo: 1)
-  //       .getDocuments();
-  //   print(result.documents[0]["event_date"].toDate());
-  // }
+
 
   @override
   void initState() {
@@ -201,16 +182,7 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   InkWell(
-                    onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) => CustomAlert(
-                                title: 'hello world nigga',
-                                description:
-                                    'teri maa ki choot madarchod order karta hai bhosdiwale',
-                                url: 'assets/nigga.gif',
-                              ));
-                    },
+                    onTap: () {},
                     child: Text(
                       "  Notice Board",
                       style: GoogleFonts.inter(
@@ -485,15 +457,6 @@ class _AdminOptionState extends State<AdminOption> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
             ),
           ),
-          // InkWell(
-          //   onTap: () {
-          //     Navigator.pushNamed(context, '/adminBooking');
-          //   },
-          //   child: Text(
-          //     'Admin Booking',
-          //     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-          //   ),
-          // ),
         )
       ]);
     } else if (isAdminglobal == null || isAdminglobal == false) {
@@ -634,19 +597,6 @@ class _LoadingDataState extends State<LoadingData> {
                             )),
                       ),
                       SizedBox(height: 10),
-                      // Container(
-                      //   padding: EdgeInsets.fromLTRB(15, 0, 0, 10),
-                      //   child: InkWell(
-                      //     onTap: () {
-                      // Navigator.pushNamed(context, '/uploadImage');
-                      //     },
-                      //     child: Text(
-                      //       "Upload Today's Menu",
-                      //       style: TextStyle(
-                      //           fontWeight: FontWeight.bold, fontSize: 25),
-                      //     ),
-                      //   ),
-                      // ),
                       SizedBox(height: 10),
                       AdminOption(areYouadmin: snapshot.data["isAdmin"]),
                       SizedBox(height: 10),

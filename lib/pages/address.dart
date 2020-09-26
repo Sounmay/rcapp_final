@@ -19,6 +19,7 @@ class _AddressFormState extends State<AddressForm> {
   String _city = '';
   String _pincode = '';
   String error = '';
+  String number = '';
 
   String _finaladdress = '';
 
@@ -88,7 +89,7 @@ class _AddressFormState extends State<AddressForm> {
                     SizedBox(height: 20.0),
                     TextFormField(
                         decoration: InputDecoration(
-                            hintText: 'City',   //hardcode to rourkela
+                            hintText: 'City', //hardcode to rourkela
                             fillColor: Colors.white,
                             filled: true,
                             enabledBorder: OutlineInputBorder(
@@ -122,57 +123,76 @@ class _AddressFormState extends State<AddressForm> {
                         validator: (val) =>
                             val.isEmpty ? 'Please Enter Your Pincode' : null,
                         obscureText: false,
+                        keyboardType: TextInputType.number,
                         onChanged: (val) {
                           setState(() => _pincode = val);
                         }),
                     SizedBox(height: 20.0),
-                    Container(
-                      width: 64.0,
-                      height: 40,
-                      child:RaisedButton(
-                        color: Colors.deepOrange,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 40, vertical: 15),
-                        child: Text(
-                          'Save',
-                          style: GoogleFonts.inter(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 20),
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        onPressed: () async {
-                          if (_formKey.currentState.validate()) {
-                            var user =
-                                (await FirebaseAuth.instance.currentUser()).uid;
-                            setState(() {
-                              _finaladdress = _houseno +
-                                  ", " +
-                                  _streetname +
-                                  ", " +
-                                  _city +
-                                  "-" +
-                                  _pincode;
-                            });
-                            print(_finaladdress);
-                            dynamic result = await _formUploader
-                                .updateAddressData(user, _finaladdress);
-                            if (result != null) {
-                              setState(() => error =
-                              'could not upload address, please try again');
-                            } else {
-                              Navigator.popAndPushNamed(context, '/cart');
-                            }
-                          }
-                        },
+                    TextFormField(
+                        decoration: InputDecoration(  
+                            hintText: 'Mobile No.',
+                            fillColor: Colors.white,
+                            filled: true,
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.deepOrange, width: 1.0),
+                                borderRadius: BorderRadius.circular(10)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.deepOrange, width: 3.0),
+                                borderRadius: BorderRadius.circular(10))),
+                        validator: (val) =>
+                            val.isEmpty ? 'Please Enter Mobile No.' : null,
+                        obscureText: false,
+                        keyboardType: TextInputType.number,
+                        onChanged: (val) {
+                          setState(() => number = val);
+                        }),
+                    SizedBox(height: 20.0),
+                    RaisedButton(
+                      color: Colors.deepOrange,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 15),
+                      child: Text(
+                        'Save',
+                        style: GoogleFonts.inter(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 25),
                       ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      onPressed: () async {
+                        if (_formKey.currentState.validate()) {
+                          var user =
+                              (await FirebaseAuth.instance.currentUser()).uid;
+                          setState(() {
+                            _finaladdress = _houseno +
+                                ", " +
+                                _streetname +
+                                ", " +
+                                _city +
+                                "-" +
+                                _pincode;
+                          });
+                          print(_finaladdress);
+                          dynamic result = await _formUploader
+                              .updateAddressData(user, _finaladdress, number);
+                          if (result != null) {
+                            setState(() => error =
+                                'could not upload address, please try again');
+                          } else {
+                            Navigator.popAndPushNamed(context, '/cart');
+                          }
+                        }
+                      },
                     ),
                     SizedBox(height: 20.0),
                     Text(
                       error,
-                      style: GoogleFonts.inter(color: Colors.red, fontSize: 14.0),
+                      style:
+                          GoogleFonts.inter(color: Colors.red, fontSize: 14.0),
                     )
                   ]),
             )),

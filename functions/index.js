@@ -20,7 +20,8 @@ var msgData;
 exports.adminOrderTrigger = functions.firestore.document('confirmedOrders/{id}').onCreate((snapshot, context) => {
     var tokens = [
         'd7cf7_GgXCg:APA91bF-HqKMwlAfTsy3dRv_LVuvxkDbiBOWkBMWHweu6X8wvq_9Zw7x8ws2qSepPOk1dypxySmiv-6ct72Pbzwu6nOejFCcTEy17-_k8EmvOEMvcS2BGP-ToNAqsfF9m_EbPG4jdlhu',
-        'dtG7Gozeq5M:APA91bHAblBNNNJnPn9EY0DWqVLbTnT8jvZNctTDxLVI9QkYU7T0BJP_U8j_pjdRu0LYeNGYtDUHzPN22cmB1cT0z95Z1Y8NDHsJD8wuWHfPax68nwYa4OmgG4Ky6i5KjaHca7-AnWdc'
+        'dtG7Gozeq5M:APA91bHAblBNNNJnPn9EY0DWqVLbTnT8jvZNctTDxLVI9QkYU7T0BJP_U8j_pjdRu0LYeNGYtDUHzPN22cmB1cT0z95Z1Y8NDHsJD8wuWHfPax68nwYa4OmgG4Ky6i5KjaHca7-AnWdc',
+        'cuRgyZmpmRA:APA91bGfW7KQODKhVjYdqFe6enWjZ4CIx1xWr-V0fpcNKO0aSbRJsbscQn3Jn0d8zH-O5ffZ-dEoMdo-29VdpPeiRhpA1Nf7kn8elIfa5qvUx0f7PrRyNk8WsS69VRg52wNHBODqkIsO'
 
     ];
     return fcm.sendToDevice(tokens, {
@@ -36,7 +37,8 @@ exports.adminOrderTrigger = functions.firestore.document('confirmedOrders/{id}')
 exports.adminBookingTrigger = functions.firestore.document('BookingDetails/{id}').onCreate((snapshot, context) => {
     var tokens = [
         'dtG7Gozeq5M:APA91bHAblBNNNJnPn9EY0DWqVLbTnT8jvZNctTDxLVI9QkYU7T0BJP_U8j_pjdRu0LYeNGYtDUHzPN22cmB1cT0z95Z1Y8NDHsJD8wuWHfPax68nwYa4OmgG4Ky6i5KjaHca7-AnWdc',
-        'd7cf7_GgXCg:APA91bF-HqKMwlAfTsy3dRv_LVuvxkDbiBOWkBMWHweu6X8wvq_9Zw7x8ws2qSepPOk1dypxySmiv-6ct72Pbzwu6nOejFCcTEy17-_k8EmvOEMvcS2BGP-ToNAqsfF9m_EbPG4jdlhu'
+        'd7cf7_GgXCg:APA91bF-HqKMwlAfTsy3dRv_LVuvxkDbiBOWkBMWHweu6X8wvq_9Zw7x8ws2qSepPOk1dypxySmiv-6ct72Pbzwu6nOejFCcTEy17-_k8EmvOEMvcS2BGP-ToNAqsfF9m_EbPG4jdlhu',
+        'cuRgyZmpmRA:APA91bGfW7KQODKhVjYdqFe6enWjZ4CIx1xWr-V0fpcNKO0aSbRJsbscQn3Jn0d8zH-O5ffZ-dEoMdo-29VdpPeiRhpA1Nf7kn8elIfa5qvUx0f7PrRyNk8WsS69VRg52wNHBODqkIsO'
     ];
     return fcm.sendToDevice(tokens, {
         notification: {

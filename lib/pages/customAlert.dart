@@ -4,8 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomAlert extends StatefulWidget {
   final title;
   final description;
-  final url;
-  CustomAlert({this.title, this.description, this.url});
+  // final url;
+  CustomAlert({this.title, this.description});
   @override
   _CustomAlertState createState() => _CustomAlertState();
 }
@@ -70,7 +70,7 @@ class _CustomAlertState extends State<CustomAlert> {
           child: CircleAvatar(
             backgroundColor: Colors.orangeAccent,
             radius: 50,
-            backgroundImage: AssetImage(widget.url),
+            backgroundImage: AssetImage('assets/tick.gif'),
           ),
         )
       ],

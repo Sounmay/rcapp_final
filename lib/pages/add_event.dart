@@ -85,7 +85,7 @@ class _AddEventPageState extends State<AddEventPage> {
                 title: 'Booking Requested',
                 description:
                     'Your booking request has been forwarded to the administrator. You will get a confirmation notification within 24 hours and can view your booking in the calendar',
-                url: 'assets/nigga.gif',
+                /*url: 'assets/tick.gif',*/
               ));
 
       // Navigator.pop(context);
