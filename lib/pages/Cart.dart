@@ -387,6 +387,48 @@ class ProceedAccess extends StatefulWidget {
 }
 
 class _ProceedAccessState extends State<ProceedAccess> {
+  StoreData storeData = StoreData();
+  int total = 0;
+  int totalquantity = 1;
+  List<String> itemList = List<String>();
+  List<int> priceList = List<int>();
+  List<int> quantityList = List<int>();
+
+  void updateTotal() {
+    Map<String, int> foodDetail = storeData.retrieveFoodDetails();
+    Map<String, int> foodqtyDetail = storeData.retrieveQtyDetails();
+
+    setState(() {
+      foodDetail.forEach((k, v) => total = total + v * foodqtyDetail[k]);
+      foodDetail.forEach((k, v) => totalquantity = totalquantity + v);
+      foodDetail.forEach((key, value) {
+        itemList.add(key);
+        priceList.add(value);
+      });
+      foodqtyDetail.forEach((key, value) => quantityList.add(value));
+    });
+  }
+
+  void confirmOrder() async {
+    var user = await FirebaseAuth.instance.currentUser();
+    var _dat = await Firestore.instance
+        .collection('userInfo')
+        .document(user.uid)
+        .get();
+
+    var userName = _dat.data["name"];
+    var number = _dat.data["number"];
+    var address = _dat.data["address"];
+    var mobileNumber = _dat.data["mobileNumber"];
+
+    DatabaseService().confirmOrderofUser(user.uid, userName, number, address,
+        itemList, priceList, quantityList, total, false, mobileNumber);
+
+    storeData.resetStore();
+    updateTotal();
+    Navigator.pushReplacementNamed(context, '/navigationbar');
+  }
+
   @override
   Widget build(BuildContext context) {
     if (widget.address == '') {
@@ -411,7 +453,6 @@ class _ProceedAccessState extends State<ProceedAccess> {
               onPressed: () {
                 updateTotal();
                 confirmOrder();
-                Navigator.pushReplacementNamed(context, '/navigationbar');
                 showDialog(
                     context: context,
                     builder: (context) => CustomAlert(
@@ -422,7 +463,7 @@ class _ProceedAccessState extends State<ProceedAccess> {
                         ));
               },
               child: Text(
-                'Confirm Order(Pay through COD',
+                'Confirm Order(Pay through COD)',
                 style: GoogleFonts.inter(color: Colors.white),
               )));
     } else if (widget.address == null) {

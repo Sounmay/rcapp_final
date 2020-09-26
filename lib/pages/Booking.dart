@@ -151,6 +151,29 @@ class _BookingState extends State<Booking> {
                   fit: BoxFit.fill)),
         ),
       ),
+      SizedBox(height: 20),
+      InkWell(
+        onTap: () {
+          Navigator.pushNamed(context, "/mainhall");
+        },
+        child: Container(
+          height: 100.0,
+          width: 150.0,
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Text(
+              'Main Hall',
+              style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w200),
+            ),
+          ),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.blue,
+              image: DecorationImage(
+                  image: new AssetImage("assets/15.jpg"),
+                  fit: BoxFit.fill)),
+        ),
+      ),
     SizedBox(width: 20),
     ],
     ),
@@ -180,28 +203,6 @@ class _BookingState extends State<Booking> {
                       physics: ClampingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       children: <Widget>[
-                        InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(context, "/mainhall");
-                          },
-                          child: Container(
-                            height: 100.0,
-                            width: 150.0,
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Text(
-                                'Main Hall',
-                                style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w200),
-                              ),
-                            ),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.blue,
-                                image: DecorationImage(
-                                    image: new AssetImage("assets/15.jpg"),
-                                    fit: BoxFit.fill)),
-                          ),
-                        ),
                         SizedBox(width: 20),
                         InkWell(
                           onTap: () {

@@ -8,21 +8,13 @@ const fcm = admin.messaging();
 
 var msgData;
 
-// exports.offerTrigger = functions.firestore.document('confirmedOrders/{id}').onCreate((snapshot, context) => {
-//     msgData = snapshot.data();
 
-//     return fcm.sendToTopic('confirmedOrders', {
-//         notification: {title: snapshot.data().name, body: 'order has been placed',clickAction: 'FLUTTER_NOTIFICATION_CLICK'}
-//     });
-
-// });
-
-exports.adminOrderTrigger = functions.firestore.document('confirmedOrders/{id}').onCreate((snapshot, context) => {
-    var tokens = [
-        'd7cf7_GgXCg:APA91bF-HqKMwlAfTsy3dRv_LVuvxkDbiBOWkBMWHweu6X8wvq_9Zw7x8ws2qSepPOk1dypxySmiv-6ct72Pbzwu6nOejFCcTEy17-_k8EmvOEMvcS2BGP-ToNAqsfF9m_EbPG4jdlhu',
-        'dtG7Gozeq5M:APA91bHAblBNNNJnPn9EY0DWqVLbTnT8jvZNctTDxLVI9QkYU7T0BJP_U8j_pjdRu0LYeNGYtDUHzPN22cmB1cT0z95Z1Y8NDHsJD8wuWHfPax68nwYa4OmgG4Ky6i5KjaHca7-AnWdc'
-
-    ];
+exports.adminOrderTrigger = functions.firestore.document('confirmedOrders/{id}').onCreate(async (snapshot, context) => {
+    var tokens = [];
+    const _snap = await admin.firestore().collection('userInfo').where('isAdmin', '==', true).get();
+    _snap.forEach((k) => {
+        tokens.push(k.data().token.toString());
+    })
     return fcm.sendToDevice(tokens, {
         notification: {
             title: 'New Order',
@@ -33,11 +25,12 @@ exports.adminOrderTrigger = functions.firestore.document('confirmedOrders/{id}')
 });
 
 
-exports.adminBookingTrigger = functions.firestore.document('BookingDetails/{id}').onCreate((snapshot, context) => {
-    var tokens = [
-        'dtG7Gozeq5M:APA91bHAblBNNNJnPn9EY0DWqVLbTnT8jvZNctTDxLVI9QkYU7T0BJP_U8j_pjdRu0LYeNGYtDUHzPN22cmB1cT0z95Z1Y8NDHsJD8wuWHfPax68nwYa4OmgG4Ky6i5KjaHca7-AnWdc',
-        'd7cf7_GgXCg:APA91bF-HqKMwlAfTsy3dRv_LVuvxkDbiBOWkBMWHweu6X8wvq_9Zw7x8ws2qSepPOk1dypxySmiv-6ct72Pbzwu6nOejFCcTEy17-_k8EmvOEMvcS2BGP-ToNAqsfF9m_EbPG4jdlhu'
-    ];
+exports.adminBookingTrigger = functions.firestore.document('BookingDetails/{id}').onCreate(async (snapshot, context) => {
+    var tokens = [];
+    const _snap = await admin.firestore().collection('userInfo').where('isAdmin', '==', true).get();
+    _snap.forEach((k) => {
+        tokens.push(k.data().token.toString());
+    })
     return fcm.sendToDevice(tokens, {
         notification: {
             title: 'New Booking',

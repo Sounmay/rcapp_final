@@ -95,8 +95,9 @@ class _AdminOrderState extends State<AdminOrder> {
                     SizedBox(height: 10.0),
                     Container(
                       padding: EdgeInsets.all(10),
-                      height: 190.0,
-                      width: 370.0,
+                      height: MediaQuery.of(context).size.height * 0.3,
+                      width: MediaQuery.of(context).size.width * 9,
+
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(12.0)),
@@ -302,7 +303,7 @@ class _AdminOrderDataState extends State<AdminOrderData> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.fromLTRB(10, 10, 20, 0),
-      height: 390,
+      height: MediaQuery.of(context).size.height * 0.4,
       child: ListView.builder(
           itemCount: widget.item.length,
           itemBuilder: (_, index) {
@@ -311,7 +312,6 @@ class _AdminOrderDataState extends State<AdminOrderData> {
               children: <Widget>[
                 Container(
                     child: Row(children: <Widget>[
-                  Text('${index + 1}) '),
                   Text('${widget.item[index]} '),
                 ])),
                 Text('${widget.quantity[index]}'),
@@ -372,8 +372,8 @@ class _AdminOrderDetailsState extends State<AdminOrderDetails> {
                   SizedBox(height: 20.0),
                   Container(
                     padding: EdgeInsets.all(10),
-                    height: 500.0,
-                    width: 370.0,
+                    height: MediaQuery.of(context).size.height * 0.7,
+                    width: MediaQuery.of(context).size.width * 0.9,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(15.0)),
@@ -468,29 +468,29 @@ class _AdminOrderDetailsState extends State<AdminOrderDetails> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 Text(
-                                  "Mobile No. :",
+                                  "Mobile No. : ${widget.mobileNumber}",
                                   style: GoogleFonts.inter(
                                       color: Colors.grey,
                                       fontSize: 18,
                                       fontWeight: FontWeight.w500),
                                 ),
                                 SizedBox(height: 5),
-                                Padding(
+                                /*Padding(
                                   padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                                   child: Text(
-                                    "${widget.mobileNumber}",
+                                    "",
                                     style: GoogleFonts.inter(
                                         color: Colors.black,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w400),
                                   ),
-                                ),
+                                ),*/
                               ],
                             ),
                           ],
                         ),
                         SizedBox(height: 20),
-                        Container(
+                       /* Container(
                             alignment: Alignment.centerLeft,
                             child: Text(
                               'Menu :',
@@ -498,27 +498,36 @@ class _AdminOrderDetailsState extends State<AdminOrderDetails> {
                                   color: Colors.grey,
                                   fontSize: 18,
                                   fontWeight: FontWeight.w500),
-                            )),
+                            )),*/
                         Container(
                           padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Text('Item',
-                                  style: GoogleFonts.inter(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w400,
-                                      decoration: TextDecoration.underline)),
-                              Text('Qty',
-                                  style: GoogleFonts.inter(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w400,
-                                      decoration: TextDecoration.underline)),
-                              Text('Price(per qty)',
-                                  style: GoogleFonts.inter(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w400,
-                                      decoration: TextDecoration.underline))
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.4,
+                                child: Text('Item',
+                                    style: GoogleFonts.inter(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w400,
+                                        decoration: TextDecoration.underline)),
+                              ),
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.2,
+                                child: Text('Qty',
+                                    style: GoogleFonts.inter(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w400,
+                                        decoration: TextDecoration.underline)),
+                              ),
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.2,
+                                child: Text('Rate',
+                                    style: GoogleFonts.inter(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w400,
+                                        decoration: TextDecoration.underline)),
+                              ),
                             ],
                           ),
                         ),

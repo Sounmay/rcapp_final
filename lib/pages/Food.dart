@@ -150,7 +150,7 @@ class _FoodState extends State<Food> {
               ],
             ),
           ),
-          SizedBox(height: 10.0),
+          SizedBox(height: 15.0),
           BottomItemView(total: total, qty: qty)
         ]),
       ),

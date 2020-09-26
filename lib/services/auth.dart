@@ -46,6 +46,14 @@ class AuthService {
           .get()
           .then((value) => value.data["isAdmin"]);
 
+      final FirebaseMessaging _messaging = FirebaseMessaging();
+      var token = await _messaging.getToken();
+
+      await Firestore.instance
+          .collection('userInfo')
+          .document(userkaabba)
+          .updateData({'token': token});
+
       isAdminglobal = dat;
 
       return _userFromFirebaseUser(user);

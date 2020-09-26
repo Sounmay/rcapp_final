@@ -70,7 +70,7 @@ class _CustomAlertState extends State<CustomAlert> {
           child: CircleAvatar(
             backgroundColor: Colors.orangeAccent,
             radius: 50,
-            // backgroundImage: AssetImage(widget.url),
+            backgroundImage: AssetImage('assets/tick.gif'),
           ),
         )
       ],
