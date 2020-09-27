@@ -16,7 +16,7 @@ class _WeddingHallState extends State<WeddingHall> {
         title: Text('Banquets'),
       ),
       body: Container(
-        height: MediaQuery.of(context).size.height * 0.88,
+        height: MediaQuery.of(context).size.height * 1,
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
