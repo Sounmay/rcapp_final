@@ -176,7 +176,7 @@ class _CartState extends State<Cart> {
                                   ),
                                 ),
                                 SizedBox(
-                                  width: 200,
+                                  width: MediaQuery.of(context).size.width * 0.56,
                                   child: Text(
                                     keyname,
                                     style: GoogleFonts.inter(
@@ -426,7 +426,7 @@ class _ProceedAccessState extends State<ProceedAccess> {
 
     storeData.resetStore();
     updateTotal();
-    Navigator.pushReplacementNamed(context, '/navigationbar');
+    /*Navigator.pushReplacementNamed(context, '/navigationbar');*/
   }
 
   @override
@@ -453,12 +453,13 @@ class _ProceedAccessState extends State<ProceedAccess> {
               onPressed: () {
                 updateTotal();
                 confirmOrder();
+                Navigator.pushReplacementNamed(context, '/navigationbar');
                 showDialog(
                     context: context,
                     builder: (context) => CustomAlert(
                           title: 'Order Placed!',
                           description:
-                              'Your Order has been placed and will be on its way to you shortly',
+                              'Your Order has been placed and will be on its way to you shortly. For further queries regarding your order, please contact - Mr. Debabrata Mohanty - +919438208969',
                           // url: 'assets/nigga.gif',
                         ));
               },

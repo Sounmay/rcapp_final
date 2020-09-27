@@ -10,6 +10,7 @@ import 'package:rcapp/pages/CategoryMenuList/Bread_Menu.dart';
 import 'package:rcapp/pages/CategoryMenuList/Breakfast_Menu.dart';
 import 'package:rcapp/pages/CategoryMenuList/Burger_Menu.dart';
 import 'package:rcapp/pages/CategoryMenuList/Chinese_Menu.dart';
+import 'package:rcapp/pages/CategoryMenuList/ContactDetails.dart';
 import 'package:rcapp/pages/CategoryMenuList/FriedRiceAndNoodles_Menu.dart';
 import 'package:rcapp/pages/CategoryMenuList/MainCourse_Menu.dart';
 import 'package:rcapp/pages/CategoryMenuList/Pasta_Menu.dart';
@@ -76,6 +77,7 @@ class MyApp extends StatelessWidget {
           "/previousOrder": (context) => PreviousOrder(),
           "/previousBooking": (context) => PreviousBooking(),
           "/adminBooking": (context) => AdminBooking(),
+          "/contactDetails": (context) => ContactDetails(),
           // "/previousOrder": (context) => PreviousOrderDetails(),
 
           //routes for different categories of food

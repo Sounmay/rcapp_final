@@ -47,8 +47,6 @@ class _HomeState extends State<Home> {
     }
   }
 
-
-
   @override
   void initState() {
     // TODO: implement initState
@@ -536,7 +534,7 @@ class _LoadingDataState extends State<LoadingData> {
                                   context, '/uploadAvatarImage');
                             },
                             child: CircleAvatar(
-                              radius: 60.0,
+                              radius: MediaQuery.of(context).size.width * 0.15,
                               backgroundImage: NetworkImage(
                                   'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'),
                               backgroundColor: Colors.transparent,
@@ -549,7 +547,7 @@ class _LoadingDataState extends State<LoadingData> {
                                   context, '/uploadAvatarImage');
                             },
                             child: CircleAvatar(
-                              radius: 60.0,
+                              radius: MediaQuery.of(context).size.width * 0.15,
                               backgroundImage:
                                   NetworkImage('${snapshot.data["avatar"]}'),
                               backgroundColor: Colors.transparent,
@@ -561,12 +559,19 @@ class _LoadingDataState extends State<LoadingData> {
                             children: <Widget>[
                               Text(
                                 '${snapshot.data["name"]}',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 20),
+                                style: GoogleFonts.inter(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.05),
                               ),
                               Text(
-                                'Personal No. ${snapshot.data["number"]}',
-                                style: TextStyle(color: Colors.grey[700]),
+                                'Personal No: ${snapshot.data["number"]}',
+                                style: GoogleFonts.inter(
+                                    color: Colors.grey[700],
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.026),
                               ),
                             ])
                       ]),
@@ -599,6 +604,19 @@ class _LoadingDataState extends State<LoadingData> {
                       SizedBox(height: 10),
                       SizedBox(height: 10),
                       AdminOption(areYouadmin: snapshot.data["isAdmin"]),
+                      SizedBox(height: 10),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(15, 0, 0, 10),
+                        child: InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(context, '/contactDetails');
+                            },
+                            child: Text(
+                              'Contact',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 25),
+                            )),
+                      ),
                       SizedBox(height: 10),
                       Container(
                         padding: EdgeInsets.fromLTRB(15, 0, 0, 10),

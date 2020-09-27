@@ -41,7 +41,8 @@ class FoodCategory extends StatelessWidget {
                 size: 45,
               ),
               SizedBox(height: 20),
-              Text('LOADING', style: GoogleFonts.inter(fontWeight: FontWeight.w400))
+              Text('LOADING',
+                  style: GoogleFonts.inter(fontWeight: FontWeight.w400))
             ]),
       );
     } else {
@@ -51,17 +52,11 @@ class FoodCategory extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemCount: _menuList.length,
           itemBuilder: (BuildContext context, int index) {
-            return FocusedMenuHolder(
-              onPressed: () {},
-              menuItems: <FocusedMenuItem>[
-                FocusedMenuItem(title: Text('delete'), onPressed: () {})
-              ],
-              child: FoodCard(
-                areYouAdmin: areYouAdmin,
-                categoryName: _menuList[index].category_menu,
-                imagePath: _menuList[index].imagepath,
-                itemprice: _menuList[index].price,
-              ),
+            return FoodCard(
+              areYouAdmin: areYouAdmin,
+              categoryName: _menuList[index].category_menu,
+              imagePath: _menuList[index].imagepath,
+              itemprice: _menuList[index].price,
             );
           },
         ),
