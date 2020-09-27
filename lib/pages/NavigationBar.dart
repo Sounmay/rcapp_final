@@ -5,6 +5,8 @@ import 'package:rcapp/pages/Booking.dart';
 import 'package:rcapp/pages/CategoryMenuList/flushbar.dart';
 import 'package:rcapp/pages/Food.dart';
 import 'package:rcapp/pages/Home.dart';
+import 'package:provider/provider.dart';
+import 'package:rcapp/pages/storeData.dart';
 
 class NavigationBar extends StatefulWidget {
   @override
@@ -38,8 +40,8 @@ class _NavigationBarState extends State<NavigationBar> {
     final fbm = FirebaseMessaging();
     fbm.configure(onMessage: (msg) {
       print(msg);
-      showFlushbarNotification(context, msg['notification']['title'],
-          msg['notification']['body']);
+      showFlushbarNotification(
+          context, msg['notification']['title'], msg['notification']['body']);
       return;
     }, onLaunch: (msg) {
       print(msg);
@@ -65,31 +67,34 @@ class _NavigationBarState extends State<NavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _children[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        unselectedItemColor: Colors.black,
-        selectedItemColor: Colors.deepOrange,
-        onTap: onTappedBar,
-        currentIndex: _currentIndex,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text('Home'),
-            backgroundColor: Colors.deepOrange,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.fastfood),
-            title: Text('Food'),
-            backgroundColor: Colors.deepOrange,
-            activeIcon: Icon(Icons.fastfood, color: Colors.deepOrange),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.book),
-            title: Text('Booking'),
-            backgroundColor: Colors.deepOrange,
-          ),
-        ],
+    return ChangeNotifierProvider(
+      create: (ctx) => StoreData(),
+      child: Scaffold(
+        body: _children[_currentIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          unselectedItemColor: Colors.black,
+          selectedItemColor: Colors.deepOrange,
+          onTap: onTappedBar,
+          currentIndex: _currentIndex,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              title: Text('Home'),
+              backgroundColor: Colors.deepOrange,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.fastfood),
+              title: Text('Food'),
+              backgroundColor: Colors.deepOrange,
+              activeIcon: Icon(Icons.fastfood, color: Colors.deepOrange),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.book),
+              title: Text('Booking'),
+              backgroundColor: Colors.deepOrange,
+            ),
+          ],
+        ),
       ),
     );
   }

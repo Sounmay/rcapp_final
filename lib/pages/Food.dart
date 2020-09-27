@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rcapp/CustomWidget/foot_category.dart';
@@ -20,6 +21,8 @@ import 'package:rcapp/services/database.dart';
 // }
 
 // Orders newOrder;
+
+bool refreshVar = true;
 
 class Food extends StatefulWidget {
   @override
@@ -69,6 +72,8 @@ class _FoodState extends State<Food> {
 
   @override
   Widget build(BuildContext context) {
+    final store = Provider.of<StoreData>(context);
+
     updateTotal();
     return StreamProvider<List<Today_Menu>>.value(
       value: DatabaseService().today_Menu,
@@ -78,19 +83,29 @@ class _FoodState extends State<Food> {
           elevation: 10.0,
           backgroundColor: Colors.deepOrange,
           title: Container(
-            margin: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.13),
-            child:Text('Menu', style: GoogleFonts.inter()),
-          ),  //repeat for menu and booking
+            margin:
+                EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.13),
+            child: Text('Menu', style: GoogleFonts.inter()),
+          ), //repeat for menu and booking
           actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.shopping_cart,
-                color: Colors.white,
+            Container(
+              margin: EdgeInsets.only(right: 10),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/cart');
+                },
+                icon: Badge(
+                  toAnimate: true,
+                  badgeColor: Colors.yellow,
+                  badgeContent: Text('$qty'),
+                  child: Icon(
+                    Icons.shopping_cart,
+                    color: Colors.white,
+                    size: 35,
+                  ),
+                ),
               ),
-              onPressed: () {
-                Navigator.pushNamed(context, '/cart');
-              },
-            )
+            ),
           ],
         ),
         body: Column(children: <Widget>[
@@ -151,7 +166,7 @@ class _FoodState extends State<Food> {
             ),
           ),
           SizedBox(height: 15.0),
-          BottomItemView(total: total, qty: qty)
+          BottomItemView(total: total, qty: qty),
         ]),
       ),
     );
@@ -188,8 +203,9 @@ class _QuantityState extends State<Quantity> {
           ),
           height: 25,
           width: 62,
-          child:
-              Center(child: Text('Add', style: GoogleFonts.inter(color: Colors.white))),
+          child: Center(
+              child:
+                  Text('Add', style: GoogleFonts.inter(color: Colors.white))),
         ),
       );
     } else {
@@ -207,7 +223,8 @@ class _QuantityState extends State<Quantity> {
           height: 25,
           width: 66,
           child: Center(
-              child: Text('Remove', style: GoogleFonts.inter(color: Colors.white))),
+              child: Text('Remove',
+                  style: GoogleFonts.inter(color: Colors.white))),
         ),
       );
     }
@@ -260,7 +277,8 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Main Course',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
+                          style: GoogleFonts.inter(
+                              color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -283,7 +301,8 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Breads',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
+                          style: GoogleFonts.inter(
+                              color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -306,7 +325,8 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Biryani',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
+                          style: GoogleFonts.inter(
+                              color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -329,7 +349,8 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Tandoori',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
+                          style: GoogleFonts.inter(
+                              color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -362,7 +383,8 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Chinese',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
+                          style: GoogleFonts.inter(
+                              color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -385,7 +407,8 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Noodles',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
+                          style: GoogleFonts.inter(
+                              color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -408,7 +431,8 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Rolls',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
+                          style: GoogleFonts.inter(
+                              color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -431,7 +455,8 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Pizza',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
+                          style: GoogleFonts.inter(
+                              color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -464,7 +489,8 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Snacks',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
+                          style: GoogleFonts.inter(
+                              color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -487,7 +513,8 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Sandwiches',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
+                          style: GoogleFonts.inter(
+                              color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -510,7 +537,8 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Burgers',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
+                          style: GoogleFonts.inter(
+                              color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -533,7 +561,8 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Pasta',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
+                          style: GoogleFonts.inter(
+                              color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -566,7 +595,8 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Soup',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
+                          style: GoogleFonts.inter(
+                              color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -589,7 +619,10 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Accompaniment',
-                          style: GoogleFonts.inter(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w300),
+                          style: GoogleFonts.inter(
+                              fontSize: 12,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -612,7 +645,8 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Starters',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
+                          style: GoogleFonts.inter(
+                              color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -635,7 +669,8 @@ class _ListPageState extends State<ListPage> {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Breakfast',
-                          style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w300),
+                          style: GoogleFonts.inter(
+                              color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -652,5 +687,52 @@ class _ListPageState extends State<ListPage> {
             ),
           ],
         ));
+  }
+}
+
+class BottomItemView extends StatefulWidget {
+  int total;
+  int qty;
+  BottomItemView({this.total, this.qty});
+
+  @override
+  _BottomItemViewState createState() => _BottomItemViewState();
+}
+
+class _BottomItemViewState extends State<BottomItemView> {
+  @override
+  Widget build(BuildContext context) {
+    final store = Provider.of<StoreData>(context);
+    return Container(
+      width: double.maxFinite,
+      height: 54,
+      decoration: BoxDecoration(color: Colors.deepOrange),
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text(
+              '${widget.qty} ' +
+                  '  item ' +
+                  '|' +
+                  ' ' +
+                  '₹ ' +
+                  '${widget.total}',
+              style: GoogleFonts.inter(
+                  color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+            InkWell(
+              onTap: (() => Navigator.pushNamed(context, '/cart')),
+              child: Text(
+                'VIEW CART',
+                style: GoogleFonts.inter(
+                    color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -96,6 +96,15 @@ class _CartState extends State<Cart> {
           backgroundColor: Colors.deepOrange,
           title: Text('Cart',
               style: GoogleFonts.inter()), //repeat for menu and booking
+          leading: Builder(builder: (BuildContext context) {
+            return IconButton(
+              onPressed: () {
+                refreshVar = !refreshVar;
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.arrow_back),
+            );
+          }),
         ),
         body: Column(children: <Widget>[
           SizedBox(height: 10),
@@ -176,7 +185,8 @@ class _CartState extends State<Cart> {
                                   ),
                                 ),
                                 SizedBox(
-                                  width: MediaQuery.of(context).size.width * 0.56,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.56,
                                   child: Text(
                                     keyname,
                                     style: GoogleFonts.inter(
@@ -225,7 +235,6 @@ class _CartState extends State<Cart> {
                   );
                 }),
           ),
-          // BottomItemView(total: total, qty: totalquantity),
           ProceedAccess(address: address)
         ]));
   }
@@ -471,46 +480,5 @@ class _ProceedAccessState extends State<ProceedAccess> {
       return Container(
           width: double.infinity, height: 50, child: SpinKitChasingDots());
     }
-  }
-}
-
-// class BottomItemView extends StatefulWidget {
-//   @override
-//   _BottomItemViewState createState() => _BottomItemViewState();
-// }
-
-class BottomItemView extends StatelessWidget {
-  int total;
-  int qty;
-  BottomItemView({this.total, this.qty});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.maxFinite,
-      height: 54,
-      decoration: BoxDecoration(color: Colors.deepOrange),
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text(
-              '${qty} ' + '  item ' + '|' + ' ' + '₹ ' + '${total}',
-              style: GoogleFonts.inter(
-                  color: Colors.white, fontWeight: FontWeight.bold),
-            ),
-            InkWell(
-              onTap: (() => Navigator.pushNamed(context, '/cart')),
-              child: Text(
-                'VIEW CART',
-                style: GoogleFonts.inter(
-                    color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
   }
 }
