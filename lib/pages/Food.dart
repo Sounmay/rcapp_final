@@ -35,17 +35,8 @@ class _FoodState extends State<Food> {
 
   int qty = 0;
 
-  //   @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   updateTotal();
-  // }
-
-  List<int> qtyList = List<int>();
 
   void updateTotal() {
-    Map<String, int> foodDetail = dataforCart.retrieveFoodDetails();
     Map<String, int> qtyDetail = dataforCart.retrieveQtyDetails();
 
     total = 0;
@@ -53,10 +44,8 @@ class _FoodState extends State<Food> {
 
     setState(() {
       qtyDetail.forEach((key, value) {
-        qty += value;
-        qtyList.add(value);
+        ++qty;
       });
-      foodDetail.forEach((k, v) => total = total + v * qtyDetail[k]);
     });
   }
 
