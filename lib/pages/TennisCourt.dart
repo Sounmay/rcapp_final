@@ -13,10 +13,10 @@ class _TennisCourtState extends State<TennisCourt> {
       appBar: AppBar(
         elevation: 10.0,
         backgroundColor: Colors.deepOrange,
-        title: Text('Tennis Court'),
+        title: Text('Banquets'),
       ),
       body: Container(
-        height: MediaQuery.of(context).size.height * 0.88,
+        height: MediaQuery.of(context).size.height * 1,
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[

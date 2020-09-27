@@ -14,10 +14,10 @@ class _BlueLoungeState extends State<BlueLounge> {
       appBar: AppBar(
         elevation: 10.0,
         backgroundColor: Colors.deepOrange,
-        title: Text('Blue Lounge'),
+        title: Text('Lounges'),
       ),
       body: Container(
-        height: MediaQuery.of(context).size.height * 0.88,
+        height: MediaQuery.of(context).size.height * 1,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[

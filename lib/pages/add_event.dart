@@ -84,7 +84,7 @@ class _AddEventPageState extends State<AddEventPage> {
           builder: (context) => CustomAlert(
                 title: 'Booking Requested',
                 description:
-                    'Your booking request has been forwarded to the administrator. You will get a confirmation notification within 24 hours and can view your booking in the calendar',
+                    'Your booking request has been forwarded to the administrator. You will get a confirmation notification within 24 hours and can view your booking in the calendar. For further queries, please contact - Mr. Pramod Kumar Pattnaik - +919437116141',
                 /*url: 'assets/tick.gif',*/
               ));
 
@@ -155,6 +155,7 @@ class _AddEventPageState extends State<AddEventPage> {
                     }),
                 SizedBox(height: 10),
                 TextFormField(
+                    keyboardType: TextInputType.number,
                     initialValue: _personalno,
                     decoration: InputDecoration(
                         hintText: 'Personal No.',
@@ -175,6 +176,7 @@ class _AddEventPageState extends State<AddEventPage> {
                     }),
                 SizedBox(height: 10),
                 TextFormField(
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                         hintText: 'Number of People',
                         fillColor: Colors.white,
@@ -227,11 +229,11 @@ class _AddEventPageState extends State<AddEventPage> {
                       value: _value2,
                       items: [
                         DropdownMenuItem(
-                          child: Text("Slot 1"),
+                          child: Text("Lunch Slot"),
                           value: 1,
                         ),
                         DropdownMenuItem(
-                          child: Text("Slot 2"),
+                          child: Text("Dinner Slot"),
                           value: 2,
                         ),
                       ],

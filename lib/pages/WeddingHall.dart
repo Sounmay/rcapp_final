@@ -13,10 +13,10 @@ class _WeddingHallState extends State<WeddingHall> {
       appBar: AppBar(
         elevation: 10.0,
         backgroundColor: Colors.deepOrange,
-        title: Text('Wedding Reception Hall'),
+        title: Text('Banquets'),
       ),
       body: Container(
-        height: MediaQuery.of(context).size.height * 0.88,
+        height: MediaQuery.of(context).size.height * 1,
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[

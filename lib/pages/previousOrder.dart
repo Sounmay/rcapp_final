@@ -212,11 +212,27 @@ class _OrderDataState extends State<OrderData> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Container(
-                    child: Row(children: <Widget>[
-                  Text('${widget.item[index]} '),
-                ])),
-                Text('${widget.quantity[index]}'),
-                Text('${widget.price[index]}')
+                    // decoration: BoxDecoration(color: Colors.deepOrange),
+                    width: MediaQuery.of(context).size.width * 0.34,
+                    child: Text(
+                      '${widget.item[index]}',
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.left,
+                    )),
+                Container(
+                    // decoration: BoxDecoration(color: Colors.deepOrange),
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Text(
+                      '${widget.quantity[index]}',
+                      textAlign: TextAlign.center,
+                    )),
+                Container(
+                    // decoration: BoxDecoration(color: Colors.deepOrange),
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Text(
+                      '${widget.price[index]}',
+                      textAlign: TextAlign.center,
+                    )),
               ],
             );
           }),
@@ -348,7 +364,9 @@ class _PreviousOrderDetailsState extends State<PreviousOrderDetails> {
                                             fontWeight: FontWeight.w500),
                                       ),
                                       Container(
-                                        width: MediaQuery.of(context).size.width * 0.4,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.4,
                                         child: Padding(
                                           padding:
                                               EdgeInsets.fromLTRB(10, 0, 0, 0),
@@ -367,7 +385,9 @@ class _PreviousOrderDetailsState extends State<PreviousOrderDetails> {
                             Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                SizedBox(height: 10.0,),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
                                 Text(
                                   "Mobile No. : ${widget.mobileNumber}",
                                   style: GoogleFonts.inter(
@@ -455,12 +475,12 @@ class _PreviousOrderDetailsState extends State<PreviousOrderDetails> {
                                               PreviousOrderDetails()));
                                 },
                                 child: Container(
-                                  /*child: Text('Know More',
+                                    /*child: Text('Know More',
                                       style: GoogleFonts.inter(
                                           color: Colors.deepOrange,
                                           decoration:
                                               TextDecoration.underline)),*/
-                                ),
+                                    ),
                               )
                             ]),
                       ],

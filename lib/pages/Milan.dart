@@ -13,10 +13,10 @@ class _MilanLoungeState extends State<MilanLounge> {
       appBar: AppBar(
         elevation: 10.0,
         backgroundColor: Colors.deepOrange,
-        title: Text('Milan Lounge'),
+        title: Text('Lounges'),
       ),
       body: Container(
-        height: MediaQuery.of(context).size.height * 0.88,
+        height: MediaQuery.of(context).size.height * 1,
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[

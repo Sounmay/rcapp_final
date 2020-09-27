@@ -97,7 +97,6 @@ class _AdminOrderState extends State<AdminOrder> {
                       padding: EdgeInsets.all(10),
                       height: MediaQuery.of(context).size.height * 0.3,
                       width: MediaQuery.of(context).size.width * 9,
-
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(12.0)),
@@ -311,11 +310,27 @@ class _AdminOrderDataState extends State<AdminOrderData> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Container(
-                    child: Row(children: <Widget>[
-                  Text('${widget.item[index]} '),
-                ])),
-                Text('${widget.quantity[index]}'),
-                Text('${widget.price[index]}'),
+                    // decoration: BoxDecoration(color: Colors.deepOrange),
+                    width: MediaQuery.of(context).size.width * 0.34,
+                    child: Text(
+                      '${widget.item[index]}',
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.left,
+                    )),
+                Container(
+                    // decoration: BoxDecoration(color: Colors.deepOrange),
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Text(
+                      '${widget.quantity[index]}',
+                      textAlign: TextAlign.center,
+                    )),
+                Container(
+                    // decoration: BoxDecoration(color: Colors.deepOrange),
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Text(
+                      '${widget.price[index]}',
+                      textAlign: TextAlign.center,
+                    )),
               ],
             );
           }),
@@ -490,7 +505,7 @@ class _AdminOrderDetailsState extends State<AdminOrderDetails> {
                           ],
                         ),
                         SizedBox(height: 20),
-                       /* Container(
+                        /* Container(
                             alignment: Alignment.centerLeft,
                             child: Text(
                               'Menu :',

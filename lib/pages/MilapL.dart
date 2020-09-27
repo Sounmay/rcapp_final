@@ -13,10 +13,10 @@ class _MilapLoungeState extends State<MilapLounge> {
       appBar: AppBar(
         elevation: 10.0,
         backgroundColor: Colors.deepOrange,
-        title: Text('Milap Lounge'),
+        title: Text('Lounges'),
       ),
       body: Container(
-        height: MediaQuery.of(context).size.height * 0.88,
+        height: MediaQuery.of(context).size.height * 1,
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -44,7 +44,7 @@ class _MilapLoungeState extends State<MilapLounge> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 15, vertical: 0),
               child: Text(
-                " \nThe Milap Reception Hall is a large hall present in the first floor of the club. Perfect for medium group gatherings like office parties, departmental dinners etc \n \nCapacity : 70 people\n \n \n ",
+                " \nThe Milap Reception Hall is a large hall present in the first floor of the club. Perfect for medium group gatherings like office parties, departmental dinners etc \n \nCapacity : 70 people\n \n ",
                 style: GoogleFonts.inter(fontSize: MediaQuery.of(context).size.width*0.05),
               ),
             ),

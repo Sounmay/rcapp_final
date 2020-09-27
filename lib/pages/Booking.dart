@@ -25,30 +25,34 @@ class _BookingState extends State<Booking> {
       body: new ListView(
         children: <Widget>[
           SizedBox(height: 30.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                " Lounges",
-                style: GoogleFonts.inter(
-                  color: Colors.grey,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+            child:Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  " Lounges",
+                  style: GoogleFonts.inter(
+                    color: Colors.grey,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
-              OutlineButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/bookingcalendar');
-                  },
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0)),
-                  color: Colors.grey,
-                  child: Text('Calendar')),
-            ],
+                OutlineButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/bookingcalendar');
+                    },
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(30.0)),
+                    color: Colors.grey,
+                    child: Text('Book')),
+              ],
+            ),
           ),
           SizedBox(height: 10.0),
           Container(
               margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+              alignment: Alignment.centerLeft,
               height: 150.0,
               width: double.infinity,
               child: new Column(
@@ -72,7 +76,7 @@ class _BookingState extends State<Booking> {
                                 'Blue Lounge',
                                 style: GoogleFonts.inter(
                                     color: Colors.white,
-                                    fontWeight: FontWeight.w300),
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                             decoration: BoxDecoration(
@@ -97,7 +101,7 @@ class _BookingState extends State<Booking> {
                                 'Yellow Lounge',
                                 style: GoogleFonts.inter(
                                     color: Colors.white,
-                                    fontWeight: FontWeight.w300),
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                             decoration: BoxDecoration(
@@ -122,7 +126,7 @@ class _BookingState extends State<Booking> {
                                 'Milap Hall',
                                 style: GoogleFonts.inter(
                                     color: Colors.white,
-                                    fontWeight: FontWeight.w300),
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                             decoration: BoxDecoration(
@@ -147,7 +151,7 @@ class _BookingState extends State<Booking> {
                                 'Milan Lounge',
                                 style: GoogleFonts.inter(
                                     color: Colors.white,
-                                    fontWeight: FontWeight.w300),
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                             decoration: BoxDecoration(
@@ -172,7 +176,7 @@ class _BookingState extends State<Booking> {
                                 'Main Hall',
                                 style: GoogleFonts.inter(
                                     color: Colors.white,
-                                    fontWeight: FontWeight.w200),
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                             decoration: BoxDecoration(
@@ -191,17 +195,21 @@ class _BookingState extends State<Booking> {
                 ],
               )),
           SizedBox(height: 30.0),
-          Text(
-            " Banquet Halls",
-            style: GoogleFonts.inter(
-              color: Colors.grey,
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+            child:Text(
+              " Banquet Halls",
+              style: GoogleFonts.inter(
+                color: Colors.grey,
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
           SizedBox(height: 10.0),
           Container(
               margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+              alignment: Alignment.centerLeft,
               height: 150.0,
               width: double.infinity,
               child: new Column(
@@ -226,7 +234,7 @@ class _BookingState extends State<Booking> {
                                 'Wedding Hall',
                                 style: GoogleFonts.inter(
                                     color: Colors.white,
-                                    fontWeight: FontWeight.w200),
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                             decoration: BoxDecoration(
@@ -251,7 +259,7 @@ class _BookingState extends State<Booking> {
                                 'Tennis Court',
                                 style: GoogleFonts.inter(
                                     color: Colors.white,
-                                    fontWeight: FontWeight.w200),
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                             decoration: BoxDecoration(

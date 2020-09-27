@@ -13,10 +13,10 @@ class _MainHallState extends State<MainHall> {
       appBar: AppBar(
         elevation: 10.0,
         backgroundColor: Colors.deepOrange,
-        title: Text('Main Recption Hall'),
+        title: Text('Lounges'),
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+        height: MediaQuery.of(context).size.height * 1,
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
