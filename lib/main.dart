@@ -42,6 +42,7 @@ import 'package:rcapp/pages/previousOrder.dart';
 import 'package:rcapp/pages/uploadAvatar.dart';
 import 'package:rcapp/pages/uploadImage.dart';
 import 'package:rcapp/pages/uploadPdf.dart';
+import 'package:rcapp/pages/uploadPdfImage.dart';
 import 'package:rcapp/pages/welcome.dart';
 import 'package:rcapp/services/auth.dart';
 import 'pages/wrapper.dart';
@@ -113,6 +114,7 @@ class MyApp extends StatelessWidget {
           //Routes for admin
           "/uploadImage": (context) => UploadImage(),
           "/uploadPdf": (context) => UploadPdf(),
+          "/uploadPdfImage": (context) => UploadPdfImage(),
           "/uploadAvatarImage": (context) => UploadAvatar()
         },
       ),

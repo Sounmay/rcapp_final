@@ -35,9 +35,9 @@ class _FoodState extends State<Food> {
 
   int qty = 0;
 
-
   void updateTotal() {
     Map<String, int> qtyDetail = dataforCart.retrieveQtyDetails();
+    Map<String, int> foodDetail = dataforCart.retrieveFoodDetails();
 
     total = 0;
     qty = 0;
@@ -45,6 +45,9 @@ class _FoodState extends State<Food> {
     setState(() {
       qtyDetail.forEach((key, value) {
         ++qty;
+      });
+      foodDetail.forEach((key, value) {
+        total = total + value * qtyDetail[key];
       });
     });
   }
@@ -160,6 +163,7 @@ class _FoodState extends State<Food> {
       ),
     );
   }
+
   @override
   void dispose() {
     // TODO: implement dispose

@@ -201,7 +201,23 @@ class _HomeState extends State<Home> {
                           shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(10.0)),
                           child: Text(
-                            'Add To List',
+                            'Add Pdf',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          color: Colors.deepOrange,
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Container(
+                        height: 28,
+                        child: FlatButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/uploadPdfImage');
+                          },
+                          shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(10.0)),
+                          child: Text(
+                            'Add Image',
                             style: TextStyle(color: Colors.white),
                           ),
                           color: Colors.deepOrange,
@@ -640,9 +656,4 @@ class _LoadingDataState extends State<LoadingData> {
               }
             }));
   }
-
-  
 }
-
-
-
