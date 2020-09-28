@@ -73,23 +73,69 @@ exports.adminBookingTrigger = functions.firestore.document('BookingDetails/{id}'
     }
   });
 });
-exports.confirmNotification = functions.firestore.document('confirmedOrders/{id}').onUpdate(function (snapshot, context) {
-  var token = snapshot.after.data().token;
-  return fcm.sendToDevice(token, {
-    notification: {
-      title: 'Order Confirmation',
-      body: 'Your order has been confirmed',
-      clickAction: 'FLUTTER_NOTIFICATION_CLICK'
+exports.confirmNotification = functions.firestore.document('confirmedOrders/{id}').onUpdate(function _callee3(snapshot, context) {
+  var token, rejected, confirmed;
+  return regeneratorRuntime.async(function _callee3$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          token = snapshot.after.data().token;
+          rejected = snapshot.after.data().isRejected;
+          confirmed = snapshot.after.data().isConfirmed;
+
+          if (!(confirmed === true)) {
+            _context3.next = 7;
+            break;
+          }
+
+          return _context3.abrupt("return", fcm.sendToDevice(token, {
+            notification: {
+              title: 'Order Confirmation',
+              body: 'Your order has been confirmed',
+              clickAction: 'FLUTTER_NOTIFICATION_CLICK'
+            }
+          }));
+
+        case 7:
+          if (!(rejected === true)) {
+            _context3.next = 9;
+            break;
+          }
+
+          return _context3.abrupt("return", fcm.sendToDevice(token, {
+            notification: {
+              title: 'Order rejected',
+              body: 'Your order has been rejected',
+              clickAction: 'FLUTTER_NOTIFICATION_CLICK'
+            }
+          }));
+
+        case 9:
+        case "end":
+          return _context3.stop();
+      }
     }
   });
 });
-exports.BookingNotification = functions.firestore.document('BookingDetails/{id}').onUpdate(function (snapshot, context) {
-  var token = snapshot.after.data().token;
-  return fcm.sendToDevice(token, {
-    notification: {
-      title: 'Booking Confirmation',
-      body: 'Your Booking has been confirmed',
-      clickAction: 'FLUTTER_NOTIFICATION_CLICK'
+exports.BookingNotification = functions.firestore.document('BookingDetails/{id}').onUpdate(function _callee4(snapshot, context) {
+  var token;
+  return regeneratorRuntime.async(function _callee4$(_context4) {
+    while (1) {
+      switch (_context4.prev = _context4.next) {
+        case 0:
+          token = snapshot.after.data().token;
+          return _context4.abrupt("return", fcm.sendToDevice(token, {
+            notification: {
+              title: 'Booking Confirmation',
+              body: 'Your Booking has been confirmed',
+              clickAction: 'FLUTTER_NOTIFICATION_CLICK'
+            }
+          }));
+
+        case 2:
+        case "end":
+          return _context4.stop();
+      }
     }
   });
 });

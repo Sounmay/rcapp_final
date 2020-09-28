@@ -40,19 +40,33 @@ exports.adminBookingTrigger = functions.firestore.document('BookingDetails/{id}'
     })
 });
 
-exports.confirmNotification = functions.firestore.document('confirmedOrders/{id}').onUpdate((snapshot, context) => {
+exports.confirmNotification = functions.firestore.document('confirmedOrders/{id}').onUpdate(async(snapshot, context) => {
     var token = snapshot.after.data().token;
-    return fcm.sendToDevice(token, {
-        notification: {
-            title: 'Order Confirmation',
-            body: 'Your order has been confirmed',
-            clickAction: 'FLUTTER_NOTIFICATION_CLICK'
-        }
-    })
+    var rejected = snapshot.after.data().isRejected;
+    var confirmed = snapshot.after.data().isConfirmed;
+
+    if(confirmed === true) {
+        return fcm.sendToDevice(token, {
+            notification: {
+                title: 'Order Confirmation',
+                body: 'Your order has been confirmed',
+                clickAction: 'FLUTTER_NOTIFICATION_CLICK'
+            }
+        });
+    } else if(rejected === true) {
+        return fcm.sendToDevice(token, {
+            notification: {
+                title: 'Order rejected',
+                body: 'Your order has been rejected',
+                clickAction: 'FLUTTER_NOTIFICATION_CLICK'
+            }
+        });
+    }
+    
 });
 
 
-exports.BookingNotification = functions.firestore.document('BookingDetails/{id}').onUpdate((snapshot, context) => {
+exports.BookingNotification = functions.firestore.document('BookingDetails/{id}').onUpdate(async(snapshot, context) => {
     var token = snapshot.after.data().token;
     return fcm.sendToDevice(token, {
         notification: {

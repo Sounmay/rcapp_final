@@ -143,7 +143,8 @@ class DatabaseService {
           '/' +
           '${DateTime.now().year}',
       'token': _token, 
-      'mobileNumber': mobileNumber
+      'mobileNumber': mobileNumber,
+      'isRejected': false
     });
   }
 
