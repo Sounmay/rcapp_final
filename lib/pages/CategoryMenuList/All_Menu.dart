@@ -22,7 +22,7 @@ class _AllMenuState extends State<AllMenu> {
     qty = 0;
     setState(() {
       qtyDetail.forEach((key, value) {
-        qty += value;
+        ++qty;
       });
     });
   }

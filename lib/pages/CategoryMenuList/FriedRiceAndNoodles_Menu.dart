@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -9,15 +10,36 @@ import 'package:rcapp/services/database.dart';
 
 class FriedRiceAndNoodles_MenuList extends StatefulWidget {
   @override
-  _FriedRiceAndNoodles_MenuListState createState() => _FriedRiceAndNoodles_MenuListState();
+  _FriedRiceAndNoodles_MenuListState createState() =>
+      _FriedRiceAndNoodles_MenuListState();
 }
 
-class _FriedRiceAndNoodles_MenuListState extends State<FriedRiceAndNoodles_MenuList> {
+class _FriedRiceAndNoodles_MenuListState
+    extends State<FriedRiceAndNoodles_MenuList> {
   StoreData dataforCart = StoreData();
   int total = 0;
 
   int qty = 0;
-  List<int> qtyList = List<int>();
+
+  void updateTotal() {
+    Map<String, int> qtyDetail = dataforCart.retrieveQtyDetails();
+
+    total = 0;
+    qty = 0;
+
+    setState(() {
+      qtyDetail.forEach((key, value) {
+        ++qty;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    updateTotal();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,22 +50,31 @@ class _FriedRiceAndNoodles_MenuListState extends State<FriedRiceAndNoodles_MenuL
           backgroundColor: Colors.deepOrange,
           title: Text('Fried Rice and Noodles'),
           actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.shopping_cart,
-                color: Colors.white,
+            Container(
+              margin: EdgeInsets.only(right: 10),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/cart');
+                },
+                icon: Badge(
+                  toAnimate: true,
+                  badgeColor: Colors.yellow,
+                  badgeContent: Text('$qty'),
+                  child: Icon(
+                    Icons.shopping_cart,
+                    color: Colors.white,
+                    size: 35,
+                  ),
+                ),
               ),
-              onPressed: () {
-                Navigator.pushNamed(context, '/cart');
-                // Navigator.popAndPushNamed(context, '/cart');
-              },
-            )
+            ),
           ],
         ),
         body: Column(
           children: <Widget>[
             Expanded(
-              child: FriedRiceAndNoodlesMenuListListPage(),
+              child:
+                  FriedRiceAndNoodlesMenuListListPage(updateTotal: updateTotal),
             )
           ],
         ),
@@ -53,11 +84,15 @@ class _FriedRiceAndNoodles_MenuListState extends State<FriedRiceAndNoodles_MenuL
 }
 
 class FriedRiceAndNoodlesMenuListListPage extends StatefulWidget {
+  final updateTotal;
+  FriedRiceAndNoodlesMenuListListPage({this.updateTotal});
   @override
-  _FriedRiceAndNoodlesMenuListListPageState createState() => _FriedRiceAndNoodlesMenuListListPageState();
+  _FriedRiceAndNoodlesMenuListListPageState createState() =>
+      _FriedRiceAndNoodlesMenuListListPageState();
 }
 
-class _FriedRiceAndNoodlesMenuListListPageState extends State<FriedRiceAndNoodlesMenuListListPage> {
+class _FriedRiceAndNoodlesMenuListListPageState
+    extends State<FriedRiceAndNoodlesMenuListListPage> {
   StoreData storeData = StoreData();
   int total = 0;
   bool checked = false;
@@ -179,8 +214,10 @@ class _FriedRiceAndNoodlesMenuListListPageState extends State<FriedRiceAndNoodle
                                     width: 43,
                                     margin: EdgeInsets.only(top: 6),
                                     alignment: Alignment.center,
-                                    decoration:
-                                        BoxDecoration(color: Colors.deepOrange, borderRadius: BorderRadius.circular(10)),
+                                    decoration: BoxDecoration(
+                                        color: Colors.deepOrange,
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
                                     child: IconButton(
                                       onPressed: () {
                                         showFlushbar(context);
@@ -188,6 +225,7 @@ class _FriedRiceAndNoodlesMenuListListPageState extends State<FriedRiceAndNoodle
                                         setState(() {
                                           checked = !checked;
                                         });
+                                        widget.updateTotal();
                                       },
                                       icon: Icon(
                                         Icons.add,

@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -17,7 +18,26 @@ class _ChineseMenuListState extends State<ChineseMenuList> {
   int total = 0;
 
   int qty = 0;
-  List<int> qtyList = List<int>();
+
+  void updateTotal() {
+    Map<String, int> qtyDetail = dataforCart.retrieveQtyDetails();
+
+    total = 0;
+    qty = 0;
+
+    setState(() {
+      qtyDetail.forEach((key, value) {
+        ++qty;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    updateTotal();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,21 +48,30 @@ class _ChineseMenuListState extends State<ChineseMenuList> {
           backgroundColor: Colors.deepOrange,
           title: Text('Chinese'),
           actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.shopping_cart,
-                color: Colors.white,
+            Container(
+              margin: EdgeInsets.only(right: 10),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/cart');
+                },
+                icon: Badge(
+                  toAnimate: true,
+                  badgeColor: Colors.yellow,
+                  badgeContent: Text('$qty'),
+                  child: Icon(
+                    Icons.shopping_cart,
+                    color: Colors.white,
+                    size: 35,
+                  ),
+                ),
               ),
-              onPressed: () {
-                Navigator.pushNamed(context, '/cart');
-              },
-            )
+            ),
           ],
         ),
         body: Column(
           children: <Widget>[
             Expanded(
-              child: ChineseMenuListPage(),
+              child: ChineseMenuListPage(updateTotal: updateTotal),
             )
           ],
         ),
@@ -52,6 +81,8 @@ class _ChineseMenuListState extends State<ChineseMenuList> {
 }
 
 class ChineseMenuListPage extends StatefulWidget {
+  final updateTotal;
+  ChineseMenuListPage({this.updateTotal});
   @override
   _ChineseMenuListPageState createState() => _ChineseMenuListPageState();
 }
@@ -184,6 +215,7 @@ class _ChineseMenuListPageState extends State<ChineseMenuListPage> {
                                       setState(() {
                                         checked = !checked;
                                       });
+                                      widget.updateTotal();
                                     },
                                     icon: Icon(
                                       Icons.add,
