@@ -14,6 +14,7 @@ class NavigationBar extends StatefulWidget {
 }
 
 class _NavigationBarState extends State<NavigationBar> {
+  StoreData storeData = StoreData();
   int _currentIndex = 0;
   final List<Widget> _children = [
     Home(),
@@ -68,7 +69,7 @@ class _NavigationBarState extends State<NavigationBar> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (ctx) => StoreData(),
+      create: (ctx) => storeData,
       child: Scaffold(
         body: _children[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
@@ -97,5 +98,11 @@ class _NavigationBarState extends State<NavigationBar> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 }

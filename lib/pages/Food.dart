@@ -160,6 +160,11 @@ class _FoodState extends State<Food> {
       ),
     );
   }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 }
 
 class Quantity extends StatefulWidget {

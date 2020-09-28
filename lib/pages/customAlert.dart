@@ -56,7 +56,9 @@ class _CustomAlertState extends State<CustomAlert> {
                 alignment: Alignment.bottomRight,
                 child: InkWell(
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.popUntil(
+                          context, ModalRoute.withName('/wrapper'));
+                      // Navigator.pop(context);
                     },
                     child: Text('OK')),
               )

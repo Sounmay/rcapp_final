@@ -462,7 +462,6 @@ class _ProceedAccessState extends State<ProceedAccess> {
               onPressed: () {
                 updateTotal();
                 confirmOrder();
-                Navigator.pushReplacementNamed(context, '/navigationbar');
                 showDialog(
                     context: context,
                     builder: (context) => CustomAlert(
@@ -471,6 +470,7 @@ class _ProceedAccessState extends State<ProceedAccess> {
                               'Your Order has been placed and will be on its way to you shortly. For further queries regarding your order, please contact - Mr. Debabrata Mohanty - +919438208969',
                           // url: 'assets/nigga.gif',
                         ));
+                // Navigator.pop(context);
               },
               child: Text(
                 'Confirm Order(Pay through COD)',

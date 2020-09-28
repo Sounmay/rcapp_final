@@ -27,7 +27,7 @@ class _BookingState extends State<Booking> {
           SizedBox(height: 30.0),
           Container(
             margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-            child:Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
@@ -197,7 +197,7 @@ class _BookingState extends State<Booking> {
           SizedBox(height: 30.0),
           Container(
             margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-            child:Text(
+            child: Text(
               " Banquet Halls",
               style: GoogleFonts.inter(
                 color: Colors.grey,
@@ -279,5 +279,11 @@ class _BookingState extends State<Booking> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 }

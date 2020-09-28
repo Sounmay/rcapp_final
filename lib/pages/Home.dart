@@ -276,6 +276,12 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 }
 
 class HomeListPage extends StatefulWidget {
@@ -634,6 +640,8 @@ class _LoadingDataState extends State<LoadingData> {
               }
             }));
   }
+
+  
 }
 
 
