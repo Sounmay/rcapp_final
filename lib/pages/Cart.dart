@@ -24,6 +24,7 @@ class _CartState extends State<Cart> {
 
   var address = '';
   bool isData = false;
+  bool loading = true;
 
   void init() async {
     var user = await FirebaseAuth.instance.currentUser();
@@ -34,6 +35,7 @@ class _CartState extends State<Cart> {
 
     setState(() {
       address = _dat.data["address"];
+      loading = false;
     });
   }
 
@@ -234,7 +236,7 @@ class _CartState extends State<Cart> {
                   );
                 }),
           ),
-          ProceedAccess(address: address, isData: isData)
+          ProceedAccess(address: address, isData: isData, loading: loading)
         ]));
   }
 }
@@ -389,8 +391,9 @@ class _QuantityInCartState extends State<QuantityInCart> {
 
 class ProceedAccess extends StatefulWidget {
   var isData;
+  var loading;
   var address;
-  ProceedAccess({this.address, this.isData});
+  ProceedAccess({this.address, this.isData, this.loading});
   @override
   _ProceedAccessState createState() => _ProceedAccessState();
 }
@@ -440,7 +443,20 @@ class _ProceedAccessState extends State<ProceedAccess> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.address == '') {
+    if (widget.loading == true) {
+      return Container(
+          width: double.infinity,
+          height: 50,
+          child: FlatButton(
+              color: Colors.deepOrange,
+              onPressed: () {
+                Navigator.pushNamed(context, '/address');
+              },
+              child: Text(
+                'Please Wait ...',
+                style: GoogleFonts.inter(color: Colors.white),
+              )));
+    } else if (widget.address == '' && widget.loading == false) {
       return Container(
           width: double.infinity,
           height: 50,
@@ -477,13 +493,12 @@ class _ProceedAccessState extends State<ProceedAccess> {
                 style: GoogleFonts.inter(color: Colors.white),
               )));
     } else if (widget.isData == false) {
-     return Container(
+      return Container(
           width: double.infinity,
           height: 50,
           child: FlatButton(
               color: Colors.deepOrange,
-              onPressed: () {
-              },
+              onPressed: () {},
               child: Text(
                 'Add Item To Cart',
                 style: GoogleFonts.inter(color: Colors.white),
