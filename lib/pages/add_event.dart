@@ -250,11 +250,11 @@ class _AddEventPageState extends State<AddEventPage> {
                       value: _value2,
                       items: [
                         DropdownMenuItem(
-                          child: Text("Lunch Slot"),
+                          child: Text("Lunch Slot(12PM - 3PM)"),
                           value: 1,
                         ),
                         DropdownMenuItem(
-                          child: Text("Dinner Slot"),
+                          child: Text("Dinner Slot(7:30PM - 10.30PM)"),
                           value: 2,
                         ),
                       ],

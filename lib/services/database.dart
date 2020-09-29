@@ -162,7 +162,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return Menu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -171,7 +171,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return MainCourseMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -180,7 +180,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return ChineseMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -189,7 +189,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return StarterMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -198,7 +198,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return BiryaniMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -216,7 +216,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return BreadMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -225,7 +225,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return TandooriMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -235,7 +235,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return FriedRiceAndNoodlesMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -244,7 +244,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return RollMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -253,7 +253,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return SandwichMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -262,7 +262,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return PizzaMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -271,7 +271,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return SnacksMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -280,7 +280,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return BurgerMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -289,7 +289,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return PastaMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -298,7 +298,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return SoupMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -308,7 +308,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return AccompanimentMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -317,7 +317,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return BreakfastMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }

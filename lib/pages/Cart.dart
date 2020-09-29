@@ -179,7 +179,7 @@ class _CartState extends State<Cart> {
                                 ),
                                 SizedBox(
                                   width:
-                                      MediaQuery.of(context).size.width * 0.56,
+                                      MediaQuery.of(context).size.width * 0.52,
                                   child: Text(
                                     keyname,
                                     style: GoogleFonts.inter(

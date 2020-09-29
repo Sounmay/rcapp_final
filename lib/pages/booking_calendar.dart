@@ -111,23 +111,26 @@ class _CalendarState extends State<Calendar> {
                   calendarController: _controller,
                 ),
                 ..._selectedEvents.map((event) => Container(
-                  height: 35,
-                  width: 250,
+                  height: MediaQuery.of(context).size.height * 0.08,
+                  width: MediaQuery.of(context).size.width * 0.8,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     color: Colors.white,
                   ),
                   margin: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
                     child:ListTile(
-                      title: Text("${event.Lounge}"+" Room booked for slot " + "${event.slot}", style: TextStyle(color: Colors.deepOrange),),
-                      onTap: () {
+                      title: Text(/*"${event.Lounge}"+" Room booked for slot " + "${event.slot}"*/
+                              event.slot == 1
+                                  ? "${event.Lounge} Room booked for Lunch Slot"
+                                  : "${event.Lounge} Room booked for Dinner Slot", style: TextStyle(color: Colors.deepOrange),),
+                      /*onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (_) => EventDetailsPage(
                                   event: event,
                                 )));
-                      },
+                      },*/
                     ),
                 ),
                 ),

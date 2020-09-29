@@ -151,7 +151,7 @@ class _AdminBookingState extends State<AdminBooking> {
                     SizedBox(height: 10.0),
                     Container(
                       padding: EdgeInsets.all(10),
-                      height: MediaQuery.of(context).size.height * 0.4,
+                      height: MediaQuery.of(context).size.height * 0.43,
                       width: 380.0,
                       decoration: BoxDecoration(
                           color: Colors.white,

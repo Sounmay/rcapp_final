@@ -264,7 +264,7 @@ class _SearchListState extends State<SearchList> {
                   ),
                   SearchQuantity(
                       item: widget.tempSearchStore[index]['item'],
-                      price: widget.tempSearchStore[index]['price']),
+                      price: widget.tempSearchStore[index]['club_rate']),
                 ],
               ),
             );

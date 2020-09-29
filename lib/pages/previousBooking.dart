@@ -98,7 +98,7 @@ class _PreviousBookingState extends State<PreviousBooking> {
                     SizedBox(height: 10.0),
                     Container(
                       padding: EdgeInsets.all(10),
-                      height: MediaQuery.of(context).size.height * 0.3,
+                      height: MediaQuery.of(context).size.height * 0.38,
                       width: 370.0,
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -173,6 +173,21 @@ class _PreviousBookingState extends State<PreviousBooking> {
                                     Text(
                                       "Lounge : " +
                                           "${bookings[index]["lounge"]}",
+                                      style: GoogleFonts.inter(
+                                          color: Colors.black,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 10),
+                                Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text(
+                                      "Number of people : " +
+                                          "${bookings[index]["numberOfPeople"]}",
                                       style: GoogleFonts.inter(
                                           color: Colors.black,
                                           fontSize: 18,
