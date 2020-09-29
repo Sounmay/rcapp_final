@@ -11,6 +11,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:rcapp/CustomWidget/foot_category.dart';
 import 'package:rcapp/models/user.dart';
 import 'package:rcapp/pages/customAlert.dart';
+import 'package:rcapp/pages/storeData.dart';
 import 'package:rcapp/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:rcapp/services/database.dart';
@@ -293,11 +294,11 @@ class _HomeState extends State<Home> {
     );
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   super.dispose();
+  // }
 }
 
 class HomeListPage extends StatefulWidget {
@@ -523,6 +524,7 @@ class _LoadingDataState extends State<LoadingData> {
   @override
   Widget build(BuildContext context) {
     final AuthService _auth = AuthService();
+    StoreData _storedata = StoreData();
 
     return Container(
         child: FutureBuilder(
@@ -644,6 +646,7 @@ class _LoadingDataState extends State<LoadingData> {
                         padding: EdgeInsets.fromLTRB(15, 0, 0, 10),
                         child: InkWell(
                             onTap: () async {
+                              _storedata.resetStore();
                               await _auth.signOut();
                             },
                             child: Text(
