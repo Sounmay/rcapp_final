@@ -26,8 +26,8 @@ class _BookingState extends State<Booking> {
         children: <Widget>[
           SizedBox(height: 30.0),
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-            child:Row(
+            margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
@@ -58,146 +58,149 @@ class _BookingState extends State<Booking> {
               child: new Column(
                 children: <Widget>[
                   Expanded(
-                    child: ListView(
-                      shrinkWrap: true,
-                      physics: ClampingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      children: <Widget>[
-                        InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(context, "/bluelounge");
-                          },
-                          child: Container(
-                            height: 100.0,
-                            width: 150.0,
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Text(
-                                'Blue Lounge',
-                                style: GoogleFonts.inter(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
+                    child: Container(
+                        padding: EdgeInsets.fromLTRB(20, 0, 7, 0),
+                      child: ListView(
+                        shrinkWrap: true,
+                        physics: ClampingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        children: <Widget>[
+                          InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(context, "/bluelounge");
+                            },
+                            child: Container(
+                              height: 100.0,
+                              width: 150.0,
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Text(
+                                  'Blue Lounge',
+                                  style: GoogleFonts.inter(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.blue,
+                                  image: DecorationImage(
+                                      image: new AssetImage("assets/12.jpg"),
+                                      fit: BoxFit.fill)),
                             ),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.blue,
-                                image: DecorationImage(
-                                    image: new AssetImage("assets/12.jpg"),
-                                    fit: BoxFit.fill)),
                           ),
-                        ),
-                        SizedBox(width: 20),
-                        InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(context, "/yellowlounge");
-                          },
-                          child: Container(
-                            height: 100.0,
-                            width: 150.0,
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Text(
-                                'Yellow Lounge',
-                                style: GoogleFonts.inter(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
+                          SizedBox(width: 20),
+                          InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(context, "/yellowlounge");
+                            },
+                            child: Container(
+                              height: 100.0,
+                              width: 150.0,
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Text(
+                                  'Yellow Lounge',
+                                  style: GoogleFonts.inter(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.blue,
+                                  image: DecorationImage(
+                                      image: new AssetImage("assets/13.jpg"),
+                                      fit: BoxFit.fill)),
                             ),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.blue,
-                                image: DecorationImage(
-                                    image: new AssetImage("assets/13.jpg"),
-                                    fit: BoxFit.fill)),
                           ),
-                        ),
-                        SizedBox(width: 20),
-                        InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(context, "/milaplounge");
-                          },
-                          child: Container(
-                            height: 100.0,
-                            width: 150.0,
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Text(
-                                'Milap Hall',
-                                style: GoogleFonts.inter(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
+                          SizedBox(width: 20),
+                          InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(context, "/milaplounge");
+                            },
+                            child: Container(
+                              height: 100.0,
+                              width: 150.0,
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Text(
+                                  'Milap Hall',
+                                  style: GoogleFonts.inter(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.blue,
+                                  image: DecorationImage(
+                                      image: new AssetImage("assets/17.jpg"),
+                                      fit: BoxFit.fill)),
                             ),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.blue,
-                                image: DecorationImage(
-                                    image: new AssetImage("assets/17.jpg"),
-                                    fit: BoxFit.fill)),
                           ),
-                        ),
-                        SizedBox(width: 20),
-                        InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(context, "/milanlounge");
-                          },
-                          child: Container(
-                            height: 100.0,
-                            width: 150.0,
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Text(
-                                'Milan Lounge',
-                                style: GoogleFonts.inter(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
+                          SizedBox(width: 20),
+                          InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(context, "/milanlounge");
+                            },
+                            child: Container(
+                              height: 100.0,
+                              width: 150.0,
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Text(
+                                  'Milan Lounge',
+                                  style: GoogleFonts.inter(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.blue,
+                                  image: DecorationImage(
+                                      image: new AssetImage("assets/18.jpg"),
+                                      fit: BoxFit.fill)),
                             ),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.blue,
-                                image: DecorationImage(
-                                    image: new AssetImage("assets/18.jpg"),
-                                    fit: BoxFit.fill)),
                           ),
-                        ),
-                        SizedBox(width: 20),
-                        InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(context, "/mainhall");
-                          },
-                          child: Container(
-                            height: 100.0,
-                            width: 150.0,
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Text(
-                                'Main Hall',
-                                style: GoogleFonts.inter(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
+                          SizedBox(width: 20),
+                          InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(context, "/mainhall");
+                            },
+                            child: Container(
+                              height: 100.0,
+                              width: 150.0,
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Text(
+                                  'Main Hall',
+                                  style: GoogleFonts.inter(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.blue,
+                                  image: DecorationImage(
+                                      image: new AssetImage("assets/15.jpg"),
+                                      fit: BoxFit.fill)),
                             ),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.blue,
-                                image: DecorationImage(
-                                    image: new AssetImage("assets/15.jpg"),
-                                    fit: BoxFit.fill)),
                           ),
-                        ),
-                        SizedBox(width: 20),
-                      ],
-                    ),
+                          SizedBox(width: 20),
+                        ],
+                      ),
+                    )
                   ),
                   SizedBox(height: 20),
                 ],
               )),
           SizedBox(height: 30.0),
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-            child:Text(
+            margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+            child: Text(
               " Banquet Halls",
               style: GoogleFonts.inter(
                 color: Colors.grey,
@@ -206,7 +209,7 @@ class _BookingState extends State<Booking> {
               ),
             ),
           ),
-          SizedBox(height: 10.0),
+          SizedBox(height: 15.0),
           Container(
               margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
               alignment: Alignment.centerLeft,
@@ -215,63 +218,72 @@ class _BookingState extends State<Booking> {
               child: new Column(
                 children: <Widget>[
                   Expanded(
-                    child: ListView(
-                      shrinkWrap: true,
-                      physics: ClampingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      children: <Widget>[
-                        SizedBox(width: 20),
-                        InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(context, "/weddinghall");
-                          },
-                          child: Container(
-                            height: 100.0,
-                            width: 150.0,
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Text(
-                                'Wedding Hall',
-                                style: GoogleFonts.inter(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
+                    child: Container(
+                      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      child:ListView(
+                        shrinkWrap: true,
+                        physics: ClampingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        children: <Widget>[
+                          SizedBox(width: 20),
+                          InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(context, "/weddinghall");
+                            },
+                            child: Container(
+                              height: 100.0,
+                              width: 150.0,
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Text(
+                                  'Wedding Hall',
+                                  style: GoogleFonts.inter(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.blue,
+                                  image: DecorationImage(
+                                      image: new AssetImage("assets/16.jpg"),
+                                      fit: BoxFit.fill)),
                             ),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.blue,
-                                image: DecorationImage(
-                                    image: new AssetImage("assets/16.jpg"),
-                                    fit: BoxFit.fill)),
                           ),
-                        ),
-                        SizedBox(width: 20),
-                        InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(context, "/tenniscourt");
-                          },
-                          child: Container(
-                            height: 100.0,
-                            width: 150.0,
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Text(
-                                'Tennis Court',
-                                style: GoogleFonts.inter(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
+                          SizedBox(width: 20),
+                          InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(context, "/tenniscourt");
+                            },
+                            child: Container(
+                              height: 100.0,
+                              width: 150.0,
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Text(
+                                  'Tennis Court',
+                                  style: GoogleFonts.inter(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.blue,
+                                  image: DecorationImage(
+                                      image: new AssetImage("assets/51.jpg"),
+                                      fit: BoxFit.fill)),
                             ),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.blue,
-                                image: DecorationImage(
-                                    image: new AssetImage("assets/51.jpg"),
-                                    fit: BoxFit.fill)),
                           ),
-                        ),
-                      ],
-                    ),
+                          InkWell(
+                            child: Container(
+                              height: 100.0,
+                              width: 300.0,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
                   ),
                   SizedBox(height: 20),
                 ],
@@ -279,5 +291,11 @@ class _BookingState extends State<Booking> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 }

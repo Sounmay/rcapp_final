@@ -97,7 +97,7 @@ class _PreviousOrderState extends State<PreviousOrder> {
                     SizedBox(height: 10.0),
                     Container(
                       padding: EdgeInsets.all(10),
-                      height: 140.0,
+                      height: MediaQuery.of(context).size.height * 0.3,
                       width: 370.0,
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -133,9 +133,59 @@ class _PreviousOrderState extends State<PreviousOrder> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 8),
                               ]),
-                          SizedBox(height: 15),
+                          SizedBox(height: 10),
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                "Mobile No: ${orders[index]["mobileNumber"]}",
+                                style: GoogleFonts.inter(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(children: <Widget>[
+                            Text(
+                              "Status : ",
+                              style: GoogleFonts.inter(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            if (!orders[index]["isConfirmed"] && !orders[index]["isRejected"]) ...[
+                              Text(
+                                "Not Confirmed",
+                                style: GoogleFonts.inter(
+                                    color: Colors.orange,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ] else if(orders[index]["isRejected"])...[
+                              Text(
+                                "Rejected",
+                                style: GoogleFonts.inter(
+                                    color: Colors.red[800],
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ] else ...[
+                              Text(
+                                "Confirmed",
+                                style: GoogleFonts.inter(
+                                    color: Colors.green,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ]
+                          ]),
+                          SizedBox(
+                            height: 15,
+                          ),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
@@ -212,11 +262,27 @@ class _OrderDataState extends State<OrderData> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Container(
-                    child: Row(children: <Widget>[
-                  Text('${widget.item[index]} '),
-                ])),
-                Text('${widget.quantity[index]}'),
-                Text('${widget.price[index]}')
+                    // decoration: BoxDecoration(color: Colors.deepOrange),
+                    width: MediaQuery.of(context).size.width * 0.34,
+                    child: Text(
+                      '${widget.item[index]}',
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.left,
+                    )),
+                Container(
+                    // decoration: BoxDecoration(color: Colors.deepOrange),
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Text(
+                      '${widget.quantity[index]}',
+                      textAlign: TextAlign.center,
+                    )),
+                Container(
+                    // decoration: BoxDecoration(color: Colors.deepOrange),
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Text(
+                      '${widget.price[index]}',
+                      textAlign: TextAlign.center,
+                    )),
               ],
             );
           }),
@@ -348,7 +414,9 @@ class _PreviousOrderDetailsState extends State<PreviousOrderDetails> {
                                             fontWeight: FontWeight.w500),
                                       ),
                                       Container(
-                                        width: MediaQuery.of(context).size.width * 0.4,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.4,
                                         child: Padding(
                                           padding:
                                               EdgeInsets.fromLTRB(10, 0, 0, 0),
@@ -367,7 +435,9 @@ class _PreviousOrderDetailsState extends State<PreviousOrderDetails> {
                             Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                SizedBox(height: 10.0,),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
                                 Text(
                                   "Mobile No. : ${widget.mobileNumber}",
                                   style: GoogleFonts.inter(
@@ -455,12 +525,12 @@ class _PreviousOrderDetailsState extends State<PreviousOrderDetails> {
                                               PreviousOrderDetails()));
                                 },
                                 child: Container(
-                                  /*child: Text('Know More',
+                                    /*child: Text('Know More',
                                       style: GoogleFonts.inter(
                                           color: Colors.deepOrange,
                                           decoration:
                                               TextDecoration.underline)),*/
-                                ),
+                                    ),
                               )
                             ]),
                       ],

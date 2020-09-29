@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class StoreData {
+class StoreData with ChangeNotifier {
   StoreData._privateConstructor();
   static final StoreData _instance = StoreData._privateConstructor();
 
@@ -11,31 +11,34 @@ class StoreData {
   Map<String, int> _foodNamePrice = Map<String, int>();
   Map<String, int> _foodNameQuantity = Map<String, int>();
 
-  getInstance() {}
-
   void StoreFoodDetails(String foodName, int foodPrice, int value) {
     _foodNamePrice[foodName] = foodPrice;
     _foodNameQuantity[foodName] = value;
+    notifyListeners();
   }
 
   void removeFoodDetails(String foodName) {
     _foodNamePrice.remove(foodName);
     _foodNameQuantity.remove(foodName);
+    notifyListeners();
   }
 
   void increaseQty(String foodName) {
     ++_foodNameQuantity[foodName];
+    notifyListeners();
   }
 
   void decreaseQty(String foodName) {
     if (_foodNameQuantity[foodName] != 0) {
       --_foodNameQuantity[foodName];
     }
+    notifyListeners();
   }
 
   void resetStore() {
     _foodNamePrice.clear();
     _foodNameQuantity.clear();
+    notifyListeners();
   }
 
   Map<String, int> retrieveFoodDetails() {

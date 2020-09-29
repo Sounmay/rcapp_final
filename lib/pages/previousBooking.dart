@@ -15,6 +15,7 @@ class _PreviousBookingState extends State<PreviousBooking> {
   List<dynamic> bookings = [];
 
   String name = '';
+  String mobileNumber = '';
   String number = '';
   String lounge = '';
   int slot;
@@ -34,6 +35,7 @@ class _PreviousBookingState extends State<PreviousBooking> {
         bookings.add(res.data);
         name = res.data["name"];
         number = res.data["number"];
+        mobileNumber = res.data["mobileNumber"];
         lounge = res.data["lounge"];
         slot = res.data["slot"];
       });
@@ -96,7 +98,7 @@ class _PreviousBookingState extends State<PreviousBooking> {
                     SizedBox(height: 10.0),
                     Container(
                       padding: EdgeInsets.all(10),
-                      height: 220.0,
+                      height: MediaQuery.of(context).size.height * 0.38,
                       width: 370.0,
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -154,8 +156,38 @@ class _PreviousBookingState extends State<PreviousBooking> {
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Text(
+                                      "Mobile No. : " +
+                                          "${bookings[index]["mobileNumber"]}",
+                                      style: GoogleFonts.inter(
+                                          color: Colors.black,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 10),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text(
                                       "Lounge : " +
                                           "${bookings[index]["lounge"]}",
+                                      style: GoogleFonts.inter(
+                                          color: Colors.black,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 10),
+                                Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text(
+                                      "Number of people : " +
+                                          "${bookings[index]["numberOfPeople"]}",
                                       style: GoogleFonts.inter(
                                           color: Colors.black,
                                           fontSize: 18,
@@ -175,6 +207,41 @@ class _PreviousBookingState extends State<PreviousBooking> {
                                           fontSize: 18,
                                           fontWeight: FontWeight.w400),
                                     ),
+                                    if (!bookings[index]["isConfirmed"]) ...[
+                                      Row(children: <Widget>[
+                                        Text('Status: ',
+                                            style: GoogleFonts.inter(
+                                                color: Colors.black,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w400)),
+                                        if (bookings[index]["isRejected"]) ...[
+                                          Text('Rejected',
+                                              style: GoogleFonts.inter(
+                                                  color: Colors.red[800],
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w400))
+                                        ] else ...[
+                                          Text('Not Confirmed',
+                                              style: GoogleFonts.inter(
+                                                  color: Colors.orange,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w400))
+                                        ]
+                                      ])
+                                    ] else ...[
+                                      Row(children: <Widget>[
+                                        Text('Status: ',
+                                            style: GoogleFonts.inter(
+                                                color: Colors.black,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w400)),
+                                        Text('Confirmed',
+                                            style: GoogleFonts.inter(
+                                                color: Colors.green,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w400))
+                                      ])
+                                    ]
                                   ],
                                 ),
                               ]),

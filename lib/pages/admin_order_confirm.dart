@@ -28,6 +28,16 @@ class _AdminOrderState extends State<AdminOrder> {
     });
   }
 
+  void rejectOrder(int index, int date) async {
+    await Firestore.instance
+        .collection('confirmedOrders')
+        .document('$date')
+        .updateData({"isRejected": true});
+    setState(() {
+      orders[index]["isRejected"] = true;
+    });
+  }
+
   void deleteOrder(int index, int date) async {
     await Firestore.instance
         .collection('confirmedOrders')
@@ -95,9 +105,8 @@ class _AdminOrderState extends State<AdminOrder> {
                     SizedBox(height: 10.0),
                     Container(
                       padding: EdgeInsets.all(10),
-                      height: MediaQuery.of(context).size.height * 0.3,
+                      height: MediaQuery.of(context).size.height * 0.32,
                       width: MediaQuery.of(context).size.width * 9,
-
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(12.0)),
@@ -112,7 +121,42 @@ class _AdminOrderState extends State<AdminOrder> {
                                 style: GoogleFonts.inter(
                                     color: Colors.deepOrange, fontSize: 22),
                               ),
-                              Flexible(child: Text('${orders[index]["date"]}')),
+                              // Flexible(child: Text('${orders[index]["date"]}')),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              AdminOrderDetails(
+                                                  total: orders[index]["total"],
+                                                  orderNo: orderNo,
+                                                  name: orders[index]["name"],
+                                                  date: orders[index]["date"],
+                                                  number: orders[index]
+                                                      ["number"],
+                                                  address: orders[index]
+                                                      ["address"],
+                                                  item: item[index],
+                                                  quantity: quantity[index],
+                                                  mobileNumber: orders[index]
+                                                      ["mobileNumber"],
+                                                  price: orders[index]
+                                                      ["price"])));
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 4),
+                                  decoration: BoxDecoration(
+                                      color: Colors.orange,
+                                      border: Border.all(color: Colors.black),
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Text('View',
+                                      style: GoogleFonts.inter(
+                                        color: Colors.white,
+                                      )),
+                                ),
+                              ),
                             ],
                           ),
                           SizedBox(height: 8),
@@ -138,8 +182,7 @@ class _AdminOrderState extends State<AdminOrder> {
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Text(
-                                      "Personal No : " +
-                                          "${orders[index]["number"]}",
+                                      "Date : " + "${orders[index]["date"]}",
                                       style: GoogleFonts.inter(
                                           color: Colors.black,
                                           fontSize: 18,
@@ -148,15 +191,55 @@ class _AdminOrderState extends State<AdminOrder> {
                                   ],
                                 ),
                                 SizedBox(height: 8),
-                                if (orders[index]["isConfirmed"]) ...[
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text(
+                                      "Mobile No : " +
+                                          "${orders[index]["mobileNumber"]}",
+                                      style: GoogleFonts.inter(
+                                          color: Colors.black,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 8),
+                                if (orders[index]["isConfirmed"] &&
+                                    !orders[index]["isRejected"]) ...[
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
                                       Text(
-                                        "Status: Confirmed",
+                                        "Status: ",
                                         style: GoogleFonts.inter(
                                             color: Colors.black,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                      Text(
+                                        "Confirmed",
+                                        style: GoogleFonts.inter(
+                                            color: Colors.green,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ],
+                                  ),
+                                ] else if (orders[index]["isRejected"]) ...[
+                                  Row(
+                                    children: <Widget>[
+                                      Text(
+                                        "Status: ",
+                                        style: GoogleFonts.inter(
+                                            color: Colors.black,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                      Text(
+                                        "Rejected",
+                                        style: GoogleFonts.inter(
+                                            color: Colors.red[800],
                                             fontSize: 18,
                                             fontWeight: FontWeight.w400),
                                       ),
@@ -164,13 +247,18 @@ class _AdminOrderState extends State<AdminOrder> {
                                   ),
                                 ] else ...[
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
                                       Text(
-                                        "Status: Not Confirmed",
+                                        "Status: ",
                                         style: GoogleFonts.inter(
                                             color: Colors.black,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                      Text(
+                                        "Not Confirmed",
+                                        style: GoogleFonts.inter(
+                                            color: Colors.orange,
                                             fontSize: 18,
                                             fontWeight: FontWeight.w400),
                                       ),
@@ -190,29 +278,10 @@ class _AdminOrderState extends State<AdminOrder> {
                                 Row(children: <Widget>[
                                   InkWell(
                                     onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  AdminOrderDetails(
-                                                      total: orders[index]
-                                                          ["total"],
-                                                      orderNo: orderNo,
-                                                      name: orders[index]
-                                                          ["name"],
-                                                      date: orders[index]
-                                                          ["date"],
-                                                      number: orders[index]
-                                                          ["number"],
-                                                      address: orders[index]
-                                                          ["address"],
-                                                      item: item[index],
-                                                      quantity: quantity[index],
-                                                      mobileNumber:
-                                                          orders[index]
-                                                              ["mobileNumber"],
-                                                      price: orders[index]
-                                                          ["price"])));
+                                      if (!orders[index]["isConfirmed"]) {
+                                        rejectOrder(
+                                            index, orders[index]["_date"]);
+                                      }
                                     },
                                     child: Container(
                                       padding: EdgeInsets.symmetric(
@@ -223,14 +292,14 @@ class _AdminOrderState extends State<AdminOrder> {
                                               Border.all(color: Colors.black),
                                           borderRadius:
                                               BorderRadius.circular(5)),
-                                      child: Text('View',
+                                      child: Text('Reject',
                                           style: GoogleFonts.inter(
                                             color: Colors.white,
                                           )),
                                     ),
                                   ),
                                   SizedBox(width: 10),
-                                  if (!orders[index]["isConfirmed"]) ...[
+                                  if (!orders[index]["isConfirmed"] && !orders[index]["isRejected"]) ...[
                                     InkWell(
                                       onTap: () {
                                         confirmOrder(
@@ -311,11 +380,27 @@ class _AdminOrderDataState extends State<AdminOrderData> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Container(
-                    child: Row(children: <Widget>[
-                  Text('${widget.item[index]} '),
-                ])),
-                Text('${widget.quantity[index]}'),
-                Text('${widget.price[index]}'),
+                    // decoration: BoxDecoration(color: Colors.deepOrange),
+                    width: MediaQuery.of(context).size.width * 0.34,
+                    child: Text(
+                      '${widget.item[index]}',
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.left,
+                    )),
+                Container(
+                    // decoration: BoxDecoration(color: Colors.deepOrange),
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Text(
+                      '${widget.quantity[index]}',
+                      textAlign: TextAlign.center,
+                    )),
+                Container(
+                    // decoration: BoxDecoration(color: Colors.deepOrange),
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Text(
+                      '${widget.price[index]}',
+                      textAlign: TextAlign.center,
+                    )),
               ],
             );
           }),
@@ -490,7 +575,7 @@ class _AdminOrderDetailsState extends State<AdminOrderDetails> {
                           ],
                         ),
                         SizedBox(height: 20),
-                       /* Container(
+                        /* Container(
                             alignment: Alignment.centerLeft,
                             child: Text(
                               'Menu :',

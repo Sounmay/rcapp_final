@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -17,7 +18,26 @@ class _Soup_MenuListState extends State<Soup_MenuList> {
   int total = 0;
 
   int qty = 0;
-  List<int> qtyList = List<int>();
+
+  void updateTotal() {
+    Map<String, int> qtyDetail = dataforCart.retrieveQtyDetails();
+
+    total = 0;
+    qty = 0;
+
+    setState(() {
+      qtyDetail.forEach((key, value) {
+        ++qty;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    updateTotal();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,22 +48,30 @@ class _Soup_MenuListState extends State<Soup_MenuList> {
           backgroundColor: Colors.deepOrange,
           title: Text('Soup'),
           actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.shopping_cart,
-                color: Colors.white,
+            Container(
+              margin: EdgeInsets.only(right: 10),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/cart');
+                },
+                icon: Badge(
+                  toAnimate: true,
+                  badgeColor: Colors.yellow,
+                  badgeContent: Text('$qty'),
+                  child: Icon(
+                    Icons.shopping_cart,
+                    color: Colors.white,
+                    size: 35,
+                  ),
+                ),
               ),
-              onPressed: () {
-                Navigator.pushNamed(context, '/cart');
-                // Navigator.popAndPushNamed(context, '/cart');
-              },
-            )
+            ),
           ],
         ),
         body: Column(
           children: <Widget>[
             Expanded(
-              child: SoupMenuListListPage(),
+              child: SoupMenuListListPage(updateTotal: updateTotal),
             )
           ],
         ),
@@ -53,6 +81,8 @@ class _Soup_MenuListState extends State<Soup_MenuList> {
 }
 
 class SoupMenuListListPage extends StatefulWidget {
+  final updateTotal;
+  SoupMenuListListPage({this.updateTotal});
   @override
   _SoupMenuListListPageState createState() => _SoupMenuListListPageState();
 }
@@ -179,8 +209,10 @@ class _SoupMenuListListPageState extends State<SoupMenuListListPage> {
                                     width: 43,
                                     margin: EdgeInsets.only(top: 6),
                                     alignment: Alignment.center,
-                                    decoration:
-                                        BoxDecoration(color: Colors.deepOrange, borderRadius: BorderRadius.circular(10)),
+                                    decoration: BoxDecoration(
+                                        color: Colors.deepOrange,
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
                                     child: IconButton(
                                       onPressed: () {
                                         showFlushbar(context);
@@ -188,6 +220,7 @@ class _SoupMenuListListPageState extends State<SoupMenuListListPage> {
                                         setState(() {
                                           checked = !checked;
                                         });
+                                        widget.updateTotal();
                                       },
                                       icon: Icon(
                                         Icons.add,
