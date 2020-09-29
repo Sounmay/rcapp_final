@@ -97,7 +97,7 @@ class _PreviousOrderState extends State<PreviousOrder> {
                     SizedBox(height: 10.0),
                     Container(
                       padding: EdgeInsets.all(10),
-                      height: 140.0,
+                      height: MediaQuery.of(context).size.height * 0.3,
                       width: 370.0,
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -133,9 +133,59 @@ class _PreviousOrderState extends State<PreviousOrder> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 8),
                               ]),
-                          SizedBox(height: 15),
+                          SizedBox(height: 10),
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                "Mobile No: ${orders[index]["mobileNumber"]}",
+                                style: GoogleFonts.inter(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(children: <Widget>[
+                            Text(
+                              "Status : ",
+                              style: GoogleFonts.inter(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            if (!orders[index]["isConfirmed"] && !orders[index]["isRejected"]) ...[
+                              Text(
+                                "Not Confirmed",
+                                style: GoogleFonts.inter(
+                                    color: Colors.orange,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ] else if(orders[index]["isRejected"])...[
+                              Text(
+                                "Rejected",
+                                style: GoogleFonts.inter(
+                                    color: Colors.red[800],
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ] else ...[
+                              Text(
+                                "Confirmed",
+                                style: GoogleFonts.inter(
+                                    color: Colors.green,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ]
+                          ]),
+                          SizedBox(
+                            height: 15,
+                          ),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[

@@ -63,13 +63,6 @@ class _CartState extends State<Cart> {
   }
 
   void removeItem(String item) {
-    // if ((cartList.singleWhere((element) => element.item == item,
-    //         orElse: () => null)) !=
-    //     null) {
-    //   return;
-    // } else {
-    //   cartList.add(Orders(item, price, 1));
-    // }
     storeDataforCart.removeFoodDetails(item);
     updateTotal();
     print(item);

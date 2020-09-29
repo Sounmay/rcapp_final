@@ -68,11 +68,24 @@ exports.confirmNotification = functions.firestore.document('confirmedOrders/{id}
 
 exports.BookingNotification = functions.firestore.document('BookingDetails/{id}').onUpdate(async(snapshot, context) => {
     var token = snapshot.after.data().token;
-    return fcm.sendToDevice(token, {
-        notification: {
-            title: 'Booking Confirmation',
-            body: 'Your Booking has been confirmed',
-            clickAction: 'FLUTTER_NOTIFICATION_CLICK'
-        }
-    })
+    var isConfirmed = snapshot.after.data().isConfirmed;
+    var isRejected = snapshot.after.data().isRejected;
+    if(isConfirmed === true) {
+        return fcm.sendToDevice(token, {
+            notification: {
+                title: 'Booking Confirmation',
+                body: 'Your Booking has been confirmed',
+                clickAction: 'FLUTTER_NOTIFICATION_CLICK'
+            }
+        });
+    } else if(isRejected === true) {
+        return fcm.sendToDevice(token, {
+            notification: {
+                title: 'Booking Rejection',
+                body: 'Your Booking has been rejected',
+                clickAction: 'FLUTTER_NOTIFICATION_CLICK'
+            }
+        });
+    }
 });
+

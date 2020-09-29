@@ -43,13 +43,23 @@ class _AdminBookingState extends State<AdminBooking> {
     });
   }
 
-  void rejectBookinHistory(int _eventDate, int index) async {
+  void deleteBookinHistory(int _eventDate, int index) async {
     await Firestore.instance
         .collection('BookingDetails')
         .document('$_eventDate')
         .delete();
     setState(() {
       bookings.removeAt(index);
+    });
+  }
+
+  void rejectBooking(int _eventDate, int index) async {
+    await Firestore.instance
+        .collection('BookingDetails')
+        .document('$_eventDate')
+        .updateData({'isRejected': true});
+    setState(() {
+      bookings[index]["isRejected"] = true;
     });
   }
 
@@ -141,7 +151,7 @@ class _AdminBookingState extends State<AdminBooking> {
                     SizedBox(height: 10.0),
                     Container(
                       padding: EdgeInsets.all(10),
-                      height: 240.0,
+                      height: MediaQuery.of(context).size.height * 0.4,
                       width: 380.0,
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -199,6 +209,21 @@ class _AdminBookingState extends State<AdminBooking> {
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Text(
+                                      "Mobile No. : " +
+                                          "${bookings[index]["mobileNumber"]}",
+                                      style: GoogleFonts.inter(
+                                          color: Colors.black,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 10),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text(
                                       "Lounge : " +
                                           "${bookings[index]["lounge"]}",
                                       style: GoogleFonts.inter(
@@ -214,26 +239,37 @@ class _AdminBookingState extends State<AdminBooking> {
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Text(
-                                      'Slot: ${bookings[index]["slot"]}',
+                                      bookings[index]["slot"] == 1
+                                          ? 'Slot: Lunch '
+                                          : 'Slot: Dinner ',
                                       style: GoogleFonts.inter(
                                           color: Colors.black,
                                           fontSize: 18,
                                           fontWeight: FontWeight.w400),
                                     ),
-                                    Text(
-                                        bookings[index]["isConfirmed"]
-                                            ? 'Status: Confirmed'
-                                            : 'Status: Not Confirmed',
-                                        style: GoogleFonts.inter(
-                                            color: Colors.black,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w400)),
-                                    SizedBox(width: 30)
                                   ],
                                 ),
                                 SizedBox(height: 10),
+                                if (!bookings[index]["isRejected"]) ...[
+                                  Text(
+                                      bookings[index]["isConfirmed"]
+                                          ? 'Status: Confirmed'
+                                          : 'Status: Not Confirmed',
+                                      style: GoogleFonts.inter(
+                                          color: Colors.black,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w400)),
+                                ] else ...[
+                                  Text('Status: Rejected',
+                                      style: GoogleFonts.inter(
+                                          color: Colors.black,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w400)),
+                                ],
+                                SizedBox(height: 10),
                               ]),
-                          if (!bookings[index]["isConfirmed"]) ...[
+                          if (!bookings[index]["isConfirmed"] &&
+                              !bookings[index]["isRejected"]) ...[
                             Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: <Widget>[
@@ -243,8 +279,11 @@ class _AdminBookingState extends State<AdminBooking> {
                                       width: 110,
                                       child: FlatButton(
                                         onPressed: () {
-                                          rejectBookinHistory(
-                                              bookings[index]["_date"], index);
+                                          if (!bookings[index]["isConfirmed"]) {
+                                            rejectBooking(
+                                                bookings[index]["_date"],
+                                                index);
+                                          }
                                         },
                                         color: Colors.red[700],
                                         child: Row(
@@ -273,15 +312,22 @@ class _AdminBookingState extends State<AdminBooking> {
                                       width: 110,
                                       child: FlatButton(
                                         onPressed: () {
-                                          confirmBooking(
-                                              bookings[index]["name"],
-                                              bookings[index]["number"],
-                                              bookings[index]["lounge"],
-                                              bookings[index]["slot"],
-                                              bookings[index]["numberOfPeople"],
-                                              bookings[index]["_date"],
-                                              bookings[index]["bookingDate"],
-                                              index);
+                                          if (!bookings[index]["isConfirmed"]) {
+                                            confirmBooking(
+                                                bookings[index]["name"],
+                                                bookings[index]["number"],
+                                                bookings[index]["lounge"],
+                                                bookings[index]["slot"],
+                                                bookings[index]
+                                                    ["numberOfPeople"],
+                                                bookings[index]["_date"],
+                                                bookings[index]["bookingDate"],
+                                                index);
+                                          } else {
+                                            deleteBookinHistory(
+                                                bookings[index]["_date"],
+                                                index);
+                                          }
                                         },
                                         color: Colors.deepOrange,
                                         child: Row(
@@ -293,11 +339,20 @@ class _AdminBookingState extends State<AdminBooking> {
                                                 size: 17,
                                                 color: Colors.white,
                                               ),
-                                              Text(
-                                                'Confirm',
-                                                style: GoogleFonts.inter(
-                                                    color: Colors.white),
-                                              ),
+                                              if (!bookings[index]
+                                                  ["isConfirmed"]) ...[
+                                                Text(
+                                                  'Confirm',
+                                                  style: GoogleFonts.inter(
+                                                      color: Colors.white),
+                                                ),
+                                              ] else ...[
+                                                Text(
+                                                  'Delete',
+                                                  style: GoogleFonts.inter(
+                                                      color: Colors.white),
+                                                )
+                                              ]
                                             ]),
                                         shape: new RoundedRectangleBorder(
                                             borderRadius:
@@ -315,7 +370,7 @@ class _AdminBookingState extends State<AdminBooking> {
                                     width: 100,
                                     child: FlatButton(
                                       onPressed: () {
-                                        rejectBookinHistory(
+                                        deleteBookinHistory(
                                             bookings[index]["_date"], index);
                                       },
                                       color: Colors.red[700],

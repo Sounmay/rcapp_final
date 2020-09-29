@@ -118,12 +118,20 @@ exports.confirmNotification = functions.firestore.document('confirmedOrders/{id}
   });
 });
 exports.BookingNotification = functions.firestore.document('BookingDetails/{id}').onUpdate(function _callee4(snapshot, context) {
-  var token;
+  var token, isConfirmed, isRejected;
   return regeneratorRuntime.async(function _callee4$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
           token = snapshot.after.data().token;
+          isConfirmed = snapshot.after.data().isConfirmed;
+          isRejected = snapshot.after.data().isRejected;
+
+          if (!(isConfirmed === true)) {
+            _context4.next = 7;
+            break;
+          }
+
           return _context4.abrupt("return", fcm.sendToDevice(token, {
             notification: {
               title: 'Booking Confirmation',
@@ -132,7 +140,21 @@ exports.BookingNotification = functions.firestore.document('BookingDetails/{id}'
             }
           }));
 
-        case 2:
+        case 7:
+          if (!(isRejected === true)) {
+            _context4.next = 9;
+            break;
+          }
+
+          return _context4.abrupt("return", fcm.sendToDevice(token, {
+            notification: {
+              title: 'Booking Rejection',
+              body: 'Your Booking has been rejected',
+              clickAction: 'FLUTTER_NOTIFICATION_CLICK'
+            }
+          }));
+
+        case 9:
         case "end":
           return _context4.stop();
       }

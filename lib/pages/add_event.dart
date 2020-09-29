@@ -26,6 +26,7 @@ class _AddEventPageState extends State<AddEventPage> {
 
   String _name = '';
   String _personalno = '';
+  String _mobileno = '';
   int slot = 1;
   DateTime _eventDate;
   int numberOfPeople = 1;
@@ -77,7 +78,7 @@ class _AddEventPageState extends State<AddEventPage> {
       }
     });
     if (!exits) {
-      _booking.bookDetails(id, _name, _personalno, numberOfPeople,
+      _booking.bookDetails(id, _name, _personalno, _mobileno, numberOfPeople,
           loungeColor[_value1 - 1], slot, _eventDate);
       showDialog(
           context: context,
@@ -173,6 +174,26 @@ class _AddEventPageState extends State<AddEventPage> {
                         val.isEmpty ? 'Enter your Personal No.' : null,
                     onChanged: (val) {
                       setState(() => _personalno = val);
+                    }),
+                SizedBox(height: 10),
+                TextFormField(
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                        hintText: 'Mobile No.',
+                        fillColor: Colors.white,
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.deepOrange, width: 1.0),
+                            borderRadius: BorderRadius.circular(10)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.deepOrange, width: 3.0),
+                            borderRadius: BorderRadius.circular(10))),
+                    validator: (val) =>
+                        val.isEmpty ? 'Enter your Personal No.' : null,
+                    onChanged: (val) {
+                      setState(() => _mobileno = val);
                     }),
                 SizedBox(height: 10),
                 TextFormField(
