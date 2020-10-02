@@ -122,17 +122,23 @@ class _AdminBookingState extends State<AdminBooking> {
     } else if (documentlength == 0) {
       return Scaffold(
         body: Center(
+            child: Scaffold(
+          appBar: AppBar(
+              title: Text('Admin Booking'), backgroundColor: Colors.deepOrange),
+          body: Center(
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-              Icon(Icons.all_inclusive),
-              Text('No data')
-            ])),
+                  Icon(Icons.all_inclusive),
+                  Text('No Bookings Pending')
+                ]),
+          ),
+        )),
       );
     } else {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Your Booking'),
+          title: Text('Admin Booking'),
           backgroundColor: Colors.deepOrange,
         ),
         body: Container(
