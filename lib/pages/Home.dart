@@ -311,7 +311,10 @@ class _HomeListPageState extends State<HomeListPage> {
 
   Future getPosts() async {
     var firestore = Firestore.instance;
-    QuerySnapshot qn = await firestore.collection("noticeBoard").getDocuments();
+    QuerySnapshot qn = await firestore
+        .collection("noticeBoard")
+        .orderBy('_date', descending: true)
+        .getDocuments();
     print(qn);
     return qn.documents;
   }
@@ -320,8 +323,9 @@ class _HomeListPageState extends State<HomeListPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
-    _data = getPosts();
+    setState(() {
+      _data = getPosts();
+    });
   }
 
   @override

@@ -81,7 +81,9 @@ class DatabaseService {
   }
 
   Future updateAddressData(String id, String address, String number) async {
-    return await userInfo.document(id).updateData({'address': address, 'mobileNumber': number});
+    return await userInfo
+        .document(id)
+        .updateData({'address': address, 'mobileNumber': number});
   }
 
   Future updateTodayMenu(String food, int price, String url) async {
@@ -95,15 +97,17 @@ class DatabaseService {
   }
 
   Future updatePdf(String title, String subtitle, String url) async {
+    var _date = DateTime.now().toUtc().millisecondsSinceEpoch;
     return await notice_pdfData
-        .document()
-        .setData({'title': title, 'subtitle': subtitle, 'downloadLink': url});
+        .document('$_date')
+        .setData({'_date': _date,'title': title, 'subtitle': subtitle, 'downloadLink': url});
   }
 
-  Future bookDetails(String id, String name, String number, String mobileNumber, int numberOfPeople,
-      String lounge, int slot, DateTime date) async {
+  Future bookDetails(String id, String name, String number, String mobileNumber,
+      int numberOfPeople, String lounge, int slot, DateTime date) async {
     var _date = DateTime.now().toUtc().millisecondsSinceEpoch;
-    var forToken = await Firestore.instance.collection('userInfo').document(id).get();
+    var forToken =
+        await Firestore.instance.collection('userInfo').document(id).get();
     var _token = forToken.data["token"];
     return await bookingDetails.document('$_date').setData({
       '_date': _date,
@@ -122,11 +126,21 @@ class DatabaseService {
     });
   }
 
-  Future confirmOrderofUser(String id, String name, String number,
-      String address, List item, List price, List qty, int total, bool isConfirmed, String mobileNumber) async {
+  Future confirmOrderofUser(
+      String id,
+      String name,
+      String number,
+      String address,
+      List item,
+      List price,
+      List qty,
+      int total,
+      bool isConfirmed,
+      String mobileNumber) async {
     // var docId = '$id' + '$total';
     var _date = DateTime.now().toUtc().millisecondsSinceEpoch;
-    var forToken = await Firestore.instance.collection('userInfo').document(id).get();
+    var forToken =
+        await Firestore.instance.collection('userInfo').document(id).get();
     var _token = forToken.data["token"];
     return await confirmedOrders.document('$_date').setData({
       'id': id,
@@ -144,7 +158,7 @@ class DatabaseService {
           '${DateTime.now().month}' +
           '/' +
           '${DateTime.now().year}',
-      'token': _token, 
+      'token': _token,
       'mobileNumber': mobileNumber,
       'isRejected': false
     });
