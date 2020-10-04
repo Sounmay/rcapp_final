@@ -54,6 +54,7 @@ class _SearchState extends State<Search> {
           onChanged: (val) {
             initiateSearch(val);
           },
+          textCapitalization: TextCapitalization.words,
           decoration: InputDecoration(
               prefixIcon: IconButton(
                 color: Colors.black,
@@ -123,8 +124,9 @@ class _SearchQuantityState extends State<SearchQuantity> {
           ),
           height: 25,
           width: 62,
-          child:
-              Center(child: Text('Add', style: GoogleFonts.inter(color: Colors.white))),
+          child: Center(
+              child:
+                  Text('Add', style: GoogleFonts.inter(color: Colors.white))),
         ),
       );
     } else {
@@ -178,7 +180,8 @@ class _SearchQuantityState extends State<SearchQuantity> {
             width: 33,
             child: Text(
               '$FQty',
-              style: GoogleFonts.inter(fontSize: 17, fontWeight: FontWeight.bold),
+              style:
+                  GoogleFonts.inter(fontSize: 17, fontWeight: FontWeight.bold),
             ),
           ),
           Container(
@@ -258,9 +261,14 @@ class _SearchListState extends State<SearchList> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    '${widget.tempSearchStore[index]['item']}',
-                    style: GoogleFonts.inter(fontSize: 17, fontWeight: FontWeight.bold),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    child: Text(
+                      '${widget.tempSearchStore[index]['item']}',
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.inter(
+                          fontSize: 17, fontWeight: FontWeight.bold),
+                    ),
                   ),
                   SearchQuantity(
                       item: widget.tempSearchStore[index]['item'],
