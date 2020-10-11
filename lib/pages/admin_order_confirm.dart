@@ -16,6 +16,7 @@ class _AdminOrderState extends State<AdminOrder> {
   List<dynamic> item = [];
   List<dynamic> quantity = [];
   List<dynamic> total = [];
+  bool loading = true;
 
   void confirmOrder(int index, int date) async {
     // var docId = '${orders[index]["id"]}' + '${orders[index]["total"]}';
@@ -61,6 +62,12 @@ class _AdminOrderState extends State<AdminOrder> {
         total.add(res.data["total"]);
       });
     });
+    print(result.documents.length);
+    if (result.documents.length == 0) {
+      setState(() {
+        loading = false;
+      });
+    }
   }
 
   @override
@@ -73,7 +80,10 @@ class _AdminOrderState extends State<AdminOrder> {
   @override
   Widget build(BuildContext context) {
     int orderNo = 110;
-    if (orders.length == 0 && item.length == 0 && quantity.length == 0) {
+    if (orders.length == 0 &&
+        item.length == 0 &&
+        quantity.length == 0 &&
+        loading == true) {
       return Scaffold(
         body: Center(
             child: Column(
@@ -83,7 +93,7 @@ class _AdminOrderState extends State<AdminOrder> {
               Text('Loading data')
             ])),
       );
-    } else {
+    } else if (orders.length != 0) {
       return Scaffold(
         appBar: AppBar(
           title: Text('Your Orders'),
@@ -299,7 +309,8 @@ class _AdminOrderState extends State<AdminOrder> {
                                     ),
                                   ),
                                   SizedBox(width: 10),
-                                  if (!orders[index]["isConfirmed"] && !orders[index]["isRejected"]) ...[
+                                  if (!orders[index]["isConfirmed"] &&
+                                      !orders[index]["isRejected"]) ...[
                                     InkWell(
                                       onTap: () {
                                         confirmOrder(
@@ -353,6 +364,20 @@ class _AdminOrderState extends State<AdminOrder> {
             },
           ),
         ),
+      );
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+            title: Text('Admin Orders'), backgroundColor: Colors.deepOrange),
+        body: Center(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+              Icon(Icons.add_shopping_cart, size: 40, color: Colors.deepOrange),
+              Text('No Orders Pending',
+                  style: GoogleFonts.inter(
+                      color: Colors.black, fontWeight: FontWeight.bold))
+            ])),
       );
     }
   }

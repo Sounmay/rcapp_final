@@ -68,41 +68,38 @@ class _NavigationBarState extends State<NavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (ctx) => storeData,
-      child: Scaffold(
-        body: _children[_currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          unselectedItemColor: Colors.black,
-          selectedItemColor: Colors.deepOrange,
-          onTap: onTappedBar,
-          currentIndex: _currentIndex,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              title: Text('Home'),
-              backgroundColor: Colors.deepOrange,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.fastfood),
-              title: Text('Food'),
-              backgroundColor: Colors.deepOrange,
-              activeIcon: Icon(Icons.fastfood, color: Colors.deepOrange),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.book),
-              title: Text('Booking'),
-              backgroundColor: Colors.deepOrange,
-            ),
-          ],
-        ),
+    return Scaffold(
+      body: _children[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        unselectedItemColor: Colors.black,
+        selectedItemColor: Colors.deepOrange,
+        onTap: onTappedBar,
+        currentIndex: _currentIndex,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
+            backgroundColor: Colors.deepOrange,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.fastfood),
+            title: Text('Food'),
+            backgroundColor: Colors.deepOrange,
+            activeIcon: Icon(Icons.fastfood, color: Colors.deepOrange),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.book),
+            title: Text('Booking'),
+            backgroundColor: Colors.deepOrange,
+          ),
+        ],
       ),
     );
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   super.dispose();
+  // }
 }

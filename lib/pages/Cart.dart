@@ -23,6 +23,8 @@ class _CartState extends State<Cart> {
   StoreData storeDataforCart = StoreData();
 
   var address = '';
+  bool isData = false;
+  bool loading = true;
 
   void init() async {
     var user = await FirebaseAuth.instance.currentUser();
@@ -33,6 +35,7 @@ class _CartState extends State<Cart> {
 
     setState(() {
       address = _dat.data["address"];
+      loading = false;
     });
   }
 
@@ -59,6 +62,11 @@ class _CartState extends State<Cart> {
         qtyList.add(value);
       });
       foodDetail.forEach((k, v) => total = total + v * qtyDetail[k]);
+      if (totalquantity == 0) {
+        isData = false;
+      } else {
+        isData = true;
+      }
     });
   }
 
@@ -228,7 +236,7 @@ class _CartState extends State<Cart> {
                   );
                 }),
           ),
-          ProceedAccess(address: address)
+          ProceedAccess(address: address, isData: isData, loading: loading)
         ]));
   }
 }
@@ -382,8 +390,10 @@ class _QuantityInCartState extends State<QuantityInCart> {
 }
 
 class ProceedAccess extends StatefulWidget {
+  var isData;
+  var loading;
   var address;
-  ProceedAccess({this.address});
+  ProceedAccess({this.address, this.isData, this.loading});
   @override
   _ProceedAccessState createState() => _ProceedAccessState();
 }
@@ -433,7 +443,20 @@ class _ProceedAccessState extends State<ProceedAccess> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.address == '') {
+    if (widget.loading == true) {
+      return Container(
+          width: double.infinity,
+          height: 50,
+          child: FlatButton(
+              color: Colors.deepOrange,
+              onPressed: () {
+                Navigator.pushNamed(context, '/address');
+              },
+              child: Text(
+                'Please Wait ...',
+                style: GoogleFonts.inter(color: Colors.white),
+              )));
+    } else if (widget.address == '' && widget.loading == false) {
       return Container(
           width: double.infinity,
           height: 50,
@@ -446,7 +469,7 @@ class _ProceedAccessState extends State<ProceedAccess> {
                 'Add address to proceed',
                 style: GoogleFonts.inter(color: Colors.white),
               )));
-    } else if (widget.address != '') {
+    } else if (widget.address != '' && widget.isData == true) {
       return Container(
           width: double.infinity,
           height: 50,
@@ -469,9 +492,17 @@ class _ProceedAccessState extends State<ProceedAccess> {
                 'Confirm Order(Pay through COD)',
                 style: GoogleFonts.inter(color: Colors.white),
               )));
-    } else if (widget.address == null) {
+    } else if (widget.isData == false) {
       return Container(
-          width: double.infinity, height: 50, child: SpinKitChasingDots());
+          width: double.infinity,
+          height: 50,
+          child: FlatButton(
+              color: Colors.deepOrange,
+              onPressed: () {},
+              child: Text(
+                'Add Item To Cart',
+                style: GoogleFonts.inter(color: Colors.white),
+              )));
     }
   }
 }

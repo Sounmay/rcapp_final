@@ -246,7 +246,7 @@ class _BookingState extends State<Booking> {
                                   borderRadius: BorderRadius.circular(10),
                                   color: Colors.blue,
                                   image: DecorationImage(
-                                      image: new AssetImage("assets/16.jpg"),
+                                      image: new AssetImage("assets/56.jpg"),
                                       fit: BoxFit.fill)),
                             ),
                           ),
@@ -293,9 +293,9 @@ class _BookingState extends State<Booking> {
     );
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   super.dispose();
+  // }
 }

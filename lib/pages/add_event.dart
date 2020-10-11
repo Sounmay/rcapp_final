@@ -107,6 +107,8 @@ class _AddEventPageState extends State<AddEventPage> {
 
   @override
   Widget build(BuildContext context) {
+    _eventDate = ModalRoute.of(context).settings.arguments;
+
     if (_name == '' && _personalno == '') {
       return Scaffold(
         appBar: AppBar(

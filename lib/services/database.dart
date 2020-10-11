@@ -81,7 +81,9 @@ class DatabaseService {
   }
 
   Future updateAddressData(String id, String address, String number) async {
-    return await userInfo.document(id).updateData({'address': address, 'mobileNumber': number});
+    return await userInfo
+        .document(id)
+        .updateData({'address': address, 'mobileNumber': number});
   }
 
   Future updateTodayMenu(String food, int price, String url) async {
@@ -95,15 +97,17 @@ class DatabaseService {
   }
 
   Future updatePdf(String title, String subtitle, String url) async {
+    var _date = DateTime.now().toUtc().millisecondsSinceEpoch;
     return await notice_pdfData
-        .document()
-        .setData({'title': title, 'subtitle': subtitle, 'downloadLink': url});
+        .document('$_date')
+        .setData({'_date': _date,'title': title, 'subtitle': subtitle, 'downloadLink': url});
   }
 
-  Future bookDetails(String id, String name, String number, String mobileNumber, int numberOfPeople,
-      String lounge, int slot, DateTime date) async {
+  Future bookDetails(String id, String name, String number, String mobileNumber,
+      int numberOfPeople, String lounge, int slot, DateTime date) async {
     var _date = DateTime.now().toUtc().millisecondsSinceEpoch;
-    var forToken = await Firestore.instance.collection('userInfo').document(id).get();
+    var forToken =
+        await Firestore.instance.collection('userInfo').document(id).get();
     var _token = forToken.data["token"];
     return await bookingDetails.document('$_date').setData({
       '_date': _date,
@@ -122,11 +126,21 @@ class DatabaseService {
     });
   }
 
-  Future confirmOrderofUser(String id, String name, String number,
-      String address, List item, List price, List qty, int total, bool isConfirmed, String mobileNumber) async {
+  Future confirmOrderofUser(
+      String id,
+      String name,
+      String number,
+      String address,
+      List item,
+      List price,
+      List qty,
+      int total,
+      bool isConfirmed,
+      String mobileNumber) async {
     // var docId = '$id' + '$total';
     var _date = DateTime.now().toUtc().millisecondsSinceEpoch;
-    var forToken = await Firestore.instance.collection('userInfo').document(id).get();
+    var forToken =
+        await Firestore.instance.collection('userInfo').document(id).get();
     var _token = forToken.data["token"];
     return await confirmedOrders.document('$_date').setData({
       'id': id,
@@ -144,7 +158,7 @@ class DatabaseService {
           '${DateTime.now().month}' +
           '/' +
           '${DateTime.now().year}',
-      'token': _token, 
+      'token': _token,
       'mobileNumber': mobileNumber,
       'isRejected': false
     });
@@ -162,7 +176,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return Menu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -171,7 +185,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return MainCourseMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -180,7 +194,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return ChineseMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -189,7 +203,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return StarterMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -198,7 +212,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return BiryaniMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -216,7 +230,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return BreadMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -225,7 +239,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return TandooriMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -235,7 +249,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return FriedRiceAndNoodlesMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -244,7 +258,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return RollMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -253,7 +267,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return SandwichMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -262,7 +276,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return PizzaMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -271,7 +285,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return SnacksMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -280,7 +294,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return BurgerMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -289,7 +303,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return PastaMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -298,7 +312,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return SoupMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -308,7 +322,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return AccompanimentMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }
@@ -317,7 +331,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return BreakfastMenu(
           item: doc.data["item"] ?? '',
-          price: doc.data["price"] ?? 0,
+          price: doc.data["club_rate"] ?? 0,
           searchIndex: doc.data["search_index"] ?? '');
     }).toList();
   }

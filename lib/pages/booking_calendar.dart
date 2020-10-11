@@ -16,6 +16,7 @@ class _CalendarState extends State<Calendar> {
   CalendarController _controller;
   Map<DateTime, List<dynamic>> _events;
   List<dynamic> _selectedEvents;
+  var _selectedDate = DateTime.now();
 
   @override
   void initState() {
@@ -55,75 +56,80 @@ class _CalendarState extends State<Calendar> {
                 _selectedEvents = [];
               }
             }
-          return SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                TableCalendar(
-                  events: _events,
-                  initialCalendarFormat: CalendarFormat.month,
-                  calendarStyle: CalendarStyle(
-                      canEventMarkersOverflow: true,
-                      todayColor: Colors.orange,
-                      selectedColor: Theme.of(context).primaryColor,
-                      
-                      todayStyle: GoogleFonts.inter(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0,
-                          color: Colors.white)),
-                  headerStyle: HeaderStyle(
-                    centerHeaderTitle: true,
-                    formatButtonDecoration: BoxDecoration(
-                      color: Colors.orange,
-                      borderRadius: BorderRadius.circular(20.0),
+            return SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  TableCalendar(
+                    events: _events,
+                    initialCalendarFormat: CalendarFormat.month,
+                    calendarStyle: CalendarStyle(
+                        canEventMarkersOverflow: true,
+                        todayColor: Colors.orange,
+                        selectedColor: Theme.of(context).primaryColor,
+                        todayStyle: GoogleFonts.inter(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0,
+                            color: Colors.white)),
+                    headerStyle: HeaderStyle(
+                      centerHeaderTitle: true,
+                      formatButtonDecoration: BoxDecoration(
+                        color: Colors.orange,
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      formatButtonTextStyle:
+                          GoogleFonts.inter(color: Colors.white),
+                      formatButtonShowsNext: false,
                     ),
-                    formatButtonTextStyle: GoogleFonts.inter(color: Colors.white),
-                    formatButtonShowsNext: false,
+                    startingDayOfWeek: StartingDayOfWeek.monday,
+                    onDaySelected: (date, events) {
+                      setState(() {
+                        _selectedEvents = events;
+                        _selectedDate = date;
+                      });
+                    },
+                    builders: CalendarBuilders(
+                      selectedDayBuilder: (context, date, events) => Container(
+                          margin: const EdgeInsets.all(4.0),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              color: Theme.of(context).primaryColor,
+                              borderRadius: BorderRadius.circular(10.0)),
+                          child: Text(
+                            date.day.toString(),
+                            style: GoogleFonts.inter(color: Colors.white),
+                          )),
+                      todayDayBuilder: (context, date, events) => Container(
+                          margin: const EdgeInsets.all(4.0),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              color: Colors.orange,
+                              borderRadius: BorderRadius.circular(10.0)),
+                          child: Text(
+                            date.day.toString(),
+                            style: GoogleFonts.inter(color: Colors.white),
+                          )),
+                    ),
+                    calendarController: _controller,
                   ),
-                  startingDayOfWeek: StartingDayOfWeek.monday,
-                  onDaySelected: (date, events) {
-                    setState(() {
-                      _selectedEvents = events;
-                    });
-                  },
-                  builders: CalendarBuilders(
-                    selectedDayBuilder: (context, date, events) => Container(
-                        margin: const EdgeInsets.all(4.0),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: Theme.of(context).primaryColor,
-                            borderRadius: BorderRadius.circular(10.0)),
-                        child: Text(
-                          date.day.toString(),
-                          style: GoogleFonts.inter(color: Colors.white),
-                        )),
-                    todayDayBuilder: (context, date, events) => Container(
-                        margin: const EdgeInsets.all(4.0),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: Colors.orange,
-                            borderRadius: BorderRadius.circular(10.0)),
-                        child: Text(
-                          date.day.toString(),
-                          style: GoogleFonts.inter(color: Colors.white),
-                        )),
-                  ),
-                  calendarController: _controller,
-                ),
-                ..._selectedEvents.map((event) => Container(
-                  height: MediaQuery.of(context).size.height * 0.08,
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    color: Colors.white,
-                  ),
-                  margin: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-                    child:ListTile(
-                      title: Text(/*"${event.Lounge}"+" Room booked for slot " + "${event.slot}"*/
-                              event.slot == 1
-                                  ? "${event.Lounge} Room booked for Lunch Slot"
-                                  : "${event.Lounge} Room booked for Dinner Slot", style: TextStyle(color: Colors.deepOrange),),
-                      /*onTap: () {
+                  ..._selectedEvents.map(
+                    (event) => Container(
+                      height: MediaQuery.of(context).size.height * 0.08,
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Colors.white,
+                      ),
+                      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                      child: ListTile(
+                        title: Text(
+                          /*"${event.Lounge}"+" Room booked for slot " + "${event.slot}"*/
+                          event.slot == 1
+                              ? "${event.Lounge} Room booked for Lunch Slot"
+                              : "${event.Lounge} Room booked for Dinner Slot",
+                          style: TextStyle(color: Colors.deepOrange),
+                        ),
+                        /*onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -131,21 +137,23 @@ class _CalendarState extends State<Calendar> {
                                   event: event,
                                 )));
                       },*/
+                      ),
                     ),
-                ),
-                ),
-              ],
-            ),
-          );
-        }
-      ),
+                  ),
+                ],
+              ),
+            );
+          }),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.deepOrange,
-        child: Text('Book',
-        style: GoogleFonts.inter(
-            color: Colors.white
-        ),),
-        onPressed: () => Navigator.pushNamed(context, '/add_event'),
+        child: Text(
+          'Book',
+          style: GoogleFonts.inter(color: Colors.white),
+        ),
+        onPressed: () => {
+          // print(_selectedDate)
+          Navigator.pushNamed(context, '/add_event', arguments: _selectedDate)
+        },
       ),
     );
   }

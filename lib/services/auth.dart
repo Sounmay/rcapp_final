@@ -53,6 +53,17 @@ class AuthService {
           .collection('userInfo')
           .document(userkaabba)
           .updateData({'token': token});
+      var _tokendata = await Firestore.instance
+          .collection('confirmedOrders')
+          .where('id', isEqualTo: userkaabba)
+          .getDocuments();
+
+      _tokendata.documents.forEach((element) {
+        Firestore.instance
+            .collection('confirmedOrders')
+            .document('${element.data["_date"]}')
+            .updateData({'token': token});
+      });
 
       isAdminglobal = dat;
 
