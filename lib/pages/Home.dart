@@ -269,7 +269,18 @@ class _HomeState extends State<Home> {
             Container(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                 child: FoodCategory(areYouadmin)),
-            SizedBox(height: 20.0),
+            SizedBox(height: 48.0),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+              child: Text(
+                " Designed by : Aswin Kumar Raju \n Developed by : Sounmay Mishra & Naiyar Imam",
+                style: GoogleFonts.inter(
+                  color: Colors.black,
+                  fontSize: 8,
+                  fontWeight: FontWeight.w600,
+                )
+              ),
+            ),
             /*Text(
               "  Upcoming Events",
               style: TextStyle(
