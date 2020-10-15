@@ -93,7 +93,7 @@ class _FoodState extends State<Food> {
                   child: Icon(
                     Icons.shopping_cart,
                     color: Colors.white,
-                    size: 35,
+                    size: 28,
                   ),
                 ),
               ),

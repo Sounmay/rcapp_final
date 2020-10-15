@@ -30,7 +30,7 @@ class _TennisCourtState extends State<TennisCourt> {
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.blue,
                     image: DecorationImage(
-                        image: new AssetImage("assets/51.jpg"),
+                        image: new AssetImage("assets/55.jpg"),
                         fit: BoxFit.fill)),
               ),
             ),

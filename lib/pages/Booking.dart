@@ -246,7 +246,7 @@ class _BookingState extends State<Booking> {
                                   borderRadius: BorderRadius.circular(10),
                                   color: Colors.blue,
                                   image: DecorationImage(
-                                      image: new AssetImage("assets/16.jpg"),
+                                      image: new AssetImage("assets/56.jpg"),
                                       fit: BoxFit.fill)),
                             ),
                           ),
@@ -271,7 +271,7 @@ class _BookingState extends State<Booking> {
                                   borderRadius: BorderRadius.circular(10),
                                   color: Colors.blue,
                                   image: DecorationImage(
-                                      image: new AssetImage("assets/51.jpg"),
+                                      image: new AssetImage("assets/55.jpg"),
                                       fit: BoxFit.fill)),
                             ),
                           ),
