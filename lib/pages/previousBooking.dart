@@ -98,7 +98,7 @@ class _PreviousBookingState extends State<PreviousBooking> {
                     SizedBox(height: 10.0),
                     Container(
                       padding: EdgeInsets.all(10),
-                      height: MediaQuery.of(context).size.height * 0.38,
+                      height: MediaQuery.of(context).size.height * 0.46,
                       width: 370.0,
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -244,6 +244,16 @@ class _PreviousBookingState extends State<PreviousBooking> {
                                     ]
                                   ],
                                 ),
+                                SizedBox(height: 16),
+                                if (!bookings[index]["isRejected"]) ...[
+                                  Text(
+                                    "For further queries, please contact +919437116141 (Mr. PK Pattanaik)",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.inter(
+
+                                    ),
+                                  )
+                                ],
                               ]),
                           SizedBox(height: 10),
                         ],

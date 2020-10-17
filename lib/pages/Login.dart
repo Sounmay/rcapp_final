@@ -75,7 +75,9 @@ class _LoginState extends State<Login> {
                               child: logincarousel),
                           SizedBox(height: 18.0),
                           TextFormField(
+/*
                               keyboardType: TextInputType.number,
+*/
                               decoration: InputDecoration(
                                   hintText: 'Personal Number',
                                   fillColor: Colors.white,
@@ -156,7 +158,7 @@ class _LoginState extends State<Login> {
                             style: GoogleFonts.inter(color: Colors.red, fontSize: 14.0),
                           ),
                           SizedBox(height: 15.0),
-                          /*Row(
+                          Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Text(
@@ -174,7 +176,7 @@ class _LoginState extends State<Login> {
                                           decoration: TextDecoration.underline,
                                           fontSize: 15)),
                                 )
-                              ])*/
+                              ])
                         ]),
                   )),
             ),

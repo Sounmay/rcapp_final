@@ -157,7 +157,7 @@ class _AdminBookingState extends State<AdminBooking> {
                     SizedBox(height: 10.0),
                     Container(
                       padding: EdgeInsets.all(10),
-                      height: MediaQuery.of(context).size.height * 0.43,
+                      height: MediaQuery.of(context).size.height * 0.5,
                       width: 380.0,
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -248,6 +248,21 @@ class _AdminBookingState extends State<AdminBooking> {
                                       bookings[index]["slot"] == 1
                                           ? 'Slot: Lunch '
                                           : 'Slot: Dinner ',
+                                      style: GoogleFonts.inter(
+                                          color: Colors.black,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 10),
+                                Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text(
+                                      "Number of people : " +
+                                          "${bookings[index]["numberOfPeople"]}",
                                       style: GoogleFonts.inter(
                                           color: Colors.black,
                                           fontSize: 18,
@@ -402,7 +417,7 @@ class _AdminBookingState extends State<AdminBooking> {
                                   )
                                 ])
                           ],
-                          SizedBox(height: 10),
+
                         ],
                       ),
                     ),
