@@ -36,7 +36,7 @@ void confirmOrder() async {
   var mobileNumber = _dat.data["mobileNumber"];
 
   DatabaseService().confirmOrderofUser(user.uid, userName, number, address,
-      itemList, priceList, quantityList, total, false, mobileNumber);
+      itemList, priceList, quantityList, total, false, mobileNumber,1);
 
   storeData.resetStore();
   updateTotal();

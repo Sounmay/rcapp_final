@@ -157,7 +157,8 @@ class _PreviousOrderState extends State<PreviousOrder> {
                                   fontSize: 18,
                                   fontWeight: FontWeight.w400),
                             ),
-                            if (!orders[index]["isConfirmed"] && !orders[index]["isRejected"]) ...[
+                            if (!orders[index]["isConfirmed"] &&
+                                !orders[index]["isRejected"]) ...[
                               Text(
                                 "Not Confirmed",
                                 style: GoogleFonts.inter(
@@ -165,7 +166,7 @@ class _PreviousOrderState extends State<PreviousOrder> {
                                     fontSize: 18,
                                     fontWeight: FontWeight.w400),
                               ),
-                            ] else if(orders[index]["isRejected"])...[
+                            ] else if (orders[index]["isRejected"]) ...[
                               Text(
                                 "Rejected",
                                 style: GoogleFonts.inter(
@@ -181,8 +182,23 @@ class _PreviousOrderState extends State<PreviousOrder> {
                                     fontSize: 18,
                                     fontWeight: FontWeight.w400),
                               ),
-                            ]
+                            ],
                           ]),
+                          SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(
+                                orders[index]["orderType"] == 1
+                                    ? "Order Mode : Home Delivery"
+                                    : "Order Mode: Pick Up",
+                                style: GoogleFonts.inter(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ],
+                          ),
                           SizedBox(
                             height: 15,
                           ),

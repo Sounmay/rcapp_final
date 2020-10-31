@@ -55,17 +55,6 @@ class _HomeState extends State<Home> {
     getAdmin();
   }
 
-  void abc() {
-    Fluttertoast.showToast(
-        msg: "This is Center Short Toast",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.SNACKBAR,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0);
-  }
-
   @override
   Widget build(BuildContext context) {
     // final userData = Provider.of<UserData>(context);
@@ -128,53 +117,72 @@ class _HomeState extends State<Home> {
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
           children: <Widget>[
             SizedBox(height: 4),
-            InkWell(
-              onTap: () async {
-                final status = await Permission.storage.request();
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+              InkWell(
+                onTap: () async {
+                  final status = await Permission.storage.request();
 
-                if (status.isGranted) {
-                  final externalDir = await getExternalStorageDirectory();
+                  if (status.isGranted) {
+                    final externalDir = await getExternalStorageDirectory();
 
-                  final taskId = await FlutterDownloader.enqueue(
-                    url:
-                        'https://firebasestorage.googleapis.com/v0/b/rcapp-de25c.appspot.com/o/final.pdf?alt=media&token=64819cfa-3ffd-4875-889e-c50b3dbf935d',
-                    savedDir: externalDir.path,
-                    fileName: 'Rourkela_Club_Menu',
-                    showNotification: true,
-                    openFileFromNotification: true,
-                  );
+                    var url = await Firestore.instance
+                        .collection('mainMenu')
+                        .document('mainMenu')
+                        .get()
+                        .then((value) => value.data["downloadLink"]);
+                    final taskId = await FlutterDownloader.enqueue(
+                      url: url ?? '',
+                      savedDir: externalDir.path,
+                      fileName: 'Rourkela_Club_Menu',
+                      showNotification: true,
+                      openFileFromNotification: true,
+                    );
 
-                  Fluttertoast.showToast(
-                      msg: "Downloading...",
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.BOTTOM,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: Colors.black12,
-                      textColor: Colors.black,
-                      fontSize: 16.0);
-                }
-              },
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Rourkela Club Menu',
-                      style: GoogleFonts.inter(
-                        color: Colors.deepOrange,
-                        fontSize: 14,
-                        decoration: TextDecoration.underline,
+                    Fluttertoast.showToast(
+                        msg: "Downloading...",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.black12,
+                        textColor: Colors.black,
+                        fontSize: 16.0);
+                  }
+                },
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Rourkela Club Menu',
+                        style: GoogleFonts.inter(
+                          color: Colors.deepOrange,
+                          fontSize: 14,
+                          decoration: TextDecoration.underline,
+                        ),
                       ),
-                    ),
-                    IconButton(
-                      padding: EdgeInsets.all(0),
-                      alignment: Alignment.centerLeft,
-                      onPressed: () {},
-                      icon: Icon(Icons.insert_drive_file),
-                      color: Colors.deepOrange,
-                      iconSize: 14,
-                    )
-                  ]),
-            ),
+                      IconButton(
+                        padding: EdgeInsets.all(0),
+                        alignment: Alignment.centerLeft,
+                        onPressed: () {},
+                        icon: Icon(Icons.insert_drive_file),
+                        color: Colors.deepOrange,
+                        iconSize: 14,
+                      ),
+                    ]),
+              ),
+              if (areYouadmin) ...[
+                SizedBox(width: 10),
+                IconButton(
+                  padding: EdgeInsets.all(0),
+                  alignment: Alignment.centerLeft,
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/uploadMenuPdf');
+                  },
+                  icon: Icon(Icons.border_color),
+                  color: Colors.deepOrange,
+                  iconSize: 14,
+                )
+              ]
+            ]),
             imageCarousel,
             SizedBox(height: 35.0),
             Row(
@@ -273,13 +281,12 @@ class _HomeState extends State<Home> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
               child: Text(
-                " Designed by : Aswin Kumar Raju \n Developed by : Sounmay Mishra & Naiyar Imam",
-                style: GoogleFonts.inter(
-                  color: Colors.black,
-                  fontSize: 8,
-                  fontWeight: FontWeight.w600,
-                )
-              ),
+                  " Designed by : Aswin Kumar Raju \n Developed by : Sounmay Mishra & Naiyar Imam",
+                  style: GoogleFonts.inter(
+                    color: Colors.black,
+                    fontSize: 8,
+                    fontWeight: FontWeight.w600,
+                  )),
             ),
             /*Text(
               "  Upcoming Events",

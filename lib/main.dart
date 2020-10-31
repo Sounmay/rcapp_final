@@ -42,6 +42,7 @@ import 'package:rcapp/pages/previousOrder.dart';
 import 'package:rcapp/pages/storeData.dart';
 import 'package:rcapp/pages/uploadAvatar.dart';
 import 'package:rcapp/pages/uploadImage.dart';
+import 'package:rcapp/pages/uploadMainMenu.dart';
 import 'package:rcapp/pages/uploadPdf.dart';
 import 'package:rcapp/pages/uploadPdfImage.dart';
 import 'package:rcapp/pages/welcome.dart';
@@ -50,13 +51,12 @@ import 'pages/wrapper.dart';
 import 'package:provider/provider.dart';
 import 'package:rcapp/models/user.dart';
 
-
 void main() async {
-    WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   await FlutterDownloader.initialize(
       debug: true // optional: set false to disable printing logs to console
       );
-     
+
   runApp(MyApp());
 }
 
@@ -64,65 +64,66 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<User>.value(
-        value: AuthService().user,
-        child: ChangeNotifierProvider(
-          create: (context) => StoreData(),
-                  child: MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: welcome(),
-    routes: {
-      '/navigationbar': (context) => NavigationBar(),
-      '/bookingcalendar': (context) => Calendar(),
-      '/cart': (context) => Cart(),
-      '/adminorder': (context) => AdminOrder(),
-      // '/orderdetails': (context) => OrderDetails(),
-      '/wrapper': (context) => Wrapper(),
-      "/add_event": (context) => AddEventPage(),
-      "/address": (context) => AddressForm(),
-      "/previousOrder": (context) => PreviousOrder(),
-      "/previousBooking": (context) => PreviousBooking(),
-      "/adminBooking": (context) => AdminBooking(),
-      "/contactDetails": (context) => ContactDetails(),
-      // "/previousOrder": (context) => PreviousOrderDetails(),
+      value: AuthService().user,
+      child: ChangeNotifierProvider(
+        create: (context) => StoreData(),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: welcome(),
+          routes: {
+            '/navigationbar': (context) => NavigationBar(),
+            '/bookingcalendar': (context) => Calendar(),
+            '/cart': (context) => Cart(),
+            '/adminorder': (context) => AdminOrder(),
+            // '/orderdetails': (context) => OrderDetails(),
+            '/wrapper': (context) => Wrapper(),
+            "/add_event": (context) => AddEventPage(),
+            "/address": (context) => AddressForm(),
+            "/previousOrder": (context) => PreviousOrder(),
+            "/previousBooking": (context) => PreviousBooking(),
+            "/adminBooking": (context) => AdminBooking(),
+            "/contactDetails": (context) => ContactDetails(),
+            // "/previousOrder": (context) => PreviousOrderDetails(),
 
-      //routes for different categories of food
-      "/allmenu": (context) => AllMenu(),
-      "/biryanimenu": (context) => Biryani_MenuList(),
-      "/breadmenu": (context) => Bread_MenuList(),
-      "/breakfastmenu": (context) => Breakfast_MenuList(),
-      "/burgermenu": (context) => Burger_MenuList(),
-      "/chinesemenu": (context) => ChineseMenuList(),
-      "/friedriceandnoodlesmenu": (context) =>
-            FriedRiceAndNoodles_MenuList(),
-      "/maincoursemenu": (context) => MainCourse_MenuList(),
-      "/pastamenu": (context) => Pasta_MenuList(),
-      "/pizzamenu": (context) => Pizza_MenuList(),
-      "/rollmenu": (context) => Roll_MenuList(),
-      "/sandwichmenu": (context) => Sandwich_MenuList(),
-      "/snacksmenu": (context) => Snacks_MenuList(),
-      "/soupmenu": (context) => Soup_MenuList(),
-      "/startermenu": (context) => StarterMenuList(),
-      "/tandoorimenu": (context) => Tandoori_MenuList(),
-      "/accompanimentmenu": (context) => Accompaniment_Menu(),
+            //routes for different categories of food
+            "/allmenu": (context) => AllMenu(),
+            "/biryanimenu": (context) => Biryani_MenuList(),
+            "/breadmenu": (context) => Bread_MenuList(),
+            "/breakfastmenu": (context) => Breakfast_MenuList(),
+            "/burgermenu": (context) => Burger_MenuList(),
+            "/chinesemenu": (context) => ChineseMenuList(),
+            "/friedriceandnoodlesmenu": (context) =>
+                FriedRiceAndNoodles_MenuList(),
+            "/maincoursemenu": (context) => MainCourse_MenuList(),
+            "/pastamenu": (context) => Pasta_MenuList(),
+            "/pizzamenu": (context) => Pizza_MenuList(),
+            "/rollmenu": (context) => Roll_MenuList(),
+            "/sandwichmenu": (context) => Sandwich_MenuList(),
+            "/snacksmenu": (context) => Snacks_MenuList(),
+            "/soupmenu": (context) => Soup_MenuList(),
+            "/startermenu": (context) => StarterMenuList(),
+            "/tandoorimenu": (context) => Tandoori_MenuList(),
+            "/accompanimentmenu": (context) => Accompaniment_Menu(),
 
-      // lounge routes
-      "/bluelounge": (context) => BlueLounge(),
-      "/yellowlounge": (context) => YellowLounge(),
-      "/milanlounge": (context) => MilanLounge(),
-      "/milaplounge": (context) => MilapLounge(),
-      "/coluseum": (context) => Coluseum(),
-      "/mainhall" : (context) => MainHall(),
-      "/weddinghall":  (context) => WeddingHall(),
-      "/tenniscourt": (context) => TennisCourt(),
+            // lounge routes
+            "/bluelounge": (context) => BlueLounge(),
+            "/yellowlounge": (context) => YellowLounge(),
+            "/milanlounge": (context) => MilanLounge(),
+            "/milaplounge": (context) => MilapLounge(),
+            "/coluseum": (context) => Coluseum(),
+            "/mainhall": (context) => MainHall(),
+            "/weddinghall": (context) => WeddingHall(),
+            "/tenniscourt": (context) => TennisCourt(),
 
-      //Routes for admin
-      "/uploadImage": (context) => UploadImage(),
-      "/uploadPdf": (context) => UploadPdf(),
-      "/uploadPdfImage": (context) => UploadPdfImage(),
-      "/uploadAvatarImage": (context) => UploadAvatar()
-    },
-          ),
+            //Routes for admin
+            "/uploadImage": (context) => UploadImage(),
+            "/uploadPdf": (context) => UploadPdf(),
+            "/uploadMenuPdf": (context) => UploadMainMenuPdf(),
+            "/uploadPdfImage": (context) => UploadPdfImage(),
+            "/uploadAvatarImage": (context) => UploadAvatar()
+          },
         ),
-      );
+      ),
+    );
   }
 }

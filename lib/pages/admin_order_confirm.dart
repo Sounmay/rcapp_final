@@ -96,7 +96,7 @@ class _AdminOrderState extends State<AdminOrder> {
     } else if (orders.length != 0) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Your Orders'),
+          title: Text('Admin Orders'),
           backgroundColor: Colors.deepOrange,
         ),
         body: Container(
@@ -115,7 +115,7 @@ class _AdminOrderState extends State<AdminOrder> {
                     SizedBox(height: 10.0),
                     Container(
                       padding: EdgeInsets.all(10),
-                      height: MediaQuery.of(context).size.height * 0.32,
+                      height: MediaQuery.of(context).size.height * 0.36,
                       width: MediaQuery.of(context).size.width * 9,
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -274,7 +274,21 @@ class _AdminOrderState extends State<AdminOrder> {
                                       ),
                                     ],
                                   ),
-                                ]
+                                ],
+                                SizedBox(height: 8),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text(
+                                      orders[index]["orderType"]==1?"Order Mode : Home Delivery": "Order Mode: Pick Up",
+                                      style: GoogleFonts.inter(
+                                          color: Colors.black,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ],
+                                ),
                               ]),
                           SizedBox(height: 15),
                           Row(

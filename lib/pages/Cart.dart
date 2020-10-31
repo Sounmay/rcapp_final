@@ -19,6 +19,8 @@ class _CartState extends State<Cart> {
   // StoreData storeData = StoreData();
   int total = 0;
   int totalquantity = 1;
+  bool _isHome = false;
+  bool _isPick = false;
 
   StoreData storeDataforCart = StoreData();
 
@@ -154,7 +156,31 @@ class _CartState extends State<Cart> {
                   ))
             ],
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 8),
+          CheckboxListTile(
+            title: Text('Home Delivery'),
+            value: _isHome,
+            onChanged: (bool value) {
+              setState(() {
+                _isHome = value;
+                _isPick = false;
+              });
+            },
+            activeColor: Colors.deepOrange,
+            checkColor: Colors.black,
+          ),
+          CheckboxListTile(
+            title: Text('Pick Up'),
+            value: _isPick,
+            onChanged: (bool value) {
+              setState(() {
+                _isPick = value;
+                _isHome = false;
+              });
+            },
+            activeColor: Colors.deepOrange,
+            checkColor: Colors.black,
+          ),
           OrderCard(total: total),
           Expanded(
             child: ListView.builder(
@@ -207,7 +233,9 @@ class _CartState extends State<Cart> {
                                 keyname: keyname,
                                 quantityDecreement: quantityDecreement,
                                 quantityIncreement: quantityIncreement,
-                                removeItem: removeItem)
+                                removeItem: removeItem,
+                                isHome: _isHome,
+                                isPick: _isPick)
                           ],
                         ),
                         Row(
@@ -236,7 +264,12 @@ class _CartState extends State<Cart> {
                   );
                 }),
           ),
-          ProceedAccess(address: address, isData: isData, loading: loading)
+          ProceedAccess(
+              address: address,
+              isData: isData,
+              loading: loading,
+              isHome: _isHome,
+              isPick: _isPick)
         ]));
   }
 }
@@ -245,6 +278,8 @@ class QuantityInCart extends StatefulWidget {
   int index;
   int price;
   int qty;
+  bool isHome;
+  bool isPick;
   List<int> qtyList;
   String keyname;
   final quantityIncreement;
@@ -259,7 +294,9 @@ class QuantityInCart extends StatefulWidget {
       this.keyname,
       this.quantityDecreement,
       this.quantityIncreement,
-      this.removeItem});
+      this.removeItem,
+      this.isHome,
+      this.isPick});
   @override
   _QuantityInCartState createState() => _QuantityInCartState();
 }
@@ -393,7 +430,10 @@ class ProceedAccess extends StatefulWidget {
   var isData;
   var loading;
   var address;
-  ProceedAccess({this.address, this.isData, this.loading});
+  bool isHome;
+  bool isPick;
+  ProceedAccess(
+      {this.address, this.isData, this.loading, this.isHome, this.isPick});
   @override
   _ProceedAccessState createState() => _ProceedAccessState();
 }
@@ -433,8 +473,13 @@ class _ProceedAccessState extends State<ProceedAccess> {
     var address = _dat.data["address"];
     var mobileNumber = _dat.data["mobileNumber"];
 
-    DatabaseService().confirmOrderofUser(user.uid, userName, number, address,
-        itemList, priceList, quantityList, total, false, mobileNumber);
+    if (widget.isHome) {
+      DatabaseService().confirmOrderofUser(user.uid, userName, number, address,
+          itemList, priceList, quantityList, total, false, mobileNumber, 1);
+    } else if (widget.isPick) {
+      DatabaseService().confirmOrderofUser(user.uid, userName, number, address,
+          itemList, priceList, quantityList, total, false, mobileNumber, 2);
+    }
 
     storeData.resetStore();
     updateTotal();
@@ -454,6 +499,18 @@ class _ProceedAccessState extends State<ProceedAccess> {
               },
               child: Text(
                 'Please Wait ...',
+                style: GoogleFonts.inter(color: Colors.white),
+              )));
+    } else if (widget.isHome == false && widget.isPick ==false) {
+      return Container(
+          width: double.infinity,
+          height: 50,
+          child: FlatButton(
+              color: Colors.deepOrange,
+              onPressed: () {
+              },
+              child: Text(
+                'Please Select Mode of Order',
                 style: GoogleFonts.inter(color: Colors.white),
               )));
     } else if (widget.address == '' && widget.loading == false) {

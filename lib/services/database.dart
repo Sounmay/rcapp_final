@@ -46,6 +46,8 @@ class DatabaseService {
       Firestore.instance.collection('Today_Menu_Data');
   final CollectionReference notice_pdfData =
       Firestore.instance.collection('noticeBoard');
+  final CollectionReference mainMenu_pdfData =
+      Firestore.instance.collection('mainMenu');
 
   final CollectionReference userInfo =
       Firestore.instance.collection('userInfo');
@@ -102,6 +104,14 @@ class DatabaseService {
         .document('$_date')
         .setData({'_date': _date,'title': title, 'subtitle': subtitle, 'downloadLink': url});
   }
+  
+  
+  Future updateMenuPdf(String url) async {
+    var _date = DateTime.now().toUtc().millisecondsSinceEpoch;
+    return await mainMenu_pdfData
+        .document('mainMenu')
+        .setData({'_date': _date, 'downloadLink': url});
+  }
 
   Future bookDetails(String id, String name, String number, String mobileNumber,
       int numberOfPeople, String lounge, int slot, DateTime date) async {
@@ -136,7 +146,8 @@ class DatabaseService {
       List qty,
       int total,
       bool isConfirmed,
-      String mobileNumber) async {
+      String mobileNumber,
+      int orderType) async {
     // var docId = '$id' + '$total';
     var _date = DateTime.now().toUtc().millisecondsSinceEpoch;
     var forToken =
@@ -160,7 +171,8 @@ class DatabaseService {
           '${DateTime.now().year}',
       'token': _token,
       'mobileNumber': mobileNumber,
-      'isRejected': false
+      'isRejected': false,
+      'orderType': orderType
     });
   }
 
