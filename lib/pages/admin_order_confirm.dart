@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:marquee/marquee.dart';
 import 'package:provider/provider.dart';
 import 'package:rcapp/models/user.dart';
 
@@ -115,7 +116,7 @@ class _AdminOrderState extends State<AdminOrder> {
                     SizedBox(height: 10.0),
                     Container(
                       padding: EdgeInsets.all(10),
-                      height: MediaQuery.of(context).size.height * 0.36,
+                      height: MediaQuery.of(context).size.height * 0.5,
                       width: MediaQuery.of(context).size.width * 9,
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -192,7 +193,9 @@ class _AdminOrderState extends State<AdminOrder> {
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Text(
-                                      "Date : " + "${orders[index]["date"]}",
+                                      "Date : " + "${orders[index]["date"]}" + "  "
+                                      "${DateTime.fromMillisecondsSinceEpoch(orders[index]["_date"]).hour}:" +
+                                          "${DateTime.fromMillisecondsSinceEpoch(orders[index]["_date"]).minute}",
                                       style: GoogleFonts.inter(
                                           color: Colors.black,
                                           fontSize: 18,
@@ -281,7 +284,9 @@ class _AdminOrderState extends State<AdminOrder> {
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Text(
-                                      orders[index]["orderType"]==1?"Order Mode : Home Delivery": "Order Mode: Pick Up",
+                                      orders[index]["orderType"] == 1
+                                          ? "Order Mode : Home Delivery"
+                                          : "Order Mode: Pick Up",
                                       style: GoogleFonts.inter(
                                           color: Colors.black,
                                           fontSize: 18,
@@ -415,32 +420,37 @@ class _AdminOrderDataState extends State<AdminOrderData> {
       child: ListView.builder(
           itemCount: widget.item.length,
           itemBuilder: (_, index) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Container(
-                    // decoration: BoxDecoration(color: Colors.deepOrange),
-                    width: MediaQuery.of(context).size.width * 0.34,
-                    child: Text(
-                      '${widget.item[index]}',
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.left,
-                    )),
-                Container(
-                    // decoration: BoxDecoration(color: Colors.deepOrange),
-                    width: MediaQuery.of(context).size.width * 0.2,
-                    child: Text(
-                      '${widget.quantity[index]}',
-                      textAlign: TextAlign.center,
-                    )),
-                Container(
-                    // decoration: BoxDecoration(color: Colors.deepOrange),
-                    width: MediaQuery.of(context).size.width * 0.2,
-                    child: Text(
-                      '${widget.price[index]}',
-                      textAlign: TextAlign.center,
-                    )),
-              ],
+            return Container(
+              height: 20,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                      // decoration: BoxDecoration(color: Colors.deepOrange),
+                      width: MediaQuery.of(context).size.width * 0.34,
+                      child: Marquee(
+                        text: '${widget.item[index]}',
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        velocity: 50,
+                        blankSpace: 20,
+                        pauseAfterRound: Duration(seconds: 2),
+                      )),
+                  Container(
+                      // decoration: BoxDecoration(color: Colors.deepOrange),
+                      width: MediaQuery.of(context).size.width * 0.2,
+                      child: Text(
+                        '${widget.quantity[index]}',
+                        textAlign: TextAlign.center,
+                      )),
+                  Container(
+                      // decoration: BoxDecoration(color: Colors.deepOrange),
+                      width: MediaQuery.of(context).size.width * 0.2,
+                      child: Text(
+                        '${widget.price[index]}',
+                        textAlign: TextAlign.center,
+                      )),
+                ],
+              ),
             );
           }),
     );

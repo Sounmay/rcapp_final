@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:marquee/marquee.dart';
 import 'package:provider/provider.dart';
 import 'package:rcapp/models/user.dart';
 
@@ -274,32 +275,38 @@ class _OrderDataState extends State<OrderData> {
       child: ListView.builder(
           itemCount: widget.item.length,
           itemBuilder: (_, index) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Container(
-                    // decoration: BoxDecoration(color: Colors.deepOrange),
-                    width: MediaQuery.of(context).size.width * 0.34,
-                    child: Text(
-                      '${widget.item[index]}',
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.left,
-                    )),
-                Container(
-                    // decoration: BoxDecoration(color: Colors.deepOrange),
-                    width: MediaQuery.of(context).size.width * 0.2,
-                    child: Text(
-                      '${widget.quantity[index]}',
-                      textAlign: TextAlign.center,
-                    )),
-                Container(
-                    // decoration: BoxDecoration(color: Colors.deepOrange),
-                    width: MediaQuery.of(context).size.width * 0.2,
-                    child: Text(
-                      '${widget.price[index]}',
-                      textAlign: TextAlign.center,
-                    )),
-              ],
+            return Container(
+              height: 20,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                      // decoration: BoxDecoration(color: Colors.deepOrange),
+                      width: MediaQuery.of(context).size.width * 0.34,
+                      child: Marquee(
+                        text: '${widget.item[index]}' ?? '',
+                        velocity: 50,
+                        blankSpace: 15,
+                        // overflow: TextOverflow.ellipsis,
+                        // textAlign: TextAlign.left,
+                      )),
+                  Container(
+                      // decoration: BoxDecoration(color: Colors.deepOrange),
+                      width: MediaQuery.of(context).size.width * 0.2,
+                      child: Text(
+                        '${widget.quantity[index]}',
+
+                        // textAlign: TextAlign.center,
+                      )),
+                  Container(
+                      // decoration: BoxDecoration(color: Colors.deepOrange),
+                      width: MediaQuery.of(context).size.width * 0.2,
+                      child: Text(
+                        '${widget.price[index]}',
+                        textAlign: TextAlign.center,
+                      )),
+                ],
+              ),
             );
           }),
     );
