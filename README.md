@@ -1,6 +1,6 @@
 # rcapp
 
-A new Flutter application.
+A Flutter food delivery application built for Rourkela Club as a freelancing project.
 
 ## Getting Started
 
